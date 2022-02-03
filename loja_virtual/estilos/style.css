@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comforter&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --cor1: black;
+    --cor2: green;
+}
+
+body{
+    background-color: rgba(216, 210, 210, 0.486);
+}
+
+/*header*/
+.header{
+    background-color: #E6A5E1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header > nav{
+    margin-right: 10%;
+}
+
+.header > nav > a{
+    text-decoration: none;
+    color: #612F5D;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+}
+
+.menu{
+    margin-top: 0.088rem;
+}
+
+.menu1{
+    background-color: black;
+    height: 0.15rem;
+    width: 1rem;
+    margin: 0.2rem;
+    border-radius: 2px;
+}
+
+.menu2{
+    background-color: black;
+    height: 0.15rem;
+    width: 1rem;
+    margin: 0.2rem;
+    border-radius: 2px;
+}
+
+.menu3{
+    background-color: black;
+    height: 0.15rem;
+    width: 1rem;
+    margin: 0.2rem;
+    border-radius: 2px;
+}
+
+.header > h1{
+    font-family: 'Comforter', Arial, Helvetica, sans-serif;
+    margin-left: 10%;
+    margin-top: 0.2rem;
+}
+
+.header > h1 > span{
+    color: #831179;
+}
+/*fim header*/
+
+.main{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 1rem;
+    width: 80%;
+    margin-left: 10%;
+}
+
+/*pesquisa*/
+.pesquisa{
+    background-color: white;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin-top: 1rem;
+    box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.363);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pesquisa > button{
+    background-color: rgba(233, 162, 240, 0.568);
+    height: 1.14rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+    color: rgba(32, 32, 32, 0.801);
+}
+
+.search{
+    border-radius: 0px;
+    border: 1px solid black
+}
+/*fim pesquisa*/
+
+/*produtos*/
+
+.produtos{
+    background-color: white;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 6;
+    box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.363);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.produtos > h1{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    text-align: center;
+    font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
+}
+
+/*fim produtos*/
+
+
+.sec-sobre{
+    background-color: white;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.363);
+}
+
+.sec-sobre p{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5rem;
+}
+
+.sec-sobre h1, h2{
+    text-align: center;
+    font-family: 'Bebas Neue';
+}
+
+.recomendacoes{
+    background-color: white;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.363);
+}
+
+.recomendacoes h1{
+    text-align: center;
+    font-family: 'Bebas Neue';
+}
+
+.camisa-reco > img{
+    width: 80%;
+    height: 80%;
+    border: 2px solid black;
+    display: block;
+    margin: auto;
+}
+
+.camisa-reco p{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.camisa-reco a{
+    text-decoration: none;
+    color: black;
+}
+
+.tenis-reco > img{
+    width: 80%;
+    height: 80%;
+    border: 2px solid black;
+    display: block;
+    margin: auto
+}
+
+.tenis-reco p{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.tenis-reco a{
+    text-decoration: none;
+    color: black;
+}
+
+.recomendacoes a:hover{
+    background-color: pink;
+}
+
+
+.footer{
+    background-color: violet;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+.footer a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.footer a:hover{
+    background-color: black;
+    color: white;
+}
