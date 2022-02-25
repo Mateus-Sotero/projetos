@@ -146,3 +146,46 @@ a{
   margin: 0 1rem;
   font-weight: 100;
 }
+
+@media(max-width: 1000px){
+  #portifolio .sites-portifolio{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width: 553px){
+  #portifolio .sites-portifolio a{
+    width: 90%;
+  }
+
+  #portifolio .sites-portifolio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .links-contato{
+    flex-direction: column;
+  }
+
+  .links-contato a{
+    padding: 1rem 0;
+  }
+}
+
+@media(max-width: 453px){
+  #footer h2{
+    font-size: 3rem;
+  }
+  #portifolio .sites-portifolio a{
+    height: 90%;
+  }
+}
+
+@media(max-width: 325px){
+  .menu a{
+    font-size: 1rem;
+  }
+}
