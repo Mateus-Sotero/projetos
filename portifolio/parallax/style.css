@@ -26,7 +26,6 @@
 
 .titulo{
   background-color: rgb(240, 240, 240);
-  height: 5rem;
   width: 40rem;
   display: flex;
   justify-content: center;
@@ -47,7 +46,6 @@
 }
 
 .paragrafo-1{
-  height: 15rem;
   width: 100%;
   background-color: white;
   text-align: center;
@@ -94,4 +92,19 @@
   background-size: cover;
   background-attachment: fixed;
   background-position: top center;
+}
+
+@media(max-width: 500px){
+  .titulo h1{
+    font-size: 2.5rem;
+  }
+  .text p{
+    font-size: 2rem;
+  }
+}
+
+@media(max-width: 1200px){
+  .background-8{
+    background-position: center left;
+  }
 }
