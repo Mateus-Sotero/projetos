@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.principal{
+  width: 300px;
+  height: 300px;
+  background-color: rgb(155, 155, 155);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.visor{
+  background-color: rgb(22, 24, 50);
+  color: white;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  border: 3px solid rgb(51, 62, 90);
+  font-size: 2rem;
+  text-align: right;
+}
+
+.operadores{
+  background-color: rgb(67, 0, 81);
+  color: white;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.numeros{
+  background-color: rgb(91, 91, 91);
+  color: white;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.borda{
+  border: 1px solid black;
+  padding-top: 0.5rem;
+}
+
+.borda-top{
+  border-top: 1px solid black;
+}
+
