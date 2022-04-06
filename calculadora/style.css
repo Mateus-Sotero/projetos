@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 body{
@@ -10,63 +12,137 @@ body{
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-image: linear-gradient(45deg, rgb(191, 141, 47), rgb(207, 62, 62));
+  flex-direction: column;
+}
+
+button{
+  height: 3rem;
+  width: 5.5rem;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+h1{
+  font-size: 3rem;
 }
 
 .principal{
-  width: 300px;
-  height: 300px;
-  background-color: rgb(155, 155, 155);
+  width: 400px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.94);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .visor{
-  background-color: rgb(22, 24, 50);
-  color: white;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  height: 3.5rem;
+  background-color: white;
+  width: 100%;
   grid-column-start: 1;
   grid-column-end: 5;
-  border: 3px solid rgb(51, 62, 90);
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-bottom: 1rem;
   font-size: 2rem;
   text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  border-radius: 10px;
+  padding-right: 0.5rem;
 }
 
-.operadores{
-  background-color: rgb(67, 0, 81);
-  color: white;
-  grid-row-start: 2;
-  grid-row-end: 5;
+.coluna-4{
   grid-column-start: 4;
   grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 6;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  font-size: 2rem;
-  text-align: center;
 }
 
-.numeros{
-  background-color: rgb(91, 91, 91);
-  color: white;
+.linha-1{
+  display: flex;
   grid-row-start: 2;
+  grid-row-end: 3;
+  gap: 10px;
+}
+
+.li-1 button{
+  width: 8.25rem;
+}
+
+.linha-2{
+  display: flex;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  gap: 5px;
+}
+
+.linha-3{
+  display: flex;
+  grid-row-start: 4;
   grid-row-end: 5;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  font-size: 2rem;
-  text-align: center;
+  gap: 5px;
 }
 
-.borda{
-  border: 1px solid black;
-  padding-top: 0.5rem;
+.linha-4{
+  display: flex;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  gap: 5px;
 }
 
-.borda-top{
-  border-top: 1px solid black;
+.linha-5{
+  display: flex;
+  grid-row-start: 6;
+  grid-row-end: 7;
+  gap: 10px;
 }
 
+.li-5 button{
+  width: 8.25rem;
+}
+
+.co-li-1{
+  margin-bottom: 0.9rem;
+}
+
+.co-li-2{
+  margin-bottom: 0.9rem;
+}
+
+.co-li-3{
+  margin-bottom: 0.9rem;
+}
+
+.co-li-4{
+  margin-bottom: 0.8rem;
+}
+
+.co-li-1 button{
+  background-color: red;
+}
+.co-li-2 button{
+  background-color: blue;
+}
+.co-li-3 button{
+  background-color: green;
+}
+.co-li-4 button{
+  background-color: yellow;
+}
+.co-li-5 button{
+  background-color: rgb(0, 208, 255);
+}
+
+.hover:hover{
+  background-color: rgb(79, 79, 79);
+}
