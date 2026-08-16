@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<title>Mapa do Coração — Guia dos Pais</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #3a352e;
+  line-height: 1.55;
+  background: #e9ecef;
+}
+h1, h2, h3 { font-family: 'Baloo 2', cursive; color: #2f3e2e; margin: 0 0 10px; line-height: 1.25; }
+p { margin: 0 0 10px; }
+
+.page {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fffaf3;
+  padding: 20mm 18mm;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+.page-foot {
+  margin-top: auto;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .5px;
+  color: #b8b0a0;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-top: 20px;
+}
+
+/* ---------- Cover / dividers ---------- */
+.earth-page {
+  background: linear-gradient(160deg, #5f8d6e 0%, #3d6249 55%, #2a4632 100%);
+  color: #fff; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+}
+.earth-shape { position: absolute; border-radius: 50%; opacity: .15; background: #fff; }
+.es1 { width: 260px; height: 260px; top: -90px; left: -90px; }
+.es2 { width: 190px; height: 190px; bottom: -60px; right: -60px; background: #c99a3e; opacity: .2; }
+.es3 { width: 130px; height: 130px; top: 90px; right: -40px; background: #c07b8b; opacity: .2; }
+.compass-badge {
+  font-size: 60px; background: rgba(255,255,255,.12); border: 3px solid rgba(255,255,255,.35);
+  width: 130px; height: 130px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.cover-kicker { text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; opacity: .85; margin-bottom: 6px; }
+.cover-title { font-size: 56px; color: #fff; margin: 4px 0; }
+.cover-subtitle { font-size: 16px; max-width: 480px; opacity: .94; margin-top: 8px; }
+.cover-brand { margin-top: 20px; font-family: 'Baloo 2', cursive; font-size: 14px; background: rgba(255,255,255,.14); padding: 6px 20px; border-radius: 50px; }
+.divider-page h1 { color: #fff; font-size: 34px; max-width: 480px; }
+.divider-page p { max-width: 420px; opacity: .92; font-size: 15px; }
+.divider-emoji { font-size: 50px; margin-bottom: 10px; }
+
+/* ---------- Section kicker + generic light pages ---------- */
+.section-kicker {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent, #5f8d6e); color: #fff;
+  font-weight: 800; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 14px;
+}
+.letter-page h1, .toc-page h1, .faq-page h1 { font-size: 30px; }
+.quickref-page h1 { font-size: 26px; }
+.letter-page p { font-size: 15px; line-height: 1.7; }
+.letter-list { list-style: none; padding: 0; margin: 16px 0; }
+.letter-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 14.5px; }
+.letter-ic { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; }
+.letter-sign { margin-top: 20px; font-style: italic; color: #2f3e2e; }
+
+/* ---------- TOC ---------- */
+.toc-list { list-style: none; padding: 0; margin: 14px 0 0; }
+.toc-list li {
+  display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700;
+  color: #3a352e; padding: 6.5px 0; border-bottom: 1px dashed #ece5d8;
+}
+.toc-num {
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+  background: #eef5f0; color: #3d6249; font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+.toc-ic { font-size: 16px; }
+
+/* ---------- Foundations page ---------- */
+.foundation-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.foundation-card {
+  background: #fff; border: 2px solid #f1ece0; border-top: 6px solid var(--accent);
+  border-radius: 16px; padding: 20px;
+}
+.foundation-card h3 { font-size: 17px; margin-bottom: 8px; }
+.foundation-card p { font-size: 13.5px; color: #6b6355; margin: 0; }
+
+/* ---------- Topic pages (2 per topic) ---------- */
+.topic-page { background: #fffaf3; }
+.topic-head { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+.topic-badge {
+  flex: 0 0 auto; width: 78px; height: 78px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 38px; box-shadow: 0 5px 0 rgba(0,0,0,.08);
+}
+.topic-kicker { display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; font-weight: 800; color: var(--accent-text); }
+.topic-head-text h2 { font-size: 27px; margin: 3px 0 0; }
+.info-box {
+  background: #fff; border: 1.5px solid #f1ece0; border-radius: 16px;
+  padding: 18px 20px; margin-bottom: 14px;
+}
+.info-tag { display: block; font-weight: 800; font-size: 12px; margin-bottom: 6px; color: var(--accent-text); text-transform: uppercase; letter-spacing: .5px; }
+.info-box p { margin: 0; font-size: 14.5px; color: #4a4438; line-height: 1.65; }
+
+.verse-box {
+  border-radius: 16px; padding: 18px 20px; margin-bottom: 16px;
+  background: var(--accent-soft); border: 1.5px solid var(--accent-soft);
+}
+.verse-box .info-tag { color: var(--accent-text); }
+.verse-box p { margin: 0 0 8px; font-size: 14.5px; color: #4a4438; font-style: italic; }
+.verse-box .reflection { font-style: normal; margin: 0; }
+
+.tips-title { font-size: 15px; font-weight: 800; color: #2f3e2e; margin-bottom: 10px; }
+.tips-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.tips-list li {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 14px;
+  color: #3a352e; margin-bottom: 10px; line-height: 1.5;
+}
+.tip-num {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.prayer-box {
+  border-radius: 16px; padding: 18px 20px 18px 66px; position: relative;
+  background: #faf6ee; border: 1.5px dashed #e4dcc8; margin-top: auto;
+}
+.prayer-ic { position: absolute; left: 20px; top: 18px; font-size: 26px; }
+.prayer-box p { margin: 0; font-size: 14px; color: #4a4438; font-style: italic; }
+
+/* ---------- Quick reference ---------- */
+.quickref-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 6px; }
+.quickref-card {
+  background: #fff; border: 1.5px solid #f1ece0; border-radius: 11px;
+  padding: 9px 10px; display: flex; flex-direction: column; gap: 3px;
+}
+.quickref-ic { font-size: 16px; }
+.quickref-card b { display: block; font-size: 10.5px; color: #2f3e2e; line-height: 1.25; }
+.quickref-card span { font-size: 9.5px; color: #6b6355; line-height: 1.3; }
+
+/* ---------- FAQ ---------- */
+.faq-item { border: 1.5px solid #f1ece0; border-radius: 14px; padding: 16px 20px; margin-bottom: 12px; background: #fff; }
+.faq-q { font-weight: 800; font-size: 14.5px; color: #2f3e2e; margin-bottom: 6px; }
+.faq-a { font-size: 13.5px; color: #4a4438; margin: 0; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<section class="page earth-page">
+  <div class="earth-shape es1"></div>
+  <div class="earth-shape es2"></div>
+  <div class="earth-shape es3"></div>
+  <div class="compass-badge">🧭</div>
+  <span class="cover-kicker">um guia bíblico para os pais de hoje</span>
+  <h1 class="cover-title">Mapa do<br>Coração</h1>
+  <p class="cover-subtitle">18 desafios comportamentais comuns da infância, explicados com
+     carinho, embasados na Bíblia e com dicas práticas para o dia a dia</p>
+  <span class="cover-brand">Mapa Bíblico Kids</span>
+</section>
+<section class="page letter-page">
+  <span class="section-kicker" style="--accent:#5f8d6e">💚 antes de começar</span>
+  <h1>Para Você, Que Educa com Amor</h1>
+  <p>Criar filhos é uma das jornadas mais bonitas — e mais desafiadoras — que existem. Birras,
+  teimosia, ciúmes, medos... cada fase traz um novo território para explorar, e este guia
+  quer ser uma bússola nesse caminho.</p>
+  <p>Aqui você vai encontrar 18 dos desafios comportamentais mais comuns da infância,
+  cada um com quatro partes:</p>
+  <ul class="letter-list">
+    <li><span class="letter-ic" style="background:#5f8d6e">🔍</span>
+        <b>O que é e por que acontece</b> — entendendo a fase do seu filho.</li>
+    <li><span class="letter-ic" style="background:#c99a3e">📖</span>
+        <b>Uma base bíblica</b> — um versículo e uma reflexão para o seu coração.</li>
+    <li><span class="letter-ic" style="background:#c76f4c">✅</span>
+        <b>Dicas práticas</b> — atitudes que você pode aplicar ainda hoje.</li>
+    <li><span class="letter-ic" style="background:#c07b8b">🙏</span>
+        <b>Uma oração</b> — para pedir sabedoria e paciência a Deus.</li>
+  </ul>
+  <p>Você não precisa ser um pai ou mãe perfeito — precisa apenas de um coração disposto a
+  aprender, e o guia certo para os dias mais difíceis.</p>
+  <p class="letter-sign">Com carinho,<br><b>Equipe Mapa Bíblico Kids</b></p>
+  <div class="page-foot">Mapa do Coração · 1</div>
+</section>
+<section class="page toc-page">
+  <span class="section-kicker" style="--accent:#c99a3e">🗺️ sumário</span>
+  <h1>Os 15 Desafios</h1>
+  <ul class="toc-list"><li><span class="toc-num">1</span><span class="toc-ic">😤</span>Birras e Explosões de Raiva</li><li><span class="toc-num">2</span><span class="toc-ic">🙅</span>Teimosia e Desobediência</li><li><span class="toc-num">3</span><span class="toc-ic">👧👦</span>Ciúmes Entre Irmãos</li><li><span class="toc-num">4</span><span class="toc-ic">🤥</span>Mentiras e Meias-Verdades</li><li><span class="toc-num">5</span><span class="toc-ic">😨</span>Medos e Ansiedade Infantil</li><li><span class="toc-num">6</span><span class="toc-ic">📚</span>Dificuldade de Concentração</li><li><span class="toc-num">7</span><span class="toc-ic">📱</span>Uso Excessivo de Telas</li><li><span class="toc-num">8</span><span class="toc-ic">🙈</span>Timidez e Dificuldade Social</li><li><span class="toc-num">9</span><span class="toc-ic">👊</span>Agressividade com Outras Crianças</li><li><span class="toc-num">10</span><span class="toc-ic">🧸</span>Dificuldade em Compartilhar</li><li><span class="toc-num">11</span><span class="toc-ic">🌙</span>Resistência à Hora de Dormir</li><li><span class="toc-num">12</span><span class="toc-ic">🥦</span>Seletividade Alimentar</li><li><span class="toc-num">13</span><span class="toc-ic">🧦</span>Falta de Responsabilidade</li><li><span class="toc-num">14</span><span class="toc-ic">🤗</span>Apego Excessivo aos Pais</li><li><span class="toc-num">15</span><span class="toc-ic">😒</span>Respostas Mal-Educadas</li><li><span class="toc-num">16</span><span class="toc-ic">😢</span>Choro Fácil e Sensibilidade Emocional</li><li><span class="toc-num">17</span><span class="toc-ic">🧦</span>Bagunça e Desorganização do Quarto</li><li><span class="toc-num">18</span><span class="toc-ic">🚫</span>Dificuldade em Aceitar um “Não”</li>
+    <li><span class="toc-num">📋</span><span class="toc-ic"></span>Resumo rápido de todas as dicas</li>
+    <li><span class="toc-num">❓</span><span class="toc-ic"></span>Perguntas frequentes dos pais</li>
+  </ul>
+  <div class="page-foot">Mapa do Coração · 2</div>
+</section>
+<section class="page">
+  <span class="section-kicker" style="--accent:#5f8d6e">🌱 fundamentos</span>
+  <h1>Educar com Amor e Firmeza</h1>
+  <p style="font-size:15px; line-height:1.7; max-width:600px;">Antes de entrar nos desafios
+  específicos, vale lembrar de quatro princípios que sustentam todo o resto deste guia —
+  eles funcionam como uma bússola para qualquer situação que a lista de tópicos não cobrir.</p>
+  <div class="foundation-cards">
+    <div class="foundation-card" style="--accent:#5f8d6e">
+      <h3>💚 Amor Incondicional</h3>
+      <p>O comportamento pode ser corrigido, mas o amor pelo filho nunca deve parecer
+      condicional a esse comportamento. Ele precisa saber que é amado mesmo no seu pior dia.</p>
+    </div>
+    <div class="foundation-card" style="--accent:#c76f4c">
+      <h3>🧱 Limites Claros</h3>
+      <p>Regras poucas, claras e consistentes trazem mais segurança do que muitas regras
+      aplicadas de forma inconsistente. Firmeza não é o oposto de amor — é parte dele.</p>
+    </div>
+    <div class="foundation-card" style="--accent:#c99a3e">
+      <h3>🙏 Oração Constante</h3>
+      <p>Educar é grande demais para fazermos sozinhos. Entregar cada fase, cada dificuldade
+      e cada vitória a Deus em oração renova a paciência e a sabedoria do dia a dia.</p>
+    </div>
+    <div class="foundation-card" style="--accent:#c07b8b">
+      <h3>🪞 O Exemplo</h3>
+      <p>Crianças aprendem muito mais observando do que ouvindo. A forma como lidamos com
+      nossa própria raiva, frustração e erros ensina mais do que qualquer discurso.</p>
+    </div>
+  </div>
+  <div class="page-foot">Mapa do Coração · 3</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <header class="topic-head">
+    <div class="topic-badge">😤</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 1 de 18</span>
+      <h2>Birras e Explosões de Raiva</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>A birra costuma aparecer quando a criança sente uma emoção grande demais para o tamanho do seu vocabulário e do seu autocontrole ainda em formação. Gritos, choro no chão, chutes — não é “manha” ou manipulação: é a forma que ela encontrou de expressar frustração, cansaço ou um “não” que não queria ouvir.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>O cérebro infantil ainda está desenvolvendo a área responsável por regular emoções fortes. Fome, sono atrasado, mudanças de rotina e a simples incapacidade de comunicar o que sente costumam ser os gatilhos mais comuns.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Não provoqueis à ira vossos filhos, mas criai-os na disciplina e admoestação do Senhor.” — baseado em Efésios 6:4</p>
+    <p class="reflection">Deus não pede que sejamos pais perfeitos e sempre calmos, mas pede que criemos um ambiente onde o filho se sinta seguro para sentir — e aprender a lidar com o que sente.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 4</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <span class="topic-kicker">Desafio 1 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Birras e Explosões de Raiva — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Mantenha a calma antes de tentar acalmar seu filho — sua tranquilidade é contagiante.</li><li><span class="tip-num">2</span>Nomeie o sentimento: “Eu vejo que você está muito bravo agora.”</li><li><span class="tip-num">3</span>Espere a tempestade passar antes de conversar sobre o que aconteceu.</li><li><span class="tip-num">4</span>Combine, num momento calmo, um sinal ou palavra que ajude a criança a pedir uma pausa.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, me dá paciência para acolher as emoções grandes do meu filho com calma, e sabedoria para ensiná-lo, aos poucos, a lidar com elas. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 5</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <header class="topic-head">
+    <div class="topic-badge">🙅</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 2 de 18</span>
+      <h2>Teimosia e Desobediência</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>A criança teimosa não está necessariamente “aprontando” — muitas vezes ela está testando limites, exercitando sua própria vontade e descobrindo até onde pode ir. É uma fase importante de afirmação de identidade, mesmo quando cansa os pais.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Entre os 2 e os 7 anos, é normal e esperado que a criança comece a testar regras para entender o mundo ao seu redor. Regras inconsistentes (que valem num dia e não valem no outro) costumam intensificar a teimosia.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Instrui a criança no caminho em que deve andar, e, ainda quando for velho, não se desviará dele.” — baseado em Provérbios 22:6</p>
+    <p class="reflection">Firmeza e amor não são opostos — são parceiros. Regras claras, ditas com carinho e mantidas com consistência, ajudam a criança a se sentir segura, não controlada.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 6</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <span class="topic-kicker">Desafio 2 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Teimosia e Desobediência — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Dê poucas regras, mas cumpra todas elas com consistência.</li><li><span class="tip-num">2</span>Ofereça escolhas dentro de limites: “Você prefere escovar os dentes antes ou depois do pijama?”</li><li><span class="tip-num">3</span>Evite grandes discussões — explique uma vez, com calma, e sustente a decisão.</li><li><span class="tip-num">4</span>Elogie especificamente quando ela obedecer, reforçando o comportamento bom.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, me ajuda a ser firme com amor, e a lembrar que educar não é vencer uma queda de braço, mas guiar um coração. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 7</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <header class="topic-head">
+    <div class="topic-badge">👧👦</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 3 de 18</span>
+      <h2>Ciúmes Entre Irmãos</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>A chegada de um irmão, ou simplesmente a divisão da atenção dos pais, pode despertar ciúmes reais e intensos. A criança pode regredir em comportamentos (voltar a fazer xixi na cama, pedir mamadeira) ou demonstrar agressividade com o irmão.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Para uma criança pequena, amor ainda parece um recurso limitado — ela não entende, de forma intuitiva, que o amor dos pais não “diminui” quando é dividido. Isso gera insegurança e competição.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“O amor é paciente, o amor é bondoso.” — baseado em 1 Coríntios 13:4</p>
+    <p class="reflection">Assim como Deus ama cada um dos Seus filhos de forma completa e individual, sem “dividir” o amor entre eles, podemos mostrar aos nossos filhos que o amor de um pai por cada filho é inteiro, não fracionado.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 8</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <span class="topic-kicker">Desafio 3 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Ciúmes Entre Irmãos — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Reserve um tempinho individual e exclusivo com cada filho, mesmo que curto.</li><li><span class="tip-num">2</span>Evite comparações (“seu irmão já sabe fazer isso”).</li><li><span class="tip-num">3</span>Valide o sentimento: “Eu entendo que é difícil dividir a atenção.”</li><li><span class="tip-num">4</span>Envolva o mais velho em pequenas tarefas de cuidado, para se sentir parte, não substituído.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, ajuda-me a fazer cada um dos meus filhos sentir que é amado de forma completa e única. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 9</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <header class="topic-head">
+    <div class="topic-badge">🤥</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 4 de 18</span>
+      <h2>Mentiras e Meias-Verdades</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Por volta dos 3-4 anos, a criança começa a entender que pode dizer algo diferente da realidade — e isso é, na verdade, um marco do desenvolvimento cognitivo. Com o tempo, ela aprende quando e por que mentir, geralmente para evitar problemas ou punições.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>O medo de uma reação exagerada dos pais costuma ser o principal motivo por trás das mentiras infantis. Quando dizer a verdade parece perigoso demais, a mentira vira um escudo.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Não mintais uns aos outros.” — baseado em Colossenses 3:9</p>
+    <p class="reflection">Criar um ambiente onde a verdade é mais segura do que a mentira — mesmo quando a verdade é difícil de ouvir — é um dos maiores presentes que podemos dar ao caráter de um filho.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 10</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <span class="topic-kicker">Desafio 4 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Mentiras e Meias-Verdades — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Reaja com calma quando a verdade for revelada, mesmo que seja algo grave.</li><li><span class="tip-num">2</span>Elogie a honestidade explicitamente: “Obrigado por me contar a verdade.”</li><li><span class="tip-num">3</span>Evite “armadilhas” (perguntar algo que você já sabe a resposta só para testar).</li><li><span class="tip-num">4</span>Modele a honestidade você mesmo, inclusive em pequenas coisas do dia a dia.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, me ajuda a construir uma relação de confiança com meu filho, onde a verdade sempre encontre um lugar seguro. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 11</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <header class="topic-head">
+    <div class="topic-badge">😨</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 5 de 18</span>
+      <h2>Medos e Ansiedade Infantil</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Medo do escuro, de monstros, de ficar sozinho, de errar — os medos infantis mudam com a idade, mas são reais e merecem ser levados a sério, mesmo quando parecem, para um adulto, pequenos ou irracionais.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>A imaginação infantil é muito ativa, e o cérebro ainda está aprendendo a distinguir entre perigo real e imaginado. Mudanças na rotina, notícias assustadoras ou brigas em casa também podem aumentar a ansiedade.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Não tenhas medo, porque eu sou contigo.” — baseado em Isaías 41:10</p>
+    <p class="reflection">Podemos ensinar aos filhos que é normal sentir medo, e que Deus está com eles em cada situação assustadora — o objetivo não é eliminar todo medo, mas ensinar a enfrentá-lo com apoio.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 12</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <span class="topic-kicker">Desafio 5 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Medos e Ansiedade Infantil — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Nunca ridicularize o medo, mesmo que pareça bobo para você.</li><li><span class="tip-num">2</span>Crie pequenos rituais de segurança (luz noturna, um ursinho, uma oração antes de dormir).</li><li><span class="tip-num">3</span>Ensine a respirar fundo e nomear o medo em voz alta.</li><li><span class="tip-num">4</span>Exponha a criança aos poucos e com apoio, nunca de forma forçada ou repentina.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, acalma o coração do meu filho nos momentos de medo, e me ajuda a ser um porto seguro para ele. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 13</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <header class="topic-head">
+    <div class="topic-badge">📚</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 6 de 18</span>
+      <h2>Dificuldade de Concentração</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Criança que não para quieta, que muda de atividade a todo momento, que parece não ouvir quando é chamada — em muitos casos, isso é apenas um traço normal da infância, especialmente em crianças pequenas ou muito estimuladas.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>O tempo de atenção sustentada cresce gradualmente com a idade. Excesso de estímulos (telas, brinquedos demais, rotina agitada) e falta de sono adequado também prejudicam bastante a concentração.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Tudo tem o seu tempo determinado.” — baseado em Eclesiastes 3:1</p>
+    <p class="reflection">Respeitar o tempo e o ritmo de cada criança, sem comparar com outras, é uma forma de honrar como Deus formou cada uma de forma única.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 14</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <span class="topic-kicker">Desafio 6 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Dificuldade de Concentração — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Divida tarefas em passos pequenos e claros, um de cada vez.</li><li><span class="tip-num">2</span>Reduza estímulos ao redor na hora de fazer uma atividade (TV desligada, ambiente calmo).</li><li><span class="tip-num">3</span>Use temporizadores visuais para tornar o tempo de foco mais concreto.</li><li><span class="tip-num">4</span>Garanta uma boa noite de sono — ela impacta diretamente a atenção do dia seguinte.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, me ajuda a ter paciência com o ritmo do meu filho, e a criar um ambiente que favoreça sua concentração. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 15</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <header class="topic-head">
+    <div class="topic-badge">📱</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 7 de 18</span>
+      <h2>Uso Excessivo de Telas</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Tablets, celulares e TV fazem parte do dia a dia de quase toda família hoje. O desafio não é a tela em si, mas o tempo, o conteúdo e o que deixa de acontecer (brincar, conversar, ler) quando a tela toma conta do tempo livre da criança.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Telas oferecem estímulo e recompensa imediatos, o que é naturalmente atraente para qualquer cérebro, ainda mais um em desenvolvimento. Sem limites claros, elas tendem a ocupar cada vez mais espaço.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Tudo me é lícito, mas nem tudo convém.” — baseado em 1 Coríntios 6:12</p>
+    <p class="reflection">Assim como em muitas áreas da vida, o equilíbrio é o caminho — telas não são o inimigo, mas merecem um lugar bem definido na rotina, ao lado de outras atividades importantes.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 16</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <span class="topic-kicker">Desafio 7 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Uso Excessivo de Telas — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Defina horários claros de tela, e mantenha-os visíveis (num quadro, por exemplo).</li><li><span class="tip-num">2</span>Prefira conteúdos educativos e assista/acompanhe junto quando possível.</li><li><span class="tip-num">3</span>Crie momentos “sem tela” em família, como as refeições.</li><li><span class="tip-num">4</span>Ofereça alternativas atrativas: livros, brincadeiras ao ar livre, jogos em família.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, me dá sabedoria para equilibrar a tecnologia na vida do meu filho, sem que ela ocupe o lugar de coisas mais importantes. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 17</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <header class="topic-head">
+    <div class="topic-badge">🙈</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 8 de 18</span>
+      <h2>Timidez e Dificuldade Social</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Algumas crianças demoram mais para se soltar em ambientes novos, preferem observar antes de participar, ou ficam quietas perto de pessoas que não conhecem bem. Isso não é, por si só, um problema — é um traço de temperamento.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>A timidez tem forte componente de personalidade, mas pode ser intensificada por excesso de cobrança (“vai lá, cumprimenta”) ou por comparações com crianças mais extrovertidas.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Cada um tem de Deus o seu próprio dom.” — baseado em 1 Coríntios 7:7</p>
+    <p class="reflection">Deus criou personalidades diferentes de propósito — a criança mais quieta e observadora tem tanto valor quanto a mais falante, e não precisa ser “consertada”.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 18</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <span class="topic-kicker">Desafio 8 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Timidez e Dificuldade Social — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Evite rótulos (“ele é tímido”) na frente da criança — isso pode reforçar o comportamento.</li><li><span class="tip-num">2</span>Prepare-a com antecedência para situações sociais novas, explicando o que vai acontecer.</li><li><span class="tip-num">3</span>Permita que observe antes de participar, sem forçar interação.</li><li><span class="tip-num">4</span>Elogie pequenos passos de coragem social, sem exagerar ou pressionar por mais.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, obrigado por criar meu filho do jeito que ele é. Me ajuda a valorizar seu jeitinho único, sem tentar mudá-lo. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 19</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <header class="topic-head">
+    <div class="topic-badge">👊</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 9 de 18</span>
+      <h2>Agressividade com Outras Crianças</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Morder, bater, empurrar — comportamentos agressivos são comuns especialmente em crianças pequenas que ainda não têm palavras suficientes para expressar frustração, e podem continuar, em menor grau, em crianças maiores sob estresse.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>A agressividade costuma ser a forma mais rápida e imediata que a criança encontra para resolver um conflito quando ainda não aprendeu (ou não conseguiu acessar, no calor do momento) formas mais elaboradas de comunicação.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Sede bondosos uns para com os outros, compassivos, perdoando-vos uns aos outros.” — baseado em Efésios 4:32</p>
+    <p class="reflection">Ensinar um filho a lidar com raiva sem agressão é ensinar, na prática, o que significa amar o próximo mesmo quando estamos frustrados.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 20</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <span class="topic-kicker">Desafio 9 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Agressividade com Outras Crianças — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Intervenha imediatamente e com calma, sem gritar ou bater de volta.</li><li><span class="tip-num">2</span>Nomeie a emoção e ofereça uma alternativa: “Você está bravo, mas não pode bater. Pode dizer ‘pare’ bem alto.”</li><li><span class="tip-num">3</span>Ensine e pratique, em momentos calmos, formas de pedir algo ou expressar raiva com palavras.</li><li><span class="tip-num">4</span>Seja consistente nas consequências, sempre com respeito, nunca com humilhação.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, ensina meu filho a expressar sua raiva sem machucar, e me dá paciência para ensiná-lo com gentileza. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 21</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <header class="topic-head">
+    <div class="topic-badge">🧸</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 10 de 18</span>
+      <h2>Dificuldade em Compartilhar</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Para uma criança pequena, seus brinquedos são extensões de si mesma — dividir pode parecer, literalmente, perder uma parte de si. Isso é uma fase normal do desenvolvimento, não “egoísmo” no sentido adulto da palavra.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>O conceito de posse e a capacidade de considerar o ponto de vista do outro amadurecem com o tempo. Antes dos 3-4 anos, a maioria das crianças ainda tem dificuldade real de entender por que deveria dividir algo que é “seu”.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Há mais felicidade em dar do que em receber.” — baseado em Atos 20:35</p>
+    <p class="reflection">Ensinar a generosidade é um processo, não um evento único — cada pequena prática de dividir vai construindo, aos poucos, um coração generoso.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 22</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <span class="topic-kicker">Desafio 10 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Dificuldade em Compartilhar — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Não force a divisão imediata de um brinquedo favorito — negocie um tempo de espera.</li><li><span class="tip-num">2</span>Elogie especificamente quando a criança compartilhar por conta própria.</li><li><span class="tip-num">3</span>Modele a generosidade dividindo suas próprias coisas na frente dela.</li><li><span class="tip-num">4</span>Use um temporizador para “revezar” brinquedos disputados de forma justa e previsível.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, ajuda meu filho a descobrir a alegria de dividir, e me ajuda a ensinar isso com paciência e exemplo. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 23</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <header class="topic-head">
+    <div class="topic-badge">🌙</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 11 de 18</span>
+      <h2>Resistência à Hora de Dormir</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Pedidos de “mais uma história”, idas ao banheiro, medo do escuro, ou simplesmente não querer parar de brincar — a hora de dormir é, para muitas famílias, um dos momentos mais desafiadores do dia.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Crianças muitas vezes resistem ao sono porque não querem “perder” o tempo com a família, ou porque a transição do dia agitado para o silêncio da noite é difícil sem uma rotina que sinalize esse momento com antecedência.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Em paz também me deitarei e dormirei, porque só tu, Senhor, me fazes habitar em segurança.” — baseado em Salmos 4:8</p>
+    <p class="reflection">Criar uma rotina de boa noite calma e previsível ensina à criança que dormir não é um castigo, mas um momento de paz e cuidado.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 24</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <span class="topic-kicker">Desafio 11 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Resistência à Hora de Dormir — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Mantenha um horário consistente, todos os dias, inclusive nos fins de semana.</li><li><span class="tip-num">2</span>Crie uma sequência fixa: banho, pijama, história, oração, luz apagada.</li><li><span class="tip-num">3</span>Desligue telas pelo menos uma hora antes de dormir.</li><li><span class="tip-num">4</span>Reserve um “tempo de conexão” antes da cama, para que a criança não sinta que está perdendo tempo com você.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, obrigado por cuidar do meu filho enquanto ele dorme. Ajuda-nos a criar noites tranquilas e cheias de paz. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 25</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <header class="topic-head">
+    <div class="topic-badge">🥦</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 12 de 18</span>
+      <h2>Seletividade Alimentar</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Recusar legumes, comer sempre a mesma coisa, fazer careta para alimentos novos — a seletividade alimentar é extremamente comum na infância e, na maioria das vezes, é uma fase, não um problema permanente.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>É biologicamente normal que crianças pequenas sejam cautelosas com alimentos novos — é um mecanismo antigo de proteção contra possíveis venenos. Pressão excessiva na hora da refeição costuma piorar a seletividade, não melhorar.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Quer, pois, comais quer bebais, ou façais outra coisa qualquer, fazei tudo para glória de Deus.” — baseado em 1 Coríntios 10:31</p>
+    <p class="reflection">Refeições em família podem ser momentos de conexão e gratidão, não de batalha — o clima ao redor da mesa importa tanto quanto o prato em si.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 26</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <span class="topic-kicker">Desafio 12 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Seletividade Alimentar — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Ofereça o alimento novo várias vezes, sem forçar, e sem grandes comentários.</li><li><span class="tip-num">2</span>Coma junto o que quer que a criança coma — o exemplo pesa mais que a explicação.</li><li><span class="tip-num">3</span>Evite recompensas ou castigos ligados à comida (“só sobremesa se comer tudo”).</li><li><span class="tip-num">4</span>Mantenha as refeições em horário regular e num ambiente tranquilo, sem pressa.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, obrigado pelo alimento de cada dia. Ajuda-me a ter paciência com o tempo do meu filho de experimentar coisas novas. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 27</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <header class="topic-head">
+    <div class="topic-badge">🧦</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 13 de 18</span>
+      <h2>Falta de Responsabilidade</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Esquecer tarefas, deixar brinquedos espalhados, não cuidar dos próprios pertences — a responsabilidade é uma habilidade que se constrói aos poucos, com prática e oportunidade, não algo que a criança já nasce sabendo.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>O cérebro responsável por planejamento e organização é uma das últimas áreas a amadurecer, continuando seu desenvolvimento até a vida adulta jovem. Esperar responsabilidade adulta de uma criança pequena gera frustração para os dois lados.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Fiel no pouco, fiel no muito.” — baseado em Lucas 16:10</p>
+    <p class="reflection">Dar pequenas responsabilidades, do tamanho da criança, é uma forma prática de ensinar o valor bíblico da fidelidade nas pequenas coisas.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 28</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <span class="topic-kicker">Desafio 13 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Falta de Responsabilidade — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Dê tarefas do tamanho certo para a idade, com instruções simples e específicas.</li><li><span class="tip-num">2</span>Use listas visuais (com desenhos, para os menores) em vez de só instruções verbais.</li><li><span class="tip-num">3</span>Celebre o esforço, não só o resultado perfeito.</li><li><span class="tip-num">4</span>Seja consistente: a mesma tarefa, no mesmo momento do dia, cria hábito com o tempo.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, ajuda meu filho a crescer em responsabilidade, um pequeno passo de cada vez, e me dá paciência nesse processo. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 29</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <header class="topic-head">
+    <div class="topic-badge">🤗</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 14 de 18</span>
+      <h2>Apego Excessivo aos Pais</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Chorar quando os pais saem, recusar ficar com outras pessoas, precisar de contato físico constante — o apego forte é, na maioria das vezes, sinal de um vínculo saudável, mesmo quando cansa os pais.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Até certa idade, a criança ainda não desenvolveu totalmente a noção de permanência do objeto emocional — ela precisa aprender, com repetição, que os pais sempre voltam, mesmo quando saem de perto.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Não te deixarei, nem te desampararei.” — baseado em Hebreus 13:5</p>
+    <p class="reflection">Assim como Deus promete nunca nos abandonar, podemos ajudar nossos filhos a internalizar essa mesma segurança através de despedidas previsíveis e retornos confiáveis.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 30</div>
+</section>
+<section class="page topic-page" style="--accent:#c07b8b; --accent-soft:#fbedf0; --accent-text:#8f4657">
+  <span class="topic-kicker">Desafio 14 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Apego Excessivo aos Pais — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Crie um ritual curto e consistente de despedida — evite despedidas longas e ansiosas.</li><li><span class="tip-num">2</span>Nunca saia escondido, mesmo que pareça mais fácil no momento.</li><li><span class="tip-num">3</span>Reforce verbalmente: “Eu sempre volto para buscar você.”</li><li><span class="tip-num">4</span>Aumente gradualmente o tempo de separação, começando com curtos períodos de confiança.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, ajuda meu filho a se sentir seguro mesmo quando estamos separados, sabendo que o amor continua mesmo à distância. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 31</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <header class="topic-head">
+    <div class="topic-badge">😒</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 15 de 18</span>
+      <h2>Respostas Mal-Educadas</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Respostas atravessadas, tom de voz alterado, “não quero” gritado — esse tipo de comportamento costuma aparecer quando a criança está testando limites de comunicação, ou simplesmente imitando o que ouve ao redor.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Crianças aprendem padrões de comunicação observando os adultos e outras crianças ao seu redor. Cansaço, frustração acumulada e falta de vocabulário para se expressar de forma educada também contribuem bastante.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“A resposta branda desvia o furor.” — baseado em Provérbios 15:1</p>
+    <p class="reflection">Ensinar respeito na fala é, antes de tudo, modelar respeito na fala — nossos filhos aprendem o tom que usamos tanto quanto as palavras que dizemos.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 32</div>
+</section>
+<section class="page topic-page" style="--accent:#4f8a8b; --accent-soft:#eaf4f4; --accent-text:#2f5b5c">
+  <span class="topic-kicker">Desafio 15 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Respostas Mal-Educadas — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Não reaja com o mesmo tom — responda com calma, mesmo firme.</li><li><span class="tip-num">2</span>Nomeie o comportamento sem atacar o caráter: “Esse tom não é respeitoso” em vez de “Você é mal-educado”.</li><li><span class="tip-num">3</span>Ensine, num momento calmo, uma forma melhor de dizer a mesma coisa.</li><li><span class="tip-num">4</span>Elogie quando a criança se corrigir sozinha ou pedir desculpas.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, coloca guarda em minha própria boca, para que eu ensine meu filho a falar com respeito pelo exemplo que dou. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 33</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <header class="topic-head">
+    <div class="topic-badge">😢</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 16 de 18</span>
+      <h2>Choro Fácil e Sensibilidade Emocional</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Algumas crianças choram por qualquer contrariedade — um brinquedo que não funciona, uma palavra mais dura, uma mudança de planos. Isso não significa fraqueza, mas geralmente um temperamento mais sensível, que sente tudo de forma mais intensa.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Crianças sensíveis processam estímulos emocionais com mais intensidade e, muitas vezes, ainda não têm ferramentas para lidar com essa intensidade. Elas não estão “exagerando” — para elas, aquilo realmente é grande.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Bem-aventurados os mansos, porque eles herdarão a terra.” — baseado em Mateus 5:5</p>
+    <p class="reflection">A sensibilidade não é um defeito a ser corrigido — pode ser, com o tempo, transformada em empatia e profundidade de caráter, se for acolhida com paciência.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 34</div>
+</section>
+<section class="page topic-page" style="--accent:#5f8d6e; --accent-soft:#eef5f0; --accent-text:#3d6249">
+  <span class="topic-kicker">Desafio 16 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Choro Fácil e Sensibilidade Emocional — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Evite frases como “não é nada disso” ou “para de chorar por bobagem”.</li><li><span class="tip-num">2</span>Valide o sentimento antes de tentar resolver o problema: “Eu vejo que isso te machucou.”</li><li><span class="tip-num">3</span>Ensine, aos poucos, palavras para nomear emoções específicas, além de “triste” ou “bravo”.</li><li><span class="tip-num">4</span>Celebre a sensibilidade como um dom, mostrando exemplos de empatia que ela já demonstra.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, ajuda-me a acolher o coração sensível do meu filho com paciência, vendo nele um dom e não um problema. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 35</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <header class="topic-head">
+    <div class="topic-badge">🧦</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 17 de 18</span>
+      <h2>Bagunça e Desorganização do Quarto</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Roupas no chão, brinquedos espalhados, cama nunca feita — a desorganização é uma das queixas mais comuns dos pais, e também uma das que mais gera atrito no dia a dia em casa.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>Organização é uma habilidade executiva que se desenvolve com o tempo e a prática, e não é intuitiva para a maioria das crianças. Sem um sistema simples e visual, é comum que elas simplesmente não saibam por onde começar.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Mas todas as coisas se façam decentemente e com ordem.” — baseado em 1 Coríntios 14:40</p>
+    <p class="reflection">Ensinar ordem não é sobre perfeccionismo, mas sobre ajudar a criança a construir hábitos que, no futuro, trarão mais paz e autonomia para a vida dela.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 36</div>
+</section>
+<section class="page topic-page" style="--accent:#c76f4c; --accent-soft:#fbeee7; --accent-text:#9a4a2c">
+  <span class="topic-kicker">Desafio 17 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Bagunça e Desorganização do Quarto — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Simplifique: menos brinquedos acessíveis por vez facilita a arrumação.</li><li><span class="tip-num">2</span>Use caixas ou cestos rotulados com desenhos, para facilitar a organização visual.</li><li><span class="tip-num">3</span>Transforme a arrumação num momento leve, com música ou um desafio de tempo.</li><li><span class="tip-num">4</span>Arrume junto nas primeiras vezes, ensinando o passo a passo antes de esperar autonomia.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Deus, me dá criatividade e paciência para ensinar meu filho a cuidar do que tem, um pequeno hábito de cada vez. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 37</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <header class="topic-head">
+    <div class="topic-badge">🚫</div>
+    <div class="topic-head-text">
+      <span class="topic-kicker">Desafio 18 de 18</span>
+      <h2>Dificuldade em Aceitar um “Não”</h2>
+    </div>
+  </header>
+  <div class="info-box">
+    <span class="info-tag">🔍 O que é</span>
+    <p>Chorar, insistir, negociar sem parar depois de ouvir um “não” — para muitas crianças, aceitar um limite é uma das habilidades mais difíceis de desenvolver, especialmente quando o desejo é muito forte.</p>
+  </div>
+  <div class="info-box">
+    <span class="info-tag">🧠 Por que acontece</span>
+    <p>A capacidade de tolerar frustração amadurece aos poucos, e cada “não” bem sustentado pelos pais é, na prática, um treino para essa habilidade tão importante para a vida adulta.</p>
+  </div>
+  <div class="verse-box">
+    <span class="info-tag">📖 Base bíblica</span>
+    <p>“Porque o Senhor corrige a quem ama, assim como o pai corrige o filho a quem quer bem.” — baseado em Provérbios 3:12</p>
+    <p class="reflection">Um “não” consistente, dito com amor, é uma das formas mais claras de mostrar à criança que ela pode confiar na palavra dos pais — hoje e no futuro.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 38</div>
+</section>
+<section class="page topic-page" style="--accent:#c99a3e; --accent-soft:#faf3e2; --accent-text:#8a6415">
+  <span class="topic-kicker">Desafio 18 de 18 · continuação</span>
+  <h2 style="font-size:24px; margin:4px 0 20px;">Dificuldade em Aceitar um “Não” — na prática</h2>
+  <p class="tips-title">✅ Dicas práticas para o dia a dia</p>
+  <ul class="tips-list"><li><span class="tip-num">1</span>Diga “não” com poucas palavras, sem longas justificativas ou debates.</li><li><span class="tip-num">2</span>Mantenha a decisão mesmo diante do choro — ceder ocasionalmente ensina a insistir mais.</li><li><span class="tip-num">3</span>Ofereça uma alternativa dentro do “não”: “Não pode isso agora, mas pode aquilo.”</li><li><span class="tip-num">4</span>Reconheça o esforço quando a criança aceitar um limite, mesmo que a contragosto.</li></ul>
+  <div class="prayer-box">
+    <span class="prayer-ic">🙏</span>
+    <p>Senhor, me dá firmeza para sustentar os limites necessários, mesmo quando é difícil ver meu filho frustrado. Amém.</p>
+  </div>
+  <div class="page-foot">Mapa do Coração · 39</div>
+</section>
+<section class="page quickref-page">
+  <span class="section-kicker" style="--accent:#c76f4c">📋 resumo rápido</span>
+  <h1 style="margin-bottom:6px;">Uma Dica de Cada Desafio</h1>
+  <p style="font-size:13px; color:#6b6355; max-width:560px; margin-bottom:6px;">Para consultar rapidinho nos
+  dias corridos — a dica principal de cada um dos 18 desafios deste guia.</p>
+  <div class="quickref-grid"><div class="quickref-card"><span class="quickref-ic">😤</span><div><b>Birras e Explosões de Raiva</b><span>Mantenha a calma antes de tentar acalmar seu filho — sua tranquilidade é contagiante.</span></div></div><div class="quickref-card"><span class="quickref-ic">🙅</span><div><b>Teimosia e Desobediência</b><span>Dê poucas regras, mas cumpra todas elas com consistência.</span></div></div><div class="quickref-card"><span class="quickref-ic">👧👦</span><div><b>Ciúmes Entre Irmãos</b><span>Reserve um tempinho individual e exclusivo com cada filho, mesmo que curto.</span></div></div><div class="quickref-card"><span class="quickref-ic">🤥</span><div><b>Mentiras e Meias-Verdades</b><span>Reaja com calma quando a verdade for revelada, mesmo que seja algo grave.</span></div></div><div class="quickref-card"><span class="quickref-ic">😨</span><div><b>Medos e Ansiedade Infantil</b><span>Nunca ridicularize o medo, mesmo que pareça bobo para você.</span></div></div><div class="quickref-card"><span class="quickref-ic">📚</span><div><b>Dificuldade de Concentração</b><span>Divida tarefas em passos pequenos e claros, um de cada vez.</span></div></div><div class="quickref-card"><span class="quickref-ic">📱</span><div><b>Uso Excessivo de Telas</b><span>Defina horários claros de tela, e mantenha-os visíveis (num quadro, por exemplo).</span></div></div><div class="quickref-card"><span class="quickref-ic">🙈</span><div><b>Timidez e Dificuldade Social</b><span>Evite rótulos (“ele é tímido”) na frente da criança — isso pode reforçar o comportamento.</span></div></div><div class="quickref-card"><span class="quickref-ic">👊</span><div><b>Agressividade com Outras Crianças</b><span>Intervenha imediatamente e com calma, sem gritar ou bater de volta.</span></div></div><div class="quickref-card"><span class="quickref-ic">🧸</span><div><b>Dificuldade em Compartilhar</b><span>Não force a divisão imediata de um brinquedo favorito — negocie um tempo de espera.</span></div></div><div class="quickref-card"><span class="quickref-ic">🌙</span><div><b>Resistência à Hora de Dormir</b><span>Mantenha um horário consistente, todos os dias, inclusive nos fins de semana.</span></div></div><div class="quickref-card"><span class="quickref-ic">🥦</span><div><b>Seletividade Alimentar</b><span>Ofereça o alimento novo várias vezes, sem forçar, e sem grandes comentários.</span></div></div><div class="quickref-card"><span class="quickref-ic">🧦</span><div><b>Falta de Responsabilidade</b><span>Dê tarefas do tamanho certo para a idade, com instruções simples e específicas.</span></div></div><div class="quickref-card"><span class="quickref-ic">🤗</span><div><b>Apego Excessivo aos Pais</b><span>Crie um ritual curto e consistente de despedida — evite despedidas longas e ansiosas.</span></div></div><div class="quickref-card"><span class="quickref-ic">😒</span><div><b>Respostas Mal-Educadas</b><span>Não reaja com o mesmo tom — responda com calma, mesmo firme.</span></div></div><div class="quickref-card"><span class="quickref-ic">😢</span><div><b>Choro Fácil e Sensibilidade Emocional</b><span>Evite frases como “não é nada disso” ou “para de chorar por bobagem”.</span></div></div><div class="quickref-card"><span class="quickref-ic">🧦</span><div><b>Bagunça e Desorganização do Quarto</b><span>Simplifique: menos brinquedos acessíveis por vez facilita a arrumação.</span></div></div><div class="quickref-card"><span class="quickref-ic">🚫</span><div><b>Dificuldade em Aceitar um “Não”</b><span>Diga “não” com poucas palavras, sem longas justificativas ou debates.</span></div></div></div>
+  <div class="page-foot">Mapa do Coração · 40</div>
+</section>
+<section class="page faq-page">
+  <span class="section-kicker" style="--accent:#c07b8b">❓ perguntas frequentes</span>
+  <h1>Dúvidas Comuns dos Pais</h1>
+  <div class="faq-item"><p class="faq-q">É errado impor limites e regras para meu filho?</p><p class="faq-a">Não — limites claros e consistentes são um ato de amor, não de rigidez. Eles dão à criança um senso de segurança e previsibilidade. O segredo está em como aplicamos esses limites: com firmeza, mas sempre com respeito e carinho.</p></div><div class="faq-item"><p class="faq-q">Devo dar bronca na frente de outras pessoas?</p><p class="faq-a">Sempre que possível, corrija em particular. Correções públicas costumam gerar mais vergonha do que aprendizado, e podem prejudicar a autoestima da criança sem necessariamente melhorar o comportamento.</p></div><div class="faq-item"><p class="faq-q">Orar com meu filho realmente ajuda no comportamento dele?</p><p class="faq-a">A oração em família não é uma “fórmula mágica”, mas cria um ambiente de conexão, calma e valores compartilhados que, com o tempo, fortalece o vínculo e a receptividade da criança aos ensinamentos dos pais.</p></div><div class="faq-item"><p class="faq-q">Com que idade devo começar a dar responsabilidades ao meu filho?</p><p class="faq-a">Desde muito cedo! Mesmo crianças de 2 e 3 anos podem guardar brinquedos simples ou ajudar a colocar a mesa. O importante é ajustar a tarefa à capacidade real da idade.</p></div><div class="faq-item"><p class="faq-q">É normal meu filho ter fases de comportamento difícil sem motivo aparente?</p><p class="faq-a">Sim, muito normal. Crescimento, mudanças na rotina, novas habilidades sendo desenvolvidas e até fatores como sono e alimentação podem gerar fases mais desafiadoras sem uma causa única e óbvia.</p></div><div class="faq-item"><p class="faq-q">Quando devo procurar ajuda profissional?</p><p class="faq-a">Se um comportamento for muito intenso, persistente por vários meses, ou atrapalhar significativamente a vida familiar, escolar ou social da criança, vale a pena buscar orientação de um pediatra ou psicólogo infantil — pedir ajuda é um ato de cuidado, não de fracasso.</p></div>
+  <div class="page-foot">Mapa do Coração · 41</div>
+</section>
+<section class="page earth-page">
+  <div class="earth-shape es1"></div>
+  <div class="earth-shape es2"></div>
+  <div class="compass-badge">💚</div>
+  <h1 style="color:#fff; font-size:28px; max-width:460px;">Continue Nessa Jornada</h1>
+  <p style="max-width:420px; opacity:.92; font-size:15px;">Nenhum pai ou mãe acerta sempre —
+  e está tudo bem. O que importa é continuar tentando, aprendendo e orando por sabedoria a
+  cada novo dia. Seu esforço já é, por si só, um ato de amor.</p>
+  <span class="cover-brand">Mapa Bíblico Kids</span>
+  <p style="margin-top:26px; font-size:11px; opacity:.7;">Mapa do Coração © 2026 — Todos os direitos reservados</p>
+</section>
+</body>
+</html>
