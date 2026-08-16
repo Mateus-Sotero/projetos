@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<title>Anúncio Mapa Bíblico Kids</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  width: 1080px;
+  height: 1080px;
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 0%, #14b8a6 0%, #0d9488 38%, #134e4a 100%);
+}
+
+.shape { position: absolute; border-radius: 50%; opacity: .16; background: #fff; }
+.sh1 { width: 420px; height: 420px; top: -140px; left: -140px; }
+.sh2 { width: 300px; height: 300px; bottom: -100px; right: -100px; background: #fb923c; opacity: .22; }
+.sh3 { width: 200px; height: 200px; top: 60px; right: -60px; background: #fb7185; opacity: .2; }
+.sh4 { width: 150px; height: 150px; bottom: 260px; left: -60px; background: #f5b942; opacity: .18; }
+
+.stars {
+  position: absolute; top: 44px; left: 0; right: 0; text-align: center;
+  color: #fff; opacity: .6; letter-spacing: 14px; font-size: 18px;
+}
+
+.badge-top {
+  position: absolute; top: 96px; left: 50%; transform: translateX(-50%);
+  background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.55);
+  color: #fff; font-weight: 800; font-size: 20px; letter-spacing: .5px;
+  padding: 11px 32px; border-radius: 60px; white-space: nowrap;
+}
+
+.medallion {
+  position: absolute; top: 172px; left: 50%; transform: translateX(-50%);
+  width: 216px; height: 216px; border-radius: 50%;
+  background: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 14px 0 rgba(0,0,0,.12);
+}
+.medallion-ring {
+  position: absolute; inset: -14px; border-radius: 50%;
+  border: 4px dashed rgba(255,255,255,.7);
+}
+.medallion-icon { font-size: 104px; line-height: 1; }
+
+.title {
+  position: absolute; top: 418px; left: 0; right: 0; text-align: center;
+  font-family: 'Baloo 2', cursive; font-weight: 800; color: #fff;
+  font-size: 80px; line-height: 1.04; text-shadow: 0 6px 0 rgba(0,0,0,.1);
+}
+
+.subtitle {
+  position: absolute; top: 604px; left: 100px; right: 100px; text-align: center;
+  color: #fff; font-weight: 700; font-size: 31px; line-height: 1.4; opacity: .96;
+}
+
+.icon-row {
+  position: absolute; top: 726px; left: 0; right: 0; text-align: center;
+  font-size: 42px; letter-spacing: 24px;
+}
+
+.price-wrap {
+  position: absolute; top: 806px; left: 0; right: 0; text-align: center;
+}
+.price-tag {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: #fbbf24; color: #78350f; font-family: 'Baloo 2', cursive;
+  font-weight: 800; padding: 14px 38px; border-radius: 60px;
+  box-shadow: 0 8px 0 rgba(0,0,0,.14); white-space: nowrap;
+}
+.price-tag .small { font-size: 24px; font-weight: 700; }
+.price-tag .big { font-size: 48px; }
+
+.cta {
+  position: absolute; top: 918px; left: 50%; transform: translateX(-50%);
+  background: #fff; color: #0d9488; font-family: 'Baloo 2', cursive;
+  font-weight: 800; font-size: 34px; padding: 20px 48px; border-radius: 70px;
+  box-shadow: 0 10px 0 rgba(0,0,0,.14);
+  display: flex; align-items: center; gap: 12px; white-space: nowrap;
+}
+</style>
+</head>
+<body>
+  <div class="shape sh1"></div>
+  <div class="shape sh2"></div>
+  <div class="shape sh3"></div>
+  <div class="shape sh4"></div>
+
+  <div class="stars">✦ ⋆ ✦ ⋆ ✦ ⋆ ✦</div>
+  <div class="badge-top">📖 E-BOOK INFANTIL · 85 PÁGINAS</div>
+
+  <div class="medallion">
+    <span class="medallion-ring"></span>
+    <span class="medallion-icon">📖</span>
+  </div>
+
+  <div class="title">Mapa Bíblico<br>Kids</div>
+
+  <div class="subtitle">22 histórias da Bíblia contadas do<br>jeitinho que toda criança entende</div>
+
+  <div class="icon-row">🌍 🐑 ⭐ 🕊️ ✝️</div>
+
+  <div class="price-wrap">
+    <div class="price-tag"><span class="small">por apenas</span><span class="big">R$ 29</span></div>
+  </div>
+
+  <div class="cta">👉 QUERO O MEU AGORA</div>
+</body>
+</html>

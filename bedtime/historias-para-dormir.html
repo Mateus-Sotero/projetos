@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<title>Histórias Para Dormir — E-book</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #3b3660;
+  line-height: 1.55;
+  background: #e9ecef;
+}
+h1, h2, h3 { font-family: 'Baloo 2', cursive; color: #2e2a5c; margin: 0 0 10px; line-height: 1.2; }
+p { margin: 0 0 10px; }
+
+.page {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fdfaff;
+  padding: 20mm 18mm;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+.page-foot {
+  margin-top: auto;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .5px;
+  color: #b7b2d6;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-top: 20px;
+}
+
+/* ---------- Cover & night dividers ---------- */
+.night-page {
+  background: linear-gradient(165deg, #1e1b4b 0%, #2a2566 45%, #12102a 100%);
+  color: #fff; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+}
+.night-shape { position: absolute; border-radius: 50%; opacity: .14; background: #fff; }
+.ns1 { width: 260px; height: 260px; top: -90px; left: -90px; }
+.ns2 { width: 190px; height: 190px; bottom: -60px; right: -60px; background: #f5b942; opacity: .18; }
+.ns3 { width: 130px; height: 130px; top: 80px; right: -40px; background: #a78bfa; opacity: .2; }
+.night-stars { letter-spacing: 10px; font-size: 15px; opacity: .8; margin-bottom: 10px; }
+.moon-badge {
+  font-size: 66px; background: rgba(255,255,255,.12); border: 3px solid rgba(255,255,255,.35);
+  width: 140px; height: 140px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.cover-kicker { text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; opacity: .85; margin-bottom: 6px; }
+.cover-title { font-size: 60px; color: #fff; margin: 4px 0; }
+.cover-subtitle { font-size: 16px; max-width: 480px; opacity: .92; margin-top: 8px; }
+.cover-icons { font-size: 24px; letter-spacing: 10px; margin-top: 18px; }
+.cover-brand { margin-top: 20px; font-family: 'Baloo 2', cursive; font-size: 14px; background: rgba(255,255,255,.14); padding: 6px 20px; border-radius: 50px; }
+
+.divider-page h1 { color: #fff; font-size: 36px; max-width: 480px; }
+.divider-page p { max-width: 420px; opacity: .9; font-size: 15px; }
+.divider-emoji { font-size: 54px; margin-bottom: 10px; }
+
+/* ---------- Letter / how-to / TOC (reused light style) ---------- */
+.section-kicker {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent, #a78bfa); color: #fff;
+  font-weight: 800; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 14px;
+}
+.letter-page h1, .toc-page h1 { font-size: 30px; }
+.letter-page p { font-size: 15px; line-height: 1.7; }
+.letter-list { list-style: none; padding: 0; margin: 16px 0; }
+.letter-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 14.5px; }
+.letter-ic {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px;
+}
+.letter-sign { margin-top: 20px; font-style: italic; color: #2e2a5c; }
+
+.toc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 10px; }
+.toc-col h3 { font-size: 15px; margin: 0 0 8px; }
+.toc-list { list-style: none; padding: 0; margin: 0; }
+.toc-list li {
+  display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700;
+  line-height: 1.25; color: #3b3660; padding: 3.5px 0; border-bottom: 1px dashed #e7e3f6;
+}
+.toc-ic { font-size: 12px; flex: 0 0 auto; }
+.toc-title { flex: 1 1 auto; }
+.toc-num {
+  flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
+  background: #ede9fe; color: #6d28d9; font-size: 10px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------- Story page ---------- */
+.story-page { background: #fdfaff; }
+.story-page .moon { position: absolute; top: 14mm; right: 16mm; font-size: 26px; opacity: .5; }
+.story-page .stars-deco { position: absolute; top: 16mm; left: 16mm; font-size: 16px; opacity: .5; letter-spacing: 6px; }
+.story-head { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+.story-badge {
+  flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 44px; box-shadow: 0 6px 0 rgba(0,0,0,.08);
+}
+.story-kicker {
+  display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
+  font-weight: 800; color: var(--accent-text);
+}
+.story-head-text h2 { font-size: 30px; margin: 4px 0 0; }
+.story-body {
+  font-size: 17.5px; color: #3b3660; background: #fff;
+  border-radius: 20px; padding: 28px 30px; border: 1.5px solid #f0edf9;
+  margin-bottom: 22px; line-height: 1.85;
+}
+.moral-box {
+  border-radius: 18px; padding: 22px 24px 22px 78px; position: relative;
+  background: var(--accent-soft); border: 1.5px solid var(--accent-soft);
+  margin-bottom: 20px;
+}
+.moral-ic { position: absolute; left: 22px; top: 22px; font-size: 32px; }
+.moral-tag { display: block; font-weight: 800; font-size: 14px; margin-bottom: 6px; color: var(--accent-text); }
+.moral-box p { margin: 0; font-size: 16.5px; color: #3b3660; line-height: 1.6; }
+.story-stripe {
+  text-align: center; font-size: 22px; letter-spacing: 12px; opacity: .16;
+  white-space: nowrap; overflow: hidden; margin-bottom: 4px;
+}
+.closer-line {
+  text-align: center; font-style: italic; font-size: 15px; color: #8781ac;
+  margin-top: auto; padding-top: 16px;
+}
+
+@media (max-width: 640px) { .toc-columns { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<section class="page night-page">
+  <div class="night-shape ns1"></div>
+  <div class="night-shape ns2"></div>
+  <div class="night-shape ns3"></div>
+  <div class="night-stars">✦ ⋆ ✧ ⋆ ✦ ⋆ ✧ ⋆ ✦</div>
+  <div class="moon-badge">🌙</div>
+  <span class="cover-kicker">um livro de boa noite para crianças</span>
+  <h1 class="cover-title">Histórias Para<br>Dormir</h1>
+  <p class="cover-subtitle">50 histórias — bíblicas e de valores — com começo, meio, fim<br>
+     e uma linda lição para adormecer em paz</p>
+  <div class="cover-icons">🌟 🐑 🕊️ 🧸 🌈 ☁️</div>
+  <span class="cover-brand">Mapa Bíblico Kids</span>
+</section>
+<section class="page letter-page">
+  <span class="section-kicker" style="--accent:#a78bfa">💜 antes de começar</span>
+  <h1>Para os Pais e Cuidadores</h1>
+  <p>Este livro foi feito para embalar o sono das crianças com histórias curtinhas,
+  calmas e cheias de significado. São 50 histórias no total: 30 inspiradas em
+  passagens da Bíblia e 20 fábulas originais sobre valores como gratidão,
+  paciência, perdão e coragem.</p>
+  <p>Cada história tem começo, meio e fim, e termina com uma pequena lição para
+  conversar com a criança antes dela fechar os olhinhos:</p>
+  <ul class="letter-list">
+    <li><span class="letter-ic" style="background:#a78bfa">📖</span>
+        <b>A história</b> — curtinha, calma, sem sustos, perfeita para ler em voz alta.</li>
+    <li><span class="letter-ic" style="background:#f5b942">🌙</span>
+        <b>A lição</b> — uma frase simples para fixar o valor da noite.</li>
+  </ul>
+  <p>Sugerimos ler uma história por noite, em voz baixa e tranquila, terminando com
+  um abraço e, se quiser, uma oraçãozinha de agradecimento pelo dia.</p>
+  <p class="letter-sign">Boa leitura e boas noites,<br><b>Equipe Mapa Bíblico Kids</b></p>
+  <div class="page-foot">Histórias Para Dormir · 1</div>
+</section>
+<section class="page toc-page">
+  <span class="section-kicker" style="--accent:#f5b942">🗺️ sumário</span>
+  <h1>As 50 Histórias</h1>
+  <div class="toc-columns">
+    <div class="toc-col">
+      <h3 style="color:#6d28d9">📖 Histórias Bíblicas (1–30)</h3>
+      <ul class="toc-list"><li><span class="toc-num">1</span><span class="toc-ic">🌎</span><span class="toc-title">A Criação do Mundo</span></li><li><span class="toc-num">2</span><span class="toc-ic">🍃</span><span class="toc-title">Adão e Eva no Jardim</span></li><li><span class="toc-num">3</span><span class="toc-ic">🚢</span><span class="toc-title">Noé e a Arca</span></li><li><span class="toc-num">4</span><span class="toc-ic">🏗️</span><span class="toc-title">A Torre de Babel</span></li><li><span class="toc-num">5</span><span class="toc-ic">✨</span><span class="toc-title">Abraão e as Estrelas</span></li><li><span class="toc-num">6</span><span class="toc-ic">🪣</span><span class="toc-title">Isaque e o Poço da Amizade</span></li><li><span class="toc-num">7</span><span class="toc-ic">🪜</span><span class="toc-title">Jacó e a Escada Até o Céu</span></li><li><span class="toc-num">8</span><span class="toc-ic">🌈</span><span class="toc-title">José, o Sonhador</span></li><li><span class="toc-num">9</span><span class="toc-ic">🌊</span><span class="toc-title">O Bebê Moisés no Rio</span></li><li><span class="toc-num">10</span><span class="toc-ic">🔥</span><span class="toc-title">Moisés e a Sarça que Não se Queimava</span></li><li><span class="toc-num">11</span><span class="toc-ic">🍞</span><span class="toc-title">O Maná do Céu</span></li><li><span class="toc-num">12</span><span class="toc-ic">🌾</span><span class="toc-title">Rute, a Nora Fiel</span></li><li><span class="toc-num">13</span><span class="toc-ic">👂</span><span class="toc-title">Ana e o Menino Samuel</span></li><li><span class="toc-num">14</span><span class="toc-ic">🐑</span><span class="toc-title">Davi, o Pastorzinho Corajoso</span></li><li><span class="toc-num">15</span><span class="toc-ic">👑</span><span class="toc-title">Salomão e o Pedido Sábio</span></li><li><span class="toc-num">16</span><span class="toc-ic">🐦</span><span class="toc-title">Elias e os Corvos</span></li><li><span class="toc-num">17</span><span class="toc-ic">🫙</span><span class="toc-title">O Óleo que Não Acabava</span></li><li><span class="toc-num">18</span><span class="toc-ic">👸</span><span class="toc-title">Ester, a Rainha Corajosa</span></li><li><span class="toc-num">19</span><span class="toc-ic">🦁</span><span class="toc-title">Daniel e os Leões Gentis</span></li><li><span class="toc-num">20</span><span class="toc-ic">🐋</span><span class="toc-title">Jonas e o Peixe Gigante</span></li><li><span class="toc-num">21</span><span class="toc-ic">⭐</span><span class="toc-title">O Nascimento de Jesus</span></li><li><span class="toc-num">22</span><span class="toc-ic">🐑</span><span class="toc-title">Os Pastores e a Estrela</span></li><li><span class="toc-num">23</span><span class="toc-ic">🤲</span><span class="toc-title">Jesus e as Criancinhas</span></li><li><span class="toc-num">24</span><span class="toc-ic">🐑</span><span class="toc-title">A Ovelhinha Perdida</span></li><li><span class="toc-num">25</span><span class="toc-ic">🌱</span><span class="toc-title">O Grão de Mostarda</span></li><li><span class="toc-num">26</span><span class="toc-ic">🩹</span><span class="toc-title">O Bom Samaritano</span></li><li><span class="toc-num">27</span><span class="toc-ic">🏠</span><span class="toc-title">O Filho Que Voltou Para Casa</span></li><li><span class="toc-num">28</span><span class="toc-ic">⛵</span><span class="toc-title">Jesus Acalma a Tempestade</span></li><li><span class="toc-num">29</span><span class="toc-ic">🍞</span><span class="toc-title">A Multiplicação dos Pães</span></li><li><span class="toc-num">30</span><span class="toc-ic">🌳</span><span class="toc-title">Zaqueu, o Homem Baixinho</span></li></ul>
+    </div>
+    <div class="toc-col">
+      <h3 style="color:#be123c">🌙 Fábulas de Valores (31–50)</h3>
+      <ul class="toc-list"><li><span class="toc-num">31</span><span class="toc-ic">⭐</span><span class="toc-title">A Estrelinha que Queria Brilhar Sozinha</span></li><li><span class="toc-num">32</span><span class="toc-ic">🐦</span><span class="toc-title">O Passarinho que Aprendeu a Confiar</span></li><li><span class="toc-num">33</span><span class="toc-ic">🐑</span><span class="toc-title">A Ovelha que Voltou pro Rebanho</span></li><li><span class="toc-num">34</span><span class="toc-ic">🍞</span><span class="toc-title">O Menino que Compartilhou seu Pão</span></li><li><span class="toc-num">35</span><span class="toc-ic">🦋</span><span class="toc-title">A Borboleta e a Oração da Manhã</span></li><li><span class="toc-num">36</span><span class="toc-ic">🐴</span><span class="toc-title">O Pastorzinho Honesto</span></li><li><span class="toc-num">37</span><span class="toc-ic">🌻</span><span class="toc-title">A Sementinha Paciente</span></li><li><span class="toc-num">38</span><span class="toc-ic">🐞</span><span class="toc-title">O Anjo da Guarda de Joaninha</span></li><li><span class="toc-num">39</span><span class="toc-ic">🌙</span><span class="toc-title">A Lua que Emprestou Sua Luz</span></li><li><span class="toc-num">40</span><span class="toc-ic">🐰</span><span class="toc-title">O Coelhinho que Perdoou o Amigo</span></li><li><span class="toc-num">41</span><span class="toc-ic">🐜</span><span class="toc-title">A Formiguinha Agradecida</span></li><li><span class="toc-num">42</span><span class="toc-ic">🕯️</span><span class="toc-title">O Menino e a Vela da Esperança</span></li><li><span class="toc-num">43</span><span class="toc-ic">🌱</span><span class="toc-title">As Duas Sementes no Jardim</span></li><li><span class="toc-num">44</span><span class="toc-ic">🐟</span><span class="toc-title">O Peixinho Dourado e o Rio da Bondade</span></li><li><span class="toc-num">45</span><span class="toc-ic">🐑</span><span class="toc-title">A Ovelha Negra que Encontrou seu Lugar</span></li><li><span class="toc-num">46</span><span class="toc-ic">🧸</span><span class="toc-title">O Ursinho que Aprendeu a Orar</span></li><li><span class="toc-num">47</span><span class="toc-ic">🌟</span><span class="toc-title">A Estrela Guia da Menina Perdida</span></li><li><span class="toc-num">48</span><span class="toc-ic">🌳</span><span class="toc-title">O Passarinho e a Árvore Generosa</span></li><li><span class="toc-num">49</span><span class="toc-ic">☁️</span><span class="toc-title">A Nuvem que Aprendeu a Deixar Chover</span></li><li><span class="toc-num">50</span><span class="toc-ic">🐦</span><span class="toc-title">O Sonho da Pequena Andorinha</span></li></ul>
+    </div>
+  </div>
+  <div class="page-foot">Histórias Para Dormir · 2</div>
+</section>
+<section class="page night-page divider-page">
+  <div class="night-shape ns1"></div>
+  <div class="night-shape ns2"></div>
+  <div class="divider-emoji">📖</div>
+  <h1>Histórias Bíblicas</h1>
+  <p>Trinta histórias inspiradas na Bíblia, recontadas de um jeitinho calmo e gostoso para dormir.</p>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌎</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 1 de 30</span>
+      <h2>A Criação do Mundo</h2>
+      <span class="story-ref">📍 baseado em Gênesis 1</span>
+    </div>
+  </header>
+  <p class="story-body">No começo de tudo, só existia Deus. Com carinho, Ele começou a criar: a luz, o céu, os mares e a terra. Depois vieram o sol para aquecer os dias e a lua para iluminar as noites. Deus encheu os campos de flores, os mares de peixinhos coloridos e o céu de pássaros cantores. Por fim, criou o ser humano, para cuidar de tudo com amor. Ao olhar para o mundo pronto, Deus sorriu: estava tudo muito bom. E, no sétimo dia, Ele descansou, mostrando que até as noites de sono fazem parte de um plano cheio de amor.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Tudo o que Deus faz, Ele faz com cuidado e amor — inclusive você.</p>
+  </div>
+  <div class="story-stripe">🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 3</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🍃</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 2 de 30</span>
+      <h2>Adão e Eva no Jardim</h2>
+      <span class="story-ref">📍 baseado em Gênesis 2 e 3</span>
+    </div>
+  </header>
+  <p class="story-body">Deus preparou um jardim lindo para Adão e Eva, cheio de árvores frutíferas e rios cristalinos. Eles podiam brincar e comer à vontade, menos de uma árvore especial que Deus pediu para não tocarem, para protegê-los. Um dia, encantados por uma conversa enganosa, os dois comeram do fruto proibido e sentiram, pela primeira vez, um friozinho de vergonha no coração. Mesmo assim, Deus não os abandonou: cuidou deles com ternura e prometeu que, um dia, tudo seria consertado com muito amor.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo quando erramos, o amor de Deus por nós nunca diminui.</p>
+  </div>
+  <div class="story-stripe">🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 🍃 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 4</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🚢</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 3 de 30</span>
+      <h2>Noé e a Arca</h2>
+      <span class="story-ref">📍 baseado em Gênesis 6 a 9</span>
+    </div>
+  </header>
+  <p class="story-body">Noé era um homem bom que confiava em Deus. Um dia, Deus lhe pediu para construir um barco enorme, porque uma grande chuva estava chegando. Noé obedeceu, mesmo sem entender tudo, e reuniu sua família e os animais, dois a dois, dentro da arca. Choveu por muitos dias, mas todos ficaram seguros e quentinhos lá dentro. Quando a chuva parou, uma pomba trouxe um ramo verde, sinal de que a terra estava pronta de novo. No céu, surgiu um lindo arco-íris, a promessa de Deus de cuidar sempre do seu povo.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Confiar em Deus, mesmo sem entender tudo, traz paz para o coração.</p>
+  </div>
+  <div class="story-stripe">🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 5</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🏗️</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 4 de 30</span>
+      <h2>A Torre de Babel</h2>
+      <span class="story-ref">📍 baseado em Gênesis 11</span>
+    </div>
+  </header>
+  <p class="story-body">Havia um tempo em que todas as pessoas falavam a mesma língua e viviam juntas numa cidade. Elas quiseram construir uma torre tão alta que chegasse ao céu, mais para se mostrar grandes do que para agradecer a Deus. Com carinho, Deus fez com que todos passassem a falar línguas diferentes, e as famílias se espalharam pelo mundo, cada uma com seu jeitinho de falar. Foi assim que surgiram os povos diferentes que existem até hoje, cada um especial à sua maneira.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>É bom ter sonhos grandes, mas o mais importante é ter um coração humilde.</p>
+  </div>
+  <div class="story-stripe">🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ 🏗️ </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 6</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">✨</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 5 de 30</span>
+      <h2>Abraão e as Estrelas</h2>
+      <span class="story-ref">📍 baseado em Gênesis 15 e 22</span>
+    </div>
+  </header>
+  <p class="story-body">Deus chamou Abraão para uma jornada especial e prometeu: “Você terá uma família tão grande quanto as estrelas do céu.” Certa noite, Deus levou Abraão para fora da tenda e disse: “Olhe para cima e tente contar as estrelas.” Abraão olhou maravilhado para tantas luzinhas brilhando e confiou na promessa, mesmo sem filhos ainda. Com o passar do tempo, nasceu Isaque, o filho tão esperado, e a promessa de Deus começou a se cumprir, estrelinha por estrelinha.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>As promessas de Deus podem demorar, mas elas sempre se cumprem.</p>
+  </div>
+  <div class="story-stripe">✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ ✨ </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 7</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🪣</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 6 de 30</span>
+      <h2>Isaque e o Poço da Amizade</h2>
+      <span class="story-ref">📍 baseado em Gênesis 26</span>
+    </div>
+  </header>
+  <p class="story-body">Isaque, filho de Abraão, gostava de cavar poços de água para ajudar seu povo e os animais a matarem a sede. Algumas vezes, outros pastores brigavam por causa dos poços que ele cavava. Em vez de discutir, Isaque preferia se afastar em paz e cavar um novo poço em outro lugar. Com paciência e sem brigas, ele encontrou água em abundância, e no final, até aqueles que antes discutiam com ele vieram fazer as pazes.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>A paciência e a paz resolvem mais coisas do que a briga.</p>
+  </div>
+  <div class="story-stripe">🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 🪣 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 8</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🪜</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 7 de 30</span>
+      <h2>Jacó e a Escada Até o Céu</h2>
+      <span class="story-ref">📍 baseado em Gênesis 28</span>
+    </div>
+  </header>
+  <p class="story-body">Certa noite, Jacó estava viajando sozinho e usou uma pedra como travesseiro para dormir ao relento. Enquanto dormia, teve um sonho maravilhoso: uma escada enorme que ia da terra até o céu, com anjos subindo e descendo por ela. No topo, Deus prometeu estar sempre com ele, em cada passo de sua jornada. Jacó acordou maravilhado e entendeu que, mesmo sozinho no meio do caminho, nunca estivera realmente só.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo quando parecemos sozinhos, Deus está sempre pertinho da gente.</p>
+  </div>
+  <div class="story-stripe">🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 🪜 </div>
+  <p class="closer-line">E a noite chegou serena, com o coração leve e grato.</p>
+  <div class="page-foot">Histórias Para Dormir · 9</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌈</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 8 de 30</span>
+      <h2>José, o Sonhador</h2>
+      <span class="story-ref">📍 baseado em Gênesis 37 a 45</span>
+    </div>
+  </header>
+  <p class="story-body">José tinha sonhos especiais e uma túnica colorida que seu pai lhe deu de presente. Seus irmãos, com ciúmes, o venderam para longe, e José passou por muitas dificuldades numa terra estranha. Mesmo assim, ele continuou confiando em Deus e trabalhando com honestidade, até se tornar um homem importante no Egito. Anos depois, quando seus irmãos precisaram de ajuda, José os recebeu com um abraço e disse que os perdoava de coração, porque Deus tinha transformado tudo em algo bom.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Perdoar quem nos machucou é um dos maiores presentes que podemos dar.</p>
+  </div>
+  <div class="story-stripe">🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 </div>
+  <p class="closer-line">E, com um sorriso no rosto, vieram os sonhos bons daquela noite.</p>
+  <div class="page-foot">Histórias Para Dormir · 10</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌊</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 9 de 30</span>
+      <h2>O Bebê Moisés no Rio</h2>
+      <span class="story-ref">📍 baseado em Êxodo 2</span>
+    </div>
+  </header>
+  <p class="story-body">Para proteger seu bebê, uma mamãe colocou o pequeno Moisés numa cestinha macia e o deixou flutuando entre os juncos do rio, com sua irmã vigiando de longe. Uma princesa encontrou o bebê chorando e, encantada, decidiu cuidar dele como filho. Assim, Moisés cresceu protegido e, mais tarde, tornou-se um grande líder que ajudou seu povo a ser livre. Tudo começou com o cuidado amoroso de uma mãe e a proteção de Deus sobre aquela cestinha no rio.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus cuida dos pequenos detalhes, mesmo quando tudo parece incerto.</p>
+  </div>
+  <div class="story-stripe">🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 11</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🔥</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 10 de 30</span>
+      <h2>Moisés e a Sarça que Não se Queimava</h2>
+      <span class="story-ref">📍 baseado em Êxodo 3</span>
+    </div>
+  </header>
+  <p class="story-body">Enquanto cuidava de ovelhas no deserto, Moisés viu algo incrível: um arbusto pegando fogo, mas que não se queimava. Curioso, ele se aproximou, e ouviu a voz de Deus chamando seu nome com carinho. Deus pediu que Moisés ajudasse seu povo a sair da escravidão no Egito. Moisés ficou com medo, achando que não era capaz, mas Deus prometeu estar sempre ao seu lado. Com essa promessa no coração, Moisés seguiu em frente, corajoso.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus não escolhe só os mais fortes, mas dá coragem a quem confia n'Ele.</p>
+  </div>
+  <div class="story-stripe">🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 12</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🍞</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 11 de 30</span>
+      <h2>O Maná do Céu</h2>
+      <span class="story-ref">📍 baseado em Êxodo 16</span>
+    </div>
+  </header>
+  <p class="story-body">Depois de deixarem o Egito, o povo caminhava pelo deserto e começou a sentir fome. Deus, com carinho, fez cair do céu um alimento especial toda manhã, parecido com pequenos flocos brancos e doces, chamado maná. Bastava colher o suficiente para aquele dia, porque no dia seguinte viria mais, fresquinho. Assim, ninguém passou fome na longa viagem, e todos aprenderam a confiar que Deus cuidaria de cada novo dia.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus cuida de nós um dia de cada vez, sem precisarmos nos preocupar demais.</p>
+  </div>
+  <div class="story-stripe">🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 13</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌾</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 12 de 30</span>
+      <h2>Rute, a Nora Fiel</h2>
+      <span class="story-ref">📍 baseado em Rute 1 a 4</span>
+    </div>
+  </header>
+  <p class="story-body">Rute amava muito sua sogra Noemi, mesmo depois de tempos difíceis na família. Quando Noemi decidiu voltar para sua terra natal, sozinha e triste, Rute disse: “Não vou te deixar, para onde você for, eu vou também.” As duas viajaram juntas, e Rute trabalhou com humildade recolhendo grãos nos campos para sustentar as duas. Sua bondade e lealdade tocaram o coração de um homem bom chamado Boaz, que cuidou delas com carinho, e a família de Rute foi abençoada para sempre.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>A lealdade e o amor pela família trazem bênçãos inesperadas.</p>
+  </div>
+  <div class="story-stripe">🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 🌾 </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 14</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">👂</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 13 de 30</span>
+      <h2>Ana e o Menino Samuel</h2>
+      <span class="story-ref">📍 baseado em 1 Samuel 1 a 3</span>
+    </div>
+  </header>
+  <p class="story-body">Ana desejava muito ter um filho e orou com todo o seu coração, prometendo dedicá-lo a Deus. Quando Samuel nasceu, ela cumpriu sua promessa com alegria, e o menino cresceu ajudando no templo. Certa noite, Samuel ouviu uma voz chamando seu nome, mas pensou que fosse o sacerdote Eli. Depois de chamá-lo três vezes, Eli entendeu: era Deus falando com o menino! Samuel respondeu com um coração disposto: “Fala, Senhor, que Teu servo está ouvindo.”</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus fala com quem tem um coração disposto a escutar.</p>
+  </div>
+  <div class="story-stripe">👂 👂 👂 👂 👂 👂 👂 👂 👂 👂 👂 👂 👂 👂 </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 15</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 14 de 30</span>
+      <h2>Davi, o Pastorzinho Corajoso</h2>
+      <span class="story-ref">📍 baseado em 1 Samuel 16 e 17</span>
+    </div>
+  </header>
+  <p class="story-body">Davi era o mais novo entre seus irmãos e cuidava das ovelhas da família nos campos verdes. Mesmo sendo o mais novo, ele já tinha um coração corajoso: protegia o rebanho de animais perigosos com destreza e confiava sempre em Deus. Um dia, ele foi escolhido para uma tarefa muito maior, porque Deus não olha para o tamanho de alguém, mas para o tamanho do seu coração. Davi seguiu confiante, sabendo que quem cuida das ovelhinhas com amor também sabe cuidar de grandes desafios com coragem.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus não olha o tamanho da pessoa, mas o tamanho da sua fé.</p>
+  </div>
+  <div class="story-stripe">🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 16</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">👑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 15 de 30</span>
+      <h2>Salomão e o Pedido Sábio</h2>
+      <span class="story-ref">📍 baseado em 1 Reis 3</span>
+    </div>
+  </header>
+  <p class="story-body">Quando Salomão se tornou rei, Deus apareceu em um sonho e disse: “Peça o que quiser, e eu te darei.” Ele poderia ter pedido riquezas ou fama, mas Salomão pediu algo diferente: um coração sábio para cuidar bem do seu povo. Deus ficou tão contente com esse pedido gentil que lhe deu sabedoria, e também riquezas e honra por cima. Com o tempo, Salomão se tornou conhecido em muitas terras por suas decisões justas e bondosas.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Pedir sabedoria e um bom coração vale mais do que pedir riquezas.</p>
+  </div>
+  <div class="story-stripe">👑 👑 👑 👑 👑 👑 👑 👑 👑 👑 👑 👑 👑 👑 </div>
+  <p class="closer-line">E a noite chegou serena, com o coração leve e grato.</p>
+  <div class="page-foot">Histórias Para Dormir · 17</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐦</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 16 de 30</span>
+      <h2>Elias e os Corvos</h2>
+      <span class="story-ref">📍 baseado em 1 Reis 17</span>
+    </div>
+  </header>
+  <p class="story-body">Durante um tempo de seca no reino, Deus disse ao profeta Elias para se esconder perto de um riacho tranquilo. Ali, todas as manhãs e todas as tardes, corvos vinham voando e traziam pão e carne para ele comer, como Deus tinha combinado. Elias bebia da água fresquinha do riacho e descansava em paz, sabendo que estava sendo cuidado de um jeito muito especial, mesmo em tempos difíceis. Assim aprendeu que Deus sempre encontra um jeito de cuidar de quem confia n'Ele.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo nos momentos difíceis, Deus encontra formas surpreendentes de cuidar da gente.</p>
+  </div>
+  <div class="story-stripe">🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 </div>
+  <p class="closer-line">E, com um sorriso no rosto, vieram os sonhos bons daquela noite.</p>
+  <div class="page-foot">Histórias Para Dormir · 18</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🫙</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 17 de 30</span>
+      <h2>O Óleo que Não Acabava</h2>
+      <span class="story-ref">📍 baseado em 2 Reis 4</span>
+    </div>
+  </header>
+  <p class="story-body">Uma viúva estava muito preocupada, pois tinha apenas um potinho de óleo em casa. O profeta Eliseu pediu que ela juntasse o máximo de potes vazios que conseguisse com os vizinhos. Com fé, ela começou a despejar seu pouco óleo nos potes, e, para sua surpresa, o óleo não parava de sair, enchendo pote após pote! Só parou quando não havia mais nenhum vasilhame vazio para encher. Assim, ela vendeu o óleo e conseguiu cuidar de sua família com o que sobrou.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Quando confiamos em Deus, o pouco que temos pode se tornar o suficiente.</p>
+  </div>
+  <div class="story-stripe">🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 🫙 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 19</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">👸</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 18 de 30</span>
+      <h2>Ester, a Rainha Corajosa</h2>
+      <span class="story-ref">📍 baseado em Ester 4 e 5</span>
+    </div>
+  </header>
+  <p class="story-body">Ester se tornou rainha num reino distante, mas guardava em segredo que fazia parte do povo judeu. Quando soube que seu povo corria perigo, seu tio Mordecai pediu que ela fosse corajosa e pedisse ajuda ao rei. Ester ficou com medo, mas decidiu confiar em Deus e agir com coragem, mesmo sem saber como o rei reagiria. Com sabedoria e gentileza, ela falou com o rei no momento certo, e seu povo foi salvo graças à sua coragem.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Às vezes, Deus nos coloca no lugar certo bem na hora certa para fazer o bem.</p>
+  </div>
+  <div class="story-stripe">👸 👸 👸 👸 👸 👸 👸 👸 👸 👸 👸 👸 👸 👸 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 20</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🦁</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 19 de 30</span>
+      <h2>Daniel e os Leões Gentis</h2>
+      <span class="story-ref">📍 baseado em Daniel 6</span>
+    </div>
+  </header>
+  <p class="story-body">Daniel amava muito a Deus e orava todos os dias, mesmo sabendo que algumas pessoas não gostavam disso. Por causa de uma lei injusta, ele foi colocado numa cova cheia de leões, mas Daniel não teve medo, porque confiava em Deus com todo o coração. Durante a noite inteira, um anjo ficou ao lado de Daniel e os leões permaneceram calmos e gentis, sem machucá-lo. Na manhã seguinte, todos ficaram maravilhados ao ver Daniel são e salvo.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>A fé tranquila pode nos dar paz mesmo nos momentos mais assustadores.</p>
+  </div>
+  <div class="story-stripe">🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 21</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐋</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 20 de 30</span>
+      <h2>Jonas e o Peixe Gigante</h2>
+      <span class="story-ref">📍 baseado em Jonas 1 a 3</span>
+    </div>
+  </header>
+  <p class="story-body">Deus pediu que Jonas fosse avisar uma cidade distante para mudar de comportamento, mas Jonas, com medo, fugiu para o lado contrário num navio. Uma tempestade forte surgiu, e Jonas acabou caindo no mar, onde um peixe enorme o engoliu gentilmente e o manteve seguro em sua barriga por três dias. Ali dentro, Jonas orou e pediu perdão a Deus. O peixe o levou até a praia, e Jonas, dessa vez, foi fazer o que Deus tinha pedido desde o início.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Nunca é tarde para corrigir o caminho e fazer a coisa certa.</p>
+  </div>
+  <div class="story-stripe">🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 22</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">⭐</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 21 de 30</span>
+      <h2>O Nascimento de Jesus</h2>
+      <span class="story-ref">📍 baseado em Lucas 2</span>
+    </div>
+  </header>
+  <p class="story-body">Numa noite muito especial, em Belém, nasceu um bebê chamado Jesus, num estábulo simples e aconchegante, cercado pelo cheiro de feno e o calor dos animais. Uma estrela brilhante apareceu bem no céu, mais brilhante que todas as outras, guiando quem quisesse encontrar aquele bebê especial. Pastores que cuidavam de ovelhas durante a noite foram avisados por anjos e correram para ver a boa notícia. Encontraram Maria, José e o pequeno Jesus dormindo tranquilamente na manjedoura, envolto em panos macios.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>As coisas mais preciosas costumam vir de um jeitinho simples e humilde.</p>
+  </div>
+  <div class="story-stripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 23</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 22 de 30</span>
+      <h2>Os Pastores e a Estrela</h2>
+      <span class="story-ref">📍 baseado em Lucas 2</span>
+    </div>
+  </header>
+  <p class="story-body">Enquanto cuidavam de suas ovelhas durante a noite, alguns pastores viram o céu se encher de luz e ouviram anjos anunciando: “Não tenham medo! Hoje nasceu um Salvador cheio de amor para todos.” Maravilhados, os pastores deixaram suas ovelhas por um momento e correram até Belém para ver aquele milagre com os próprios olhos. Ao encontrarem o bebê Jesus, ficaram cheios de alegria e saíram contando para todos a boa notícia que tinham visto naquela noite estrelada.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>As boas notícias merecem ser compartilhadas com um coração alegre.</p>
+  </div>
+  <div class="story-stripe">🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 24</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🤲</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 23 de 30</span>
+      <h2>Jesus e as Criancinhas</h2>
+      <span class="story-ref">📍 baseado em Marcos 10</span>
+    </div>
+  </header>
+  <p class="story-body">Certo dia, muitas famílias levaram seus filhinhos até Jesus, para que Ele os abençoasse com carinho. Alguns discípulos acharam que Jesus estava ocupado demais para as crianças e tentaram afastá-las gentilmente. Mas Jesus disse com um sorriso: “Deixem as criancinhas virem até mim, pois delas é o Reino dos Céus.” Ele pegou cada criança no colo, com muito carinho, e as abençoou uma por uma, mostrando que todas eram muito importantes e amadas por Deus.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Cada criança é muito especial e amada aos olhos de Deus.</p>
+  </div>
+  <div class="story-stripe">🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 🤲 </div>
+  <p class="closer-line">E a noite chegou serena, com o coração leve e grato.</p>
+  <div class="page-foot">Histórias Para Dormir · 25</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 24 de 30</span>
+      <h2>A Ovelhinha Perdida</h2>
+      <span class="story-ref">📍 baseado em Lucas 15</span>
+    </div>
+  </header>
+  <p class="story-body">Um pastor cuidava de cem ovelhinhas, mas percebeu que uma delas tinha se perdido, longe do rebanho. Mesmo tendo noventa e nove ovelhas seguras, ele não ficou tranquilo e saiu pelas montanhas, procurando com carinho até encontrar a pequena ovelha assustada. Quando a encontrou, colocou-a com cuidado em seus ombros e voltou feliz para casa, chamando os amigos para comemorar. Assim é o amor de Deus: Ele sempre vai atrás de quem se perde, com muita alegria ao encontrá-lo de volta.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Deus se alegra profundamente cada vez que alguém encontra o caminho de volta.</p>
+  </div>
+  <div class="story-stripe">🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 </div>
+  <p class="closer-line">E, com um sorriso no rosto, vieram os sonhos bons daquela noite.</p>
+  <div class="page-foot">Histórias Para Dormir · 26</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌱</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 25 de 30</span>
+      <h2>O Grão de Mostarda</h2>
+      <span class="story-ref">📍 baseado em Mateus 13</span>
+    </div>
+  </header>
+  <p class="story-body">Jesus gostava de contar histórias simples para ensinar coisas importantes. Certa vez, Ele comparou o Reino de Deus a uma pequena sementinha de mostarda, a menor de todas as sementes do jardim. Quando plantada com cuidado na terra, essa sementinha crescia e se tornava uma árvore grande, forte o bastante para os passarinhos fazerem seus ninhos entre os galhos. Assim, Jesus mostrou que coisas pequenas, cuidadas com fé e paciência, podem crescer e se tornar algo muito grande e bonito.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Pequenos atos de fé podem crescer e se tornar algo maravilhoso.</p>
+  </div>
+  <div class="story-stripe">🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 27</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🩹</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 26 de 30</span>
+      <h2>O Bom Samaritano</h2>
+      <span class="story-ref">📍 baseado em Lucas 10</span>
+    </div>
+  </header>
+  <p class="story-body">Um viajante foi ferido no caminho e ficou deitado, precisando de ajuda. Duas pessoas passaram por ali, mas seguiram em frente, sem parar para socorrê-lo. Então chegou um samaritano, alguém de um povo diferente, que parou imediatamente ao ver o homem machucado. Com cuidado, ele limpou os ferimentos, o levou para um lugar seguro e pagou para que fosse bem cuidado até se recuperar. Jesus contou essa história para ensinar que ser um bom vizinho é cuidar de quem precisa, não importa de onde a pessoa venha.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Amar o próximo é parar e ajudar quem precisa, sem olhar diferenças.</p>
+  </div>
+  <div class="story-stripe">🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 🩹 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 28</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🏠</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 27 de 30</span>
+      <h2>O Filho Que Voltou Para Casa</h2>
+      <span class="story-ref">📍 baseado em Lucas 15</span>
+    </div>
+  </header>
+  <p class="story-body">Um jovem pediu sua parte da herança ao pai e foi viver longe, gastando tudo sem pensar no amanhã. Quando o dinheiro acabou, ele passou fome e sentiu muita saudade de casa. Envergonhado, decidiu voltar, mesmo sem saber como seria recebido. Para sua surpresa, o pai o viu chegando de longe e correu para abraçá-lo com lágrimas de alegria, sem nenhuma cobrança. Fez uma bela festa para comemorar, porque o filho que estava perdido, finalmente, tinha voltado para casa.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>O amor de um pai — e o amor de Deus — está sempre pronto para nos receber de volta.</p>
+  </div>
+  <div class="story-stripe">🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 29</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">⛵</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 28 de 30</span>
+      <h2>Jesus Acalma a Tempestade</h2>
+      <span class="story-ref">📍 baseado em Marcos 4</span>
+    </div>
+  </header>
+  <p class="story-body">Depois de um dia cheio de ensinamentos, Jesus e seus amigos entraram num barco para atravessar o lago. Jesus, cansado, adormeceu tranquilamente na popa do barco. De repente, uma tempestade forte surgiu, balançando o barco de um lado para o outro. Assustados, os amigos acordaram Jesus, que se levantou e disse calmamente ao vento e às ondas: “Fiquem quietos.” Na mesma hora, tudo se acalmou, e um silêncio de paz tomou conta do lago outra vez.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo nas tempestades da vida, a paz de Deus pode acalmar nosso coração.</p>
+  </div>
+  <div class="story-stripe">⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 30</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🍞</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 29 de 30</span>
+      <h2>A Multiplicação dos Pães</h2>
+      <span class="story-ref">📍 baseado em Mateus 14</span>
+    </div>
+  </header>
+  <p class="story-body">Uma multidão seguiu Jesus até um lugar tranquilo para ouvi-lo falar, e quando a noite se aproximou, todos estavam com fome. Um menino generoso ofereceu os poucos pães e peixinhos que tinha guardado para si. Jesus pegou aquela pequena oferta, agradeceu a Deus por ela e começou a distribuir para todos — e, para a surpresa de todos, a comida nunca acabava! Milhares de pessoas comeram até ficarem satisfeitas, e ainda sobrou muito mais do que tinham no começo.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Quando compartilhamos o pouco que temos com um coração generoso, ele pode se multiplicar.</p>
+  </div>
+  <div class="story-stripe">🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 31</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌳</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Histórias Bíblicas · História 30 de 30</span>
+      <h2>Zaqueu, o Homem Baixinho</h2>
+      <span class="story-ref">📍 baseado em Lucas 19</span>
+    </div>
+  </header>
+  <p class="story-body">Zaqueu era um homem baixinho que queria muito ver Jesus passando pela cidade, mas a multidão era grande demais. Com criatividade, ele subiu numa árvore para conseguir enxergar por cima de todos. Jesus, ao passar, olhou para cima, sorriu e disse: “Zaqueu, desça, hoje vou visitar sua casa!” Zaqueu ficou tão feliz e transformado por essa atenção carinhosa que decidiu, ali mesmo, ser uma pessoa mais generosa e gentil com todos ao seu redor.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Um pouco de atenção e amor pode transformar completamente um coração.</p>
+  </div>
+  <div class="story-stripe">🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 32</div>
+</section>
+<section class="page night-page divider-page">
+  <div class="night-shape ns1"></div>
+  <div class="night-shape ns2"></div>
+  <div class="divider-emoji">🌈</div>
+  <h1>Fábulas de Valores</h1>
+  <p>Vinte historinhas originais sobre bondade, coragem, gratidão e amor — para sonhar com um coração cheio de valores.</p>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">⭐</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 1 de 20</span>
+      <h2>A Estrelinha que Queria Brilhar Sozinha</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">No alto do céu, havia uma estrelinha pequena chamada Luma, que sonhava em brilhar mais forte do que todas as outras. Uma noite, ela se afastou das amigas, achando que sozinha brilharia mais. Mas, longe das outras estrelas, Luma percebeu que sua luz parecia fraquinha e solitária no meio da escuridão. Ela voltou correndo para perto das amigas, e juntas, formaram um céu deslumbrante, cada uma brilhando à sua maneira, mas muito mais lindas em conjunto do que sozinhas.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Somos mais fortes e brilhamos mais quando estamos juntos, ajudando uns aos outros.</p>
+  </div>
+  <div class="story-stripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 33</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐦</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 2 de 20</span>
+      <h2>O Passarinho que Aprendeu a Confiar</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Um passarinho chamado Pipo tinha muito medo de voar longe do ninho, achando que ia se perder no caminho. Sua mãe explicou, com carinho, que Deus cuidava de cada passarinho, guiando seu voo mesmo quando o caminho parecia incerto. Num dia de sol, Pipo criou coragem e abriu suas asinhas, voando mais longe do que jamais tinha ido. No caminho, encontrou frutinhas deliciosas e um lindo riacho, e percebeu que, confiando, o mundo se tornava um lugar cheio de coisas boas para descobrir.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Confiar em Deus nos dá coragem para explorar coisas novas sem medo.</p>
+  </div>
+  <div class="story-stripe">🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 34</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 3 de 20</span>
+      <h2>A Ovelha que Voltou pro Rebanho</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma ovelhinha curiosa chamada Nina resolveu explorar sozinha um campo distante, sem avisar ao pastor. Ao anoitecer, ela percebeu que estava longe demais e não conseguia encontrar o caminho de volta, e ficou com muito medo da escuridão. O pastor, preocupado, saiu à sua procura com uma lanterna, chamando seu nome com carinho pelos campos. Ao ouvir a voz familiar, Nina correu em direção à luz, e o pastor a levou de volta, aquecida e segura, para junto do rebanho.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Seguir perto de quem cuida da gente evita muitos sustos pelo caminho.</p>
+  </div>
+  <div class="story-stripe">🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 35</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🍞</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 4 de 20</span>
+      <h2>O Menino que Compartilhou seu Pão</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Tiago tinha o único pedaço de pão da turma na hora do lanche, e viu um coleguinha novo, sentado sozinho, sem nada para comer. Ele hesitou por um momento, pensando em guardar tudo só para si, mas seu coração o convenceu a repartir. Dividiu o pão em duas partes e sentou-se ao lado do menino, conversando e rindo juntos durante o lanche. No fim do dia, Tiago percebeu que tinha ganhado não só um amigo novo, mas uma alegria muito maior do que se tivesse comido o pão sozinho.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Compartilhar o pouco que temos multiplica a alegria em nosso coração.</p>
+  </div>
+  <div class="story-stripe">🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 36</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🦋</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 5 de 20</span>
+      <h2>A Borboleta e a Oração da Manhã</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Toda manhã, uma borboletinha chamada Flor pousava numa flor diferente do jardim e agradecia a Deus por mais um dia de sol e cores. As outras borboletas achavam estranho parar para agradecer, preferindo apenas voar sem pensar em mais nada. Um dia, uma tempestade repentina assustou todas as borboletas do jardim, mas Flor, com o coração em paz por sua gratidão diária, encontrou um abrigo tranquilo debaixo de uma folha grande. Ali, ela esperou calmamente a chuva passar, sabendo que Deus estava cuidando dela.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Começar o dia agradecendo enche o coração de paz para qualquer situação.</p>
+  </div>
+  <div class="story-stripe">🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 37</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐴</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 6 de 20</span>
+      <h2>O Pastorzinho Honesto</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Beto era um pastorzinho que cuidava de um pequeno rebanho na fazenda de seu avô. Um dia, sem querer, ele deixou o portão aberto e duas ovelhas fugiram para o campo vizinho. Com medo de ser repreendido, Beto pensou em esconder o que tinha acontecido, mas decidiu contar a verdade ao avô, mesmo com receio. Seu avô, ao invés de ficar bravo, agradeceu a honestidade do neto e os dois foram juntos buscar as ovelhinhas, rindo e conversando pelo caminho.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Dizer a verdade, mesmo quando é difícil, fortalece a confiança entre as pessoas.</p>
+  </div>
+  <div class="story-stripe">🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 🐴 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 38</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌻</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 7 de 20</span>
+      <h2>A Sementinha Paciente</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma sementinha foi plantada num canto do jardim e ficou ansiosa para crescer rapidamente e virar uma flor grande. Todos os dias, ela tentava espiar para fora da terra antes da hora, mas só encontrava escuridão e teve que esperar mais um pouco. Com paciência, ela recebeu água, sol e cuidado, até que, finalmente, no tempo certo, brotou como uma linda flor amarela, brilhando ao sol da manhã. Ela entendeu que cada coisa boa tem seu próprio tempo de acontecer.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>As coisas boas da vida acontecem no tempo certo, e vale a pena esperar com paciência.</p>
+  </div>
+  <div class="story-stripe">🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 </div>
+  <p class="closer-line">E a noite chegou serena, com o coração leve e grato.</p>
+  <div class="page-foot">Histórias Para Dormir · 39</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐞</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 8 de 20</span>
+      <h2>O Anjo da Guarda de Joaninha</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Joaninha, a pequena inseto de bolinhas vermelhas, tinha medo de atravessar sozinha o jardim grande até a horta do outro lado. Sua avó lhe contou que Deus colocava um anjinho da guarda para cuidar de cada bichinho em sua jornada, mesmo quando ela não conseguia vê-lo. Com essa lembrança no coração, Joaninha criou coragem e voou devagarinho, sentindo-se protegida em cada folha que pousava. Ao chegar são e salva do outro lado, ela sorriu, sabendo que nunca estivera realmente sozinha.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo sem ver, podemos sentir que Deus está cuidando de nós em cada passo.</p>
+  </div>
+  <div class="story-stripe">🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 🐞 </div>
+  <p class="closer-line">E, com um sorriso no rosto, vieram os sonhos bons daquela noite.</p>
+  <div class="page-foot">Histórias Para Dormir · 40</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌙</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 9 de 20</span>
+      <h2>A Lua que Emprestou Sua Luz</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Numa noite muito escura, a Lua percebeu que uma coruja pequena estava perdida na floresta, sem conseguir enxergar o caminho de casa. Mesmo cansada depois de um longo dia escondida atrás das nuvens, a Lua decidiu brilhar com toda sua força para iluminar o caminho da corujinha. Aos poucos, a coruja encontrou a árvore de seu ninho e agradeceu, piscando os olhinhos para o céu. A Lua, satisfeita por ter ajudado, brilhou ainda mais bonita aquela noite.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Ajudar alguém a encontrar o caminho é um dos gestos mais bonitos que existem.</p>
+  </div>
+  <div class="story-stripe">🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 🌙 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 41</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐰</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 10 de 20</span>
+      <h2>O Coelhinho que Perdoou o Amigo</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Marrom, um coelhinho brincalhão, ficou muito triste quando seu amigo esquilo acidentalmente destruiu seu jardim de cenouras durante uma brincadeira. No começo, Marrom pensou em nunca mais falar com ele, mas viu como o esquilo estava arrependido e triste pelo que tinha feito. Com um coração generoso, Marrom decidiu perdoá-lo, e os dois passaram a tarde plantando novas sementinhas de cenoura juntos. No final, o jardim ficou ainda mais bonito do que antes, regado com risadas e amizade renovada.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Perdoar um amigo pode deixar a amizade ainda mais forte do que era antes.</p>
+  </div>
+  <div class="story-stripe">🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 🐰 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 42</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐜</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 11 de 20</span>
+      <h2>A Formiguinha Agradecida</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma formiguinha chamada Fé trabalhava o dia inteiro carregando alimentos para o formigueiro, sempre cantarolando baixinho de tão feliz. Suas amigas perguntaram por que ela estava sempre tão alegre, mesmo com tanto trabalho pela frente. Fé respondeu que, a cada folhinha que carregava, ela agradecia a Deus por ter força, amigas e um lar aconchegante para voltar. Contagiadas pela sua alegria, as outras formiguinhas também começaram a agradecer, e o formigueiro inteiro ficou mais leve e feliz.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>A gratidão transforma até as tarefas mais simples em momentos de alegria.</p>
+  </div>
+  <div class="story-stripe">🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 43</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🕯️</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 12 de 20</span>
+      <h2>O Menino e a Vela da Esperança</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Durante uma noite de tempestade, faltou luz na casa de Pedro, e o menino ficou com muito medo do escuro. Sua mãe acendeu uma velinha pequena e disse: “Mesmo a luz mais fraquinha consegue afastar uma escuridão bem grande.” Pedro observou a chama tremular, e aos poucos foi se acalmando, imaginando que a esperança funcionava do mesmo jeito: por menor que fosse, sempre trazia luz para os momentos difíceis. Naquela noite, ele aprendeu a nunca deixar sua esperança se apagar.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo uma pequena esperança pode iluminar os momentos mais escuros.</p>
+  </div>
+  <div class="story-stripe">🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ 🕯️ </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 44</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌱</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 13 de 20</span>
+      <h2>As Duas Sementes no Jardim</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">No mesmo canteiro, foram plantadas duas sementinhas: uma orgulhosa, que achava que cresceria mais alta e bonita que todas as outras plantas, e outra humilde, que só queria crescer com gratidão. A sementinha orgulhosa cresceu rápido, mas seus galhos ficaram fracos por querer crescer alto demais, muito rápido. Já a sementinha humilde cresceu devagar, com raízes fortes e profundas, tornando-se uma planta resistente mesmo nos dias de vento forte. No final, a humildade se mostrou a base mais firme para crescer bem.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Crescer com humildade nos dá raízes mais fortes para enfrentar as dificuldades.</p>
+  </div>
+  <div class="story-stripe">🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 🌱 </div>
+  <p class="closer-line">E, sob as estrelas, veio um sono calmo e uma noite tranquila.</p>
+  <div class="page-foot">Histórias Para Dormir · 45</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐟</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 14 de 20</span>
+      <h2>O Peixinho Dourado e o Rio da Bondade</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Um peixinho dourado chamado Raio adorava nadar pelo rio, ajudando outros peixinhos a encontrar caminhos seguros entre as pedras. Um dia, encontrou um peixinho pequeno e assustado, preso numa poça isolada depois que o rio baixou. Mesmo sem conhecê-lo, Raio nadou de um lado para o outro até encontrar uma passagem de água que reconectava a poça ao rio principal. O peixinho pequeno, livre novamente, agradeceu, e os dois se tornaram grandes amigos, nadando juntos pelo resto do dia.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Um gesto de bondade pode transformar completamente o dia de alguém.</p>
+  </div>
+  <div class="story-stripe">🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 </div>
+  <p class="closer-line">E todos dormiram bem, sabendo que o amor de Deus nunca dorme.</p>
+  <div class="page-foot">Histórias Para Dormir · 46</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐑</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 15 de 20</span>
+      <h2>A Ovelha Negra que Encontrou seu Lugar</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Preta era uma ovelhinha diferente das demais, com sua lã escura em meio a um rebanho todo branquinho. No começo, ela se sentia triste, achando que não se encaixava e ficando sempre um pouco afastada das outras. Mas o pastor sempre a tratava com o mesmo carinho, e aos poucos, as outras ovelhas perceberam que Preta era divertida, corajosa e uma ótima amiga. Com o tempo, ela se tornou querida por todos, entendendo que ser diferente não a fazia menos especial.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Cada um é especial do seu próprio jeitinho, e isso deve ser celebrado.</p>
+  </div>
+  <div class="story-stripe">🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 🐑 </div>
+  <p class="closer-line">E a noite chegou serena, com o coração leve e grato.</p>
+  <div class="page-foot">Histórias Para Dormir · 47</div>
+</section>
+<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#92400e">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🧸</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 16 de 20</span>
+      <h2>O Ursinho que Aprendeu a Orar</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Todas as noites, antes de dormir, o ursinho Mel ficava um pouquinho preocupado com as coisas do dia seguinte. Sua mamãe ursa lhe ensinou a fazer uma oraçãozinha simples antes de fechar os olhos, agradecendo pelo dia e pedindo um sono tranquilo. No começo, Mel achou estranho conversar com Deus sem vê-lo, mas logo sentiu seu coração ficar mais leve e calmo depois de orar. Desde então, a oraçãozinha da noite virou sua parte preferida antes de dormir.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Conversar com Deus antes de dormir traz paz e tranquilidade para o coração.</p>
+  </div>
+  <div class="story-stripe">🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 🧸 </div>
+  <p class="closer-line">E, com um sorriso no rosto, vieram os sonhos bons daquela noite.</p>
+  <div class="page-foot">Histórias Para Dormir · 48</div>
+</section>
+<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#6d28d9">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌟</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 17 de 20</span>
+      <h2>A Estrela Guia da Menina Perdida</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Durante um passeio noturno em acampamento, a pequena Alice se distraiu olhando as flores e acabou se afastando do grupo, ficando sozinha na trilha. Com o coração acelerado, ela se lembrou do que seu pai tinha ensinado: procurar a estrela mais brilhante do céu e caminhar em direção à luz das fogueiras. Respirando fundo, Alice seguiu a estrela e logo avistou o brilho alaranjado da fogueira do acampamento ao longe. Correu para os braços de seu pai, aliviada, aprendendo que manter a calma sempre ajuda a encontrar o caminho.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Mesmo perdidos, com calma e um pouco de fé, sempre encontramos o caminho de volta.</p>
+  </div>
+  <div class="story-stripe">🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 🌟 </div>
+  <p class="closer-line">E, com o coração tranquilo, todos foram dormir sabendo que Deus cuida de cada um.</p>
+  <div class="page-foot">Histórias Para Dormir · 49</div>
+</section>
+<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#be123c">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🌳</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 18 de 20</span>
+      <h2>O Passarinho e a Árvore Generosa</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma árvore grande e frondosa oferecia seus galhos para os passarinhos construírem seus ninhos e suas frutas para eles se alimentarem. Um passarinho chamado Vento, agradecido, perguntou por que a árvore dava tanto sem pedir nada em troca. A árvore respondeu, balançando suas folhas: “A alegria de ver vocês felizes já é a minha recompensa.” Vento entendeu a lição e, daquele dia em diante, passou a compartilhar suas sementinhas com os outros passarinhos da floresta, do mesmo jeitinho generoso.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Dar sem esperar nada em troca é uma das formas mais bonitas de amar.</p>
+  </div>
+  <div class="story-stripe">🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 🌳 </div>
+  <p class="closer-line">E naquela noite, o sono chegou leve e feliz, cheio de paz.</p>
+  <div class="page-foot">Histórias Para Dormir · 50</div>
+</section>
+<section class="page story-page" style="--accent:#7dd3fc; --accent-soft:#eaf8ff; --accent-text:#0369a1">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">☁️</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 19 de 20</span>
+      <h2>A Nuvem que Aprendeu a Deixar Chover</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma nuvem fofinha chamada Bruma guardava toda sua água com medo de que, se chovesse, ela desapareceria no céu. Mas ao ver os campos secos e as florzinhas murchando sem água, seu coração ficou apertado de tristeza. Com coragem, Bruma decidiu confiar e deixou a chuva cair, mesmo com medo do que aconteceria depois. Ao invés de desaparecer, ela se sentiu leve e feliz, vendo o jardim inteiro florescer graças à sua generosidade.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Soltar o que guardamos com medo pode trazer bênçãos que nem imaginávamos.</p>
+  </div>
+  <div class="story-stripe">☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ </div>
+  <p class="closer-line">E assim, em paz, todos fecharam os olhinhos e dormiram sorrindo.</p>
+  <div class="page-foot">Histórias Para Dormir · 51</div>
+</section>
+<section class="page story-page" style="--accent:#86efac; --accent-soft:#eefdf3; --accent-text:#15803d">
+  <span class="moon">🌙</span>
+  <span class="stars-deco">✦ ⋆ ✦</span>
+  <header class="story-head">
+    <div class="story-badge">🐦</div>
+    <div class="story-head-text">
+      <span class="story-kicker">Fábulas de Valores · História 20 de 20</span>
+      <h2>O Sonho da Pequena Andorinha</h2>
+      
+    </div>
+  </header>
+  <p class="story-body">Uma andorinha bem pequena, chamada Aurora, sonhava em voar até terras muito distantes, mas suas asinhas ainda pareciam fracas demais para uma viagem tão longa. Muitos pássaros mais velhos disseram que ela era jovem demais para tentar, e Aurora quase desistiu do seu sonho. Mas, treinando um pouquinho a cada dia e confiando na força que Deus tinha colocado nela, suas asinhas foram ficando cada vez mais fortes. Quando chegou a hora, Aurora alçou voo com toda a sua turma, realizando o sonho que um dia pareceu impossível.</p>
+  <div class="moral-box">
+    <span class="moral-ic">🌙</span>
+    <span class="moral-tag">Lição para guardar</span>
+    <p>Com fé, coragem e um pouco de treino todo dia, sonhos grandes se tornam possíveis.</p>
+  </div>
+  <div class="story-stripe">🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 🐦 </div>
+  <p class="closer-line">E o coração ficou quentinho de alegria até a hora de dormir.</p>
+  <div class="page-foot">Histórias Para Dormir · 52</div>
+</section>
+<section class="page night-page">
+  <div class="night-shape ns1"></div>
+  <div class="night-shape ns2"></div>
+  <div class="night-stars">✦ ⋆ ✧ ⋆ ✦</div>
+  <div class="moon-badge">😴</div>
+  <h1 style="color:#fff; font-size:30px; max-width:460px;">Fim das Histórias de Hoje...<br>Até Amanhã!</h1>
+  <p style="max-width:420px; opacity:.9; font-size:15px;">Cinquenta histórias, cinquenta noites de paz. Continue lendo,
+  conversando e sonhando alto — o amor de Deus cabe em cada uma delas.</p>
+  <span class="cover-brand">Mapa Bíblico Kids</span>
+  <p style="margin-top:26px; font-size:11px; opacity:.7;">Histórias Para Dormir © 2026 — Todos os direitos reservados</p>
+</section>
+</body>
+</html>

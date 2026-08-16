@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mapa Didático da Bíblia Kids</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --purple: #0d9488;
+  --purple-dark: #134e4a;
+  --purple-light-bg: #f0fdfa;
+  --purple-border: #ccfbf1;
+  --amber: #fb923c;
+  --amber-dark: #9a3412;
+  --pink: #fb7185;
+  --gray-text: #374151;
+  --gray-muted: #6b7280;
+  --gray-light: #9ca3af;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--gray-text);
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: 'Baloo 2', cursive;
+  color: var(--purple-dark);
+  line-height: 1.25;
+  margin: 0 0 20px;
+}
+
+h1 { font-size: clamp(1.9rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 48px 0;
+}
+
+.text-center { text-align: center; }
+
+/* Topbar */
+.topbar {
+  background: var(--purple-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 50px;
+  padding: 8px 22px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.badge-purple { background: var(--purple); color: var(--white); }
+.badge-yellow {
+  background: #fef9c3;
+  border: 2px solid var(--amber);
+  color: var(--amber-dark);
+  font-weight: 800;
+}
+
+.badge-row { text-align: center; margin-bottom: 16px; }
+
+.lead {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  font-size: 17px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+.bold-text {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  font-weight: 700;
+  color: var(--purple-dark);
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.stat { text-align: center; }
+.stat-n {
+  font-family: 'Baloo 2', cursive;
+  font-size: 38px;
+  color: var(--purple-dark);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--amber-dark);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  margin-top: 4px;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+.carousel-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px;
+  scrollbar-width: thin;
+}
+.carousel-track::-webkit-scrollbar { height: 6px; }
+.carousel-track::-webkit-scrollbar-thumb { background: var(--purple-border); border-radius: 4px; }
+.carousel-slide {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  width: 260px;
+}
+.carousel-slide img {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+.carousel--square .carousel-slide { width: 160px; }
+.carousel--portrait .carousel-slide { width: 200px; }
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--white);
+  border: 1.5px solid var(--purple-border);
+  color: var(--purple);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.carousel-btn:hover { background: var(--purple); color: var(--white); }
+.carousel-btn.prev { left: -6px; }
+.carousel-btn.next { right: -6px; }
+
+/* Barriers grid */
+.barriers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 24px auto 0;
+}
+.barrier-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  border-left: 4px solid var(--purple);
+  box-shadow: 0 4px 16px rgba(13, 148, 136, .08);
+}
+.barrier-card.pink { border-left-color: var(--pink); box-shadow: 0 4px 16px rgba(251,113,133,.08); }
+.barrier-card.amber { border-left-color: var(--amber); box-shadow: 0 4px 16px rgba(251,146,60,.08); }
+.barrier-icon { font-size: 28px; margin-bottom: 10px; }
+.barrier-card strong { font-size: 15px; color: var(--purple); }
+.barrier-card.pink strong { color: var(--pink); }
+.barrier-card.amber strong { color: #d97706; }
+.barrier-card p { font-size: 14px; color: var(--gray-muted); margin-top: 8px; }
+
+/* Quote section */
+.quote-section {
+  background: var(--purple-dark);
+  text-align: center;
+  padding: 56px 20px;
+}
+.quote-section p {
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 700;
+  max-width: 700px;
+  margin: 0 auto 10px;
+}
+.quote-source { color: var(--amber) !important; font-style: italic; font-weight: 600 !important; font-size: 15px !important; }
+
+/* For-you cards */
+.kfw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.kfw-card {
+  background: var(--white);
+  border: 2px solid var(--purple-border);
+  border-radius: 18px;
+  padding: 24px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.kfw-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--purple);
+}
+.kfw-icon {
+  width: 38px; height: 38px;
+  background: var(--amber);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+.kfw-card p { font-size: 14px; font-weight: 600; color: var(--gray-text); margin: 0; }
+
+/* Receives (kc) rows */
+.kc-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto 48px;
+  flex-wrap: wrap;
+}
+.kc-row.reverse { flex-direction: row-reverse; }
+.kc-row > .kc-img { flex: 1 1 280px; }
+.kc-row > .kc-text { flex: 1 1 320px; }
+.kc-text h3 { font-size: 24px; margin-bottom: 14px; }
+.kc-text p { font-size: 15px; margin-bottom: 18px; }
+.kc-text p b { color: var(--purple-dark); }
+.kc-text ul { list-style: none; margin: 0; padding: 0; }
+.kc-text li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.kc-text li::before {
+  content: '✔';
+  flex: 0 0 auto;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: var(--white);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+
+/* Learn section */
+.learn {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.ka-title em, .ka-title2 em { font-style: normal; color: var(--purple); }
+.ka-checks {
+  list-style: none; padding: 0; margin: 0 0 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.ka-check {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--purple-border);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+.ka-check-ic {
+  width: 26px; height: 26px;
+  background: var(--purple);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 14px; font-weight: 800;
+  flex-shrink: 0; margin-top: 1px;
+}
+.ka-check p { font-size: 15px; font-weight: 700; color: var(--purple-dark); margin: 0; }
+
+.ka-destaque {
+  background: var(--purple-dark);
+  border-radius: 18px;
+  padding: 28px 32px;
+  text-align: center;
+  margin-bottom: 52px;
+}
+.ka-destaque p { color: rgba(255,255,255,.7); font-size: 17px; font-weight: 600; margin: 0 0 8px; }
+.ka-destaque strong { font-family: 'Baloo 2', cursive; font-size: 28px; color: var(--amber); display: block; }
+
+.ka-divider { border: none; border-top: 2px dashed var(--purple-border); margin: 0 0 48px; }
+
+.ka-bloco2-head { text-align: center; margin: 0 auto 28px; max-width: 600px; }
+.ka-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.ka-card {
+  background: var(--white);
+  border: 1.5px solid var(--purple-border);
+  border-radius: 16px;
+  padding: 18px 16px;
+  display: flex; align-items: flex-start; gap: 12px;
+  position: relative; overflow: hidden;
+}
+.ka-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+  background: var(--purple);
+}
+.ka-card-ic { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.ka-card p { font-size: 14px; font-weight: 700; color: var(--gray-text); margin: 0; }
+
+/* CTA button */
+.btn-cta {
+  display: inline-block;
+  background: var(--purple);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-align: center;
+  transition: transform .15s, background .2s;
+}
+.btn-cta:hover { background: var(--purple-dark); transform: translateY(-2px); }
+.btn-wrap { text-align: center; margin: 24px 0; }
+
+/* Price */
+.price-block { text-align: center; }
+.price-divider { border: none; border-top: 1px dashed #e5e7eb; margin: 0 auto 18px; max-width: 420px; }
+.price-value { font-family: 'Baloo 2', cursive; font-size: 56px; color: var(--purple-dark); line-height: 1; margin-bottom: 4px; }
+.price-sub { font-size: 13px; color: var(--gray-light); margin-bottom: 4px; }
+.price-badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.price-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--purple-light-bg); color: #5b21b6;
+  font-size: 12px; font-weight: 700; padding: 5px 13px;
+  border-radius: 50px; border: 1px solid var(--purple-border);
+}
+.coupon-badge {
+  display: inline-block;
+  background: var(--amber); color: var(--amber-dark);
+  font-weight: 800; font-size: 13px;
+  padding: 6px 20px; border-radius: 50px;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 16px auto 0;
+}
+
+/* Guarantee */
+.guarantee {
+  background: var(--purple-light-bg);
+  border: 2px solid var(--purple);
+  border-radius: 24px;
+  padding: 40px 36px;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.guarantee-icon { font-size: 64px; display: block; margin-bottom: 16px; }
+.guarantee h3 { font-size: 26px; margin-bottom: 12px; }
+.guarantee h3 span { color: var(--purple); }
+.guarantee p { font-size: 16px; max-width: 520px; margin: 0 auto; }
+.guarantee p strong { color: var(--purple-dark); }
+
+/* FAQ */
+.faq-title { text-align: center; margin-bottom: 24px; color: var(--purple); font-size: 26px; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border: 1.5px solid var(--purple-border);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: var(--white);
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 24px;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.faq-q:hover { background: var(--purple-light-bg); }
+.faq-chevron {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  background: var(--purple);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 16px; font-weight: 800;
+  transition: transform .25s;
+}
+.faq-item.open .faq-chevron { transform: rotate(45deg); }
+.faq-a {
+  display: none;
+  padding: 16px 24px 22px;
+  font-size: 15px;
+  color: var(--gray-text);
+  border-top: 1px dashed #e5e7eb;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-a strong { color: var(--purple); }
+.faq-a a { color: var(--purple); font-weight: 700; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 48px 20px 32px;
+}
+.footer-wordmark {
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+.footer-copy { font-size: 13px; color: var(--gray-light); }
+
+@media (max-width: 640px) {
+  .kc-row, .kc-row.reverse { flex-direction: column; text-align: center; }
+  .stats { gap: 22px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">🎉 OFERTA DE DIA DOS PAIS</div>
+
+<section>
+  <div class="container text-center">
+    <div class="badge-row"><span class="badge badge-purple">📖 Mapa Didático da Bíblia Kids</span></div>
+
+    <h1>Plante a Palavra hoje, colha caráter amanhã.</h1>
+    <p class="lead">Uma criança que conhece a Bíblia e tem Deus no coração aprende desde cedo princípios cristãos!</p>
+
+    <div class="carousel" data-carousel>
+      <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/51-768x543.png" alt="Página ilustrada 1" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/52-768x543.png" alt="Página ilustrada 2" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/49-768x543.png" alt="Página ilustrada 3" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/50-768x543.png" alt="Página ilustrada 4" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/47-768x543.png" alt="Página ilustrada 5" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/48-768x543.png" alt="Página ilustrada 6" loading="lazy"></div>
+      </div>
+      <button class="carousel-btn next" aria-label="Próximo">›</button>
+    </div>
+
+    <div class="badge-row"><span class="badge badge-yellow">✨ Aprovado por pastores, professores e líderes de Ministério Infantil</span></div>
+    <div class="dots">
+      <span class="dot" style="background:#0d9488"></span>
+      <span class="dot" style="background:#fb923c"></span>
+      <span class="dot" style="background:#fb7185"></span>
+      <span class="dot" style="background:#0d9488"></span>
+      <span class="dot" style="background:#fb923c"></span>
+    </div>
+
+    <p class="bold-text"><strong>O Mapa Didático da Bíblia Kids traz a Bíblia inteira organizada para a mente de uma criança, de forma clara, didática, ilustrada e inesquecível.</strong><br><br>
+    Um material que conduz seu filho de Gênesis a Apocalipse, mostrando que a Bíblia é uma linda grande história, e que <b>Jesus é o centro de tudo</b>.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n">115</div><div class="stat-l">Páginas ilustradas</div></div>
+      <div class="stat"><div class="stat-n">66</div><div class="stat-l">Livros da Bíblia</div></div>
+      <div class="stat"><div class="stat-n">+90.000</div><div class="stat-l">Famílias impactadas</div></div>
+      <div class="stat"><div class="stat-n">Todas</div><div class="stat-l">as Idades</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="text-center">
+  <div class="container">
+    <h1>Já recebemos MILHARES de depoimentos de famílias transformadas pela nossa didática:</h1>
+  </div>
+</section>
+
+<section>
+  <div class="carousel carousel--portrait" data-carousel>
+    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.20-768x1359.jpeg" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.21-1-768x1359.jpeg" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Design-sem-nome-4-768x1365.png" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.22-1-768x1359.jpeg" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.22-2-768x1359.jpeg" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Design-sem-nome-3-768x1365.png" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.22-768x1359.jpeg" alt="Depoimento" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-22.06.21-768x1350.jpeg" alt="Depoimento" loading="lazy"></div>
+    </div>
+    <button class="carousel-btn next" aria-label="Próximo">›</button>
+  </div>
+</section>
+
+<section>
+  <div class="carousel carousel--square" data-carousel>
+    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/07/2-1-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2024/05/951E550A-E10A-4134-8841-A74994F7A0CA-768x768.jpeg" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/07/1-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/04/14-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/07/3-1-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/04/17-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/07/4-1-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/04/13-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/04/20-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/10/34-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/08/8-768x768.png" alt="" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://bibliatecamapeada.com/wp-content/uploads/2025/08/Feedback-BibliaTeca-768x768.png" alt="" loading="lazy"></div>
+    </div>
+    <button class="carousel-btn next" aria-label="Próximo">›</button>
+  </div>
+</section>
+
+<section>
+  <div class="container text-center">
+    <p>Nossas crianças aprendem com o mundo todos os dias: na escola, com os amiguinhos, na internet, com os desenhos, nos ambientes que você não consegue controlar&hellip; mas quem está ensinando o que agrada a Deus?</p>
+    <p class="bold-text"><strong>Você já reparou que as crianças conseguem decorar tudo o que assistem nos desenhos favoritos delas? Imitam os personagens, às vezes até o jeito de falar&hellip; e de forma involuntária, começam a se espelhar nessas referências que, vamos combinar, não agregam em nada em princípios e valores no caráter dos nossos filhos!</strong></p>
+    <img src="https://bibliatecamapeada.com/wp-content/uploads/2026/03/MOCKUPS-2-768x543.png" alt="Mockup do material" style="max-width:600px;margin:24px auto;" loading="lazy">
+    <p><strong>E por que será que isso não acontece com as histórias da Bíblia?</strong> <strong>A verdade é que a Bíblia é, sim, interessante até para uma criança&hellip; se conseguirmos vencer estas barreiras:</strong></p>
+
+    <div class="barriers-grid">
+      <div class="barrier-card">
+        <div class="barrier-icon">📜</div>
+        <strong>Barreira Cronológica</strong>
+        <p>O livro mais recente foi escrito há mais de 2 mil anos, com referências históricas difíceis de assimilar.</p>
+      </div>
+      <div class="barrier-card pink">
+        <div class="barrier-icon">🗣️</div>
+        <strong>Barreira Linguística</strong>
+        <p>Apesar das traduções amenizarem estas barreiras, existem palavras e termos que não fazem mais parte da atualidade, o que dificulta a expressão do sentido original.</p>
+      </div>
+      <div class="barrier-card amber">
+        <div class="barrier-icon">📱</div>
+        <strong>Concorrência Tecnológica</strong>
+        <p>Em um mundo frenético e dominado pela tecnologia, o excesso de estímulos é uma concorrência desleal e desafiadora. A leitura da Bíblia pode parecer menos atrativa quando comparada com essas distrações mais dopaminérgicas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <p>&ldquo;Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente, para que sejam capazes de experimentar e comprovar a boa, agradável e perfeita vontade de Deus.&rdquo;</p>
+  <p class="quote-source">- Romanos 12:2-5</p>
+</div>
+
+<section class="text-center">
+  <div class="container">
+    <h2>O Mapa Didático da Bíblia Kids é pra você que:</h2>
+    <div class="kfw-grid">
+      <div class="kfw-card"><div class="kfw-icon">🙏</div><p>Deseja inserir um tempo com Deus na rotina do seu filho, mas não sabe por onde começar;</p></div>
+      <div class="kfw-card"><div class="kfw-icon">✝️</div><p>Gostaria de ensinar sobre a vida de Jesus através das histórias mais fascinantes da Bíblia;</p></div>
+      <div class="kfw-card"><div class="kfw-icon">🌱</div><p>Pretende transmitir valores e princípios cristãos às suas crianças desde cedo, de forma leve e eficiente;</p></div>
+      <div class="kfw-card"><div class="kfw-icon">👨‍👩‍👧</div><p>É pai/mãe; Professor; Pastor; Líder de Ministério e deseja enriquecer o conhecimento dos pequenos sobre a Palavra.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="text-center">
+  <div class="container">
+    <h2>Didático, ilustrado, rico em informações&hellip;</h2>
+    <img src="https://bibliatecamapeada.com/wp-content/uploads/2026/03/COLECAO-INFANTIL-768x543.png" alt="Coleção infantil" style="max-width:600px;margin:0 auto 24px;" loading="lazy">
+    <span class="badge badge-yellow">✨ Aprovado por + de 90.000 Cristãos</span>
+  </div>
+</section>
+
+<section class="text-center">
+  <div class="container"><h2>O que você recebe:</h2></div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="kc-row">
+      <div class="kc-img"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Logo-para-startup-de-marketing-e-design-de-conteudos-5-1024x1024.png" alt="Panorama geral da Bíblia" loading="lazy"></div>
+      <div class="kc-text">
+        <h3>Panorama Geral da Bíblia</h3>
+        <p>Antes de começar a sua jornada, o seu filho vai enxergar <b>a Bíblia inteira através de um panorama didático e ilustrado</b> para entender como ela é organizada, do Antigo ao Novo Testamento, com todos os livros classificados de um jeito didático e fácil de entender.</p>
+        <ul>
+          <li>Panorama completo de Gênesis a Apocalipse</li>
+          <li>Classificação de todos os livros da Bíblia</li>
+          <li>Antigo e Novo Testamento</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kc-row reverse">
+      <div class="kc-img"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Logo-para-startup-de-marketing-e-design-de-conteudos-6-1024x1024.png" alt="Antigo Testamento detalhado" loading="lazy"></div>
+      <div class="kc-text">
+        <h3>Antigo Testamento detalhado</h3>
+        <p>O seu filho vai conhecer os <b>personagens e acontecimentos mais importantes</b> do Antigo Testamento, desde a Criação, quando tudo começou, sem deixar nenhum detalhe de fora.</p>
+        <ul>
+          <li>De Adão e Eva até os grandes reis de Israel</li>
+          <li>Personagens marcantes como Noé, Abraão, Davi e Daniel</li>
+          <li>Lições de fé, coragem e obediência em cada história</li>
+          <li>Contexto, personagens, lição, versículo relacionado</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kc-row">
+      <div class="kc-img"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Logo-para-startup-de-marketing-e-design-de-conteudos-7-1024x1024.png" alt="Novo Testamento detalhado" loading="lazy"></div>
+      <div class="kc-text">
+        <h3>Novo Testamento detalhado</h3>
+        <p>Da chegada do anjo até o Espírito Santo, seu filho vai acompanhar a <b>vida de Jesus passo a passo</b> — do nascimento à ressurreição — entendendo por que Ele é o centro de toda a Bíblia.</p>
+        <ul>
+          <li>Do nascimento de Jesus à Sua ressurreição</li>
+          <li>Milagres, parábolas e os ensinamentos mais importantes</li>
+          <li>A vida dos apóstolos e o início da Igreja</li>
+          <li>História detalhada, capítulo indicado, quiz e momento oração</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kc-row reverse">
+      <div class="kc-img"><img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Logo-para-startup-de-marketing-e-design-de-conteudos-8-1024x1024.png" alt="Recursos pra fixar o aprendizado" loading="lazy"></div>
+      <div class="kc-text">
+        <h3>Recursos Pra Fixar o Aprendizado</h3>
+        <p>Cada história vem acompanhada de ferramentas de aplicação e estudo ativo que ajudam a transformar experiência em aprendizado e teoria em prática: <b>lição, perguntas estratégicas sobre o assunto abordado, oração intencional para repassar valores e princípios de acordo com cada tema</b> e indicação de capítulo e versículo para leitura aprofundada.</p>
+        <ul>
+          <li>Oração aplicada a cada tema</li>
+          <li>Lição e valores de cada história</li>
+          <li>Quiz de fixação pra testar o aprendizado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="learn container">
+    <div class="badge-row"><span class="badge badge-yellow">🌱 aprendendo a amar a bíblia</span></div>
+    <h2 class="ka-title text-center">Com o Mapa Didático da Bíblia Kids, <em>seu filho vai:</em></h2>
+
+    <ul class="ka-checks">
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Entender a ordem dos acontecimentos bíblicos</p></li>
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Conectar as histórias entre si</p></li>
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Descobrir que Jesus é o centro da Bíblia</p></li>
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Desenvolver princípios como obediência, coragem, fé, perdão e amor ao próximo</p></li>
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Aprender a refletir e aplicar o que absorveu no dia a dia</p></li>
+      <li class="ka-check"><div class="ka-check-ic">✔</div><p>Criar base espiritual sólida desde cedo</p></li>
+    </ul>
+
+    <div class="ka-destaque">
+      <p>Não é apenas informação.</p>
+      <strong>É formação.</strong>
+    </div>
+
+    <hr class="ka-divider">
+
+    <div class="ka-bloco2-head">
+      <div class="badge-row"><span class="badge badge-purple">🧠 A didática que faz a diferença</span></div>
+      <h2 class="ka-title2">Cada página foi estruturada<br>para a <em>mente infantil:</em></h2>
+    </div>
+
+    <div class="ka-cards">
+      <div class="ka-card"><div class="ka-card-ic">✏️</div><p>Linguagem simples e objetiva</p></div>
+      <div class="ka-card"><div class="ka-card-ic">📄</div><p>Texto curto e compreensível</p></div>
+      <div class="ka-card"><div class="ka-card-ic">✍️</div><p>Perguntas para fixação</p></div>
+      <div class="ka-card"><div class="ka-card-ic">🙏</div><p>Oração aplicada ao tema</p></div>
+      <div class="ka-card"><div class="ka-card-ic">🎨</div><p>Ilustrações acolhedoras</p></div>
+      <div class="ka-card"><div class="ka-card-ic">📅</div><p>Organização cronológica clara</p></div>
+    </div>
+
+    <p class="text-center"><strong>Você nunca mais vai sentir dificuldade para ensinar a Bíblia!</strong></p>
+  </div>
+</section>
+
+<section class="text-center">
+  <div class="container">
+    <h2>Presentes que você leva hoje:</h2>
+    <img src="https://bibliatecamapeada.com/wp-content/uploads/2026/08/Logo-para-startup-de-marketing-e-design-de-conteudos-9-768x768.png" alt="Presentes inclusos" style="max-width:420px;margin:0 auto;" loading="lazy">
+  </div>
+</section>
+
+<section class="text-center">
+  <div class="container">
+    <h2>Garanta hoje o Mapa Didático da Bíblia Kids:</h2>
+    <img src="https://bibliatecamapeada.com/wp-content/uploads/2026/02/MOCKUPS-30-2-1024x656.png" alt="Mockup do Mapa Didático da Bíblia Kids" style="max-width:640px;margin:0 auto 24px;" loading="lazy">
+
+    <div class="btn-wrap">
+      <a class="btn-cta" href="https://pay.kiwify.com.br/8vFRKyo" target="_blank" rel="noopener">QUERO O MAPA KIDS!</a>
+    </div>
+
+    <div class="price-block">
+      <hr class="price-divider">
+      <div class="price-value">R$ 29,00</div>
+      <div class="price-sub">pagamento único</div>
+      <div class="price-badges">
+        <span class="price-badge">📥 Download imediato</span>
+        <span class="price-badge">🔒 Compra segura</span>
+        <span class="price-badge">💜 Acesso vitalício</span>
+      </div>
+      <div><span class="coupon-badge">CUPOM de dia dos pais Aplicado</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="guarantee">
+      <span class="guarantee-icon">🛡️</span>
+      <h3>Garantia de <span>7 dias</span> — risco zero para você!</h3>
+      <p>Confiamos tanto na qualidade do nosso material, que estamos te oferecendo uma <strong>garantia incondicional de 7 dias</strong>! Caso não esteja totalmente satisfeito, dentro deste prazo, devolvemos <strong>100% do seu dinheiro</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h3 class="faq-title">Perguntas frequentes:</h3>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">O MATERIAL É FÍSICO OU DIGITAL?<span class="faq-chevron">+</span></button>
+        <div class="faq-a">O Mapa Didático Da Bíblia Kids é um produto digital de alta qualidade com acesso imediato! Você não precisa esperar dias para recebê-lo e poderá baixar, imprimir e encadernar como desejar e quando quiser, pois o acesso é vitalício!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">COMO SERÁ FEITO O ENVIO DO MATERIAL?<span class="faq-chevron">+</span></button>
+        <div class="faq-a">O acesso com todos os BÔNUS desta oferta será liberado no seu e-mail de compra logo após confirmação de pagamento. Nosso material está hospedado numa área de membros da Hotmart, empresa grande, séria e considerada a maior plataforma de vendas online do Brasil.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">É CATÓLICO OU EVANGÉLICO?<span class="faq-chevron">+</span></button>
+        <div class="faq-a">Esta página corresponde à versão Evangélica. Caso queira o Mapa Didático da Bíblia Kids na versão <strong>Católica</strong>, acesse: <a href="#">clique aqui para a versão Católica</a>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">E SE EU NÃO FICAR SATISFEITO?<span class="faq-chevron">+</span></button>
+        <div class="faq-a">Você tem <strong>7 dias de garantia incondicional</strong>. Caso não esteja totalmente satisfeito, dentro deste prazo, devolvemos <strong>100% do seu dinheiro</strong>. Sem burocracia, sem perguntas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="btn-wrap">
+    <a class="btn-cta" href="https://pay.kiwify.com.br/8vFRKyo" target="_blank" rel="noopener">QUERO O MAPA KIDS!</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo footer-wordmark">Mapa Bíblico Kids</div>
+  <div class="footer-copy">Mapa Bíblico Kids © 2026 – Todos os direitos reservados</div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('.carousel-track');
+    var prev = carousel.querySelector('.prev');
+    var next = carousel.querySelector('.next');
+    var step = function () {
+      var slide = track.querySelector('.carousel-slide');
+      return slide ? slide.getBoundingClientRect().width + 14 : 260;
+    };
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (el) {
+        el.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
