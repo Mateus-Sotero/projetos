@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
 
 :root {
-  --purple: #7c3aed;
-  --purple-dark: #1e1b4b;
-  --purple-light-bg: #f3f0ff;
-  --purple-border: #ede9fe;
-  --amber: #fbbf24;
-  --amber-dark: #92400e;
-  --pink: #ec4899;
+  --purple: #0d9488;
+  --purple-dark: #134e4a;
+  --purple-light-bg: #f0fdfa;
+  --purple-border: #ccfbf1;
+  --amber: #fb923c;
+  --amber-dark: #9a3412;
+  --pink: #fb7185;
   --gray-text: #374151;
   --gray-muted: #6b7280;
   --gray-light: #9ca3af;
@@ -32,7 +32,7 @@ img {
 }
 
 h1, h2, h3 {
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Baloo 2', cursive;
   color: var(--purple-dark);
   line-height: 1.25;
   margin: 0 0 20px;
@@ -114,7 +114,7 @@ section {
 }
 .stat { text-align: center; }
 .stat-n {
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Baloo 2', cursive;
   font-size: 38px;
   color: var(--purple-dark);
   line-height: 1;
@@ -190,10 +190,10 @@ section {
   border-radius: 16px;
   padding: 24px;
   border-left: 4px solid var(--purple);
-  box-shadow: 0 4px 16px rgba(124, 58, 237, .08);
+  box-shadow: 0 4px 16px rgba(13, 148, 136, .08);
 }
-.barrier-card.pink { border-left-color: var(--pink); box-shadow: 0 4px 16px rgba(236,72,153,.08); }
-.barrier-card.amber { border-left-color: var(--amber); box-shadow: 0 4px 16px rgba(251,191,36,.08); }
+.barrier-card.pink { border-left-color: var(--pink); box-shadow: 0 4px 16px rgba(251,113,133,.08); }
+.barrier-card.amber { border-left-color: var(--amber); box-shadow: 0 4px 16px rgba(251,146,60,.08); }
 .barrier-icon { font-size: 28px; margin-bottom: 10px; }
 .barrier-card strong { font-size: 15px; color: var(--purple); }
 .barrier-card.pink strong { color: var(--pink); }
@@ -319,7 +319,7 @@ section {
   margin-bottom: 52px;
 }
 .ka-destaque p { color: rgba(255,255,255,.7); font-size: 17px; font-weight: 600; margin: 0 0 8px; }
-.ka-destaque strong { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--amber); display: block; }
+.ka-destaque strong { font-family: 'Baloo 2', cursive; font-size: 28px; color: var(--amber); display: block; }
 
 .ka-divider { border: none; border-top: 2px dashed var(--purple-border); margin: 0 0 48px; }
 
@@ -365,7 +365,7 @@ section {
 /* Price */
 .price-block { text-align: center; }
 .price-divider { border: none; border-top: 1px dashed #e5e7eb; margin: 0 auto 18px; max-width: 420px; }
-.price-value { font-family: 'Fredoka One', cursive; font-size: 56px; color: var(--purple-dark); line-height: 1; margin-bottom: 4px; }
+.price-value { font-family: 'Baloo 2', cursive; font-size: 56px; color: var(--purple-dark); line-height: 1; margin-bottom: 4px; }
 .price-sub { font-size: 13px; color: var(--gray-light); margin-bottom: 4px; }
 .price-badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
 .price-badge {
@@ -452,20 +452,12 @@ footer {
   text-align: center;
   padding: 48px 20px 32px;
 }
-.footer-contact { font-size: 15px; margin-bottom: 24px; }
-.footer-contact a { color: var(--purple); font-weight: 700; text-decoration: none; }
-.footer-contact a:hover { text-decoration: underline; }
-.footer-socials { display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; }
-.social-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 52px; height: 52px; border-radius: 14px;
-  transition: opacity .2s, transform .15s;
+.footer-wordmark {
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  color: var(--purple);
+  margin-bottom: 12px;
 }
-.social-btn:hover { opacity: .85; transform: translateY(-2px); }
-.social-btn.whatsapp { background: #25d366; }
-.social-btn.instagram { background: #000; }
-.social-btn svg { width: 26px; height: 26px; fill: #fff; }
-.footer-logo img { height: 64px; width: auto; margin: 0 auto 20px; }
 .footer-copy { font-size: 13px; color: var(--gray-light); }
 
 @media (max-width: 640px) {
