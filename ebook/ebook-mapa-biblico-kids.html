@@ -53,10 +53,10 @@ ul, ol { margin: 0; }
   gap: 14px;
 }
 .cover-shape { position: absolute; border-radius: 50%; opacity: .18; }
-.c1 { width: 260px; height: 260px; background: #fb923c; top: -80px; left: -80px; }
-.c2 { width: 200px; height: 200px; background: #fb7185; bottom: -60px; right: -60px; }
-.c3 { width: 140px; height: 140px; background: #f5b942; bottom: 60px; left: -50px; }
-.c4 { width: 100px; height: 100px; background: #a78bfa; top: 90px; right: -30px; }
+.cover-shape.c1 { width: 260px; height: 260px; background: #fb923c; top: -80px; left: -80px; }
+.cover-shape.c2 { width: 200px; height: 200px; background: #fb7185; bottom: -60px; right: -60px; }
+.cover-shape.c3 { width: 140px; height: 140px; background: #f5b942; bottom: 60px; left: -50px; }
+.cover-shape.c4 { width: 100px; height: 100px; background: #a78bfa; top: 90px; right: -30px; }
 .cover-stars { letter-spacing: 8px; font-size: 14px; opacity: .8; }
 .cover-badge {
   font-size: 54px; background: rgba(255,255,255,.15); border: 3px solid rgba(255,255,255,.4);
@@ -154,49 +154,77 @@ ul, ol { margin: 0; }
   background: #f3f0ff; border: 1.5px solid #ddd6fe; border-radius: 16px;
   padding: 18px 22px; font-size: 15.5px; margin-top: 18px; line-height: 1.6;
 }
+.panorama-highlight.alt {
+  background: #fff8e6; border-color: #fde3a7; font-weight: 700; color: #92400e;
+  text-align: center;
+}
 
-/* ---------- Story pages ---------- */
-.story-page { background: #fffaf3; display: flex; flex-direction: column; }
-.story-deco { position: absolute; font-size: 40px; color: var(--accent-soft); opacity: .9; }
-.story-deco.tl { top: 10mm; left: -4mm; }
-.story-deco.br { bottom: 16mm; right: -4mm; }
-.story-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-.story-badge {
-  flex: 0 0 auto; width: 76px; height: 76px; border-radius: 50%;
-  background: var(--accent); display: flex; align-items: center; justify-content: center;
-  font-size: 38px; box-shadow: 0 5px 0 rgba(0,0,0,.08);
+/* ---------- Story pages (3 per story: capa / lição / reflexão) ---------- */
+.story-page {
+  background: #fffaf3; display: flex; flex-direction: column; align-items: center;
+  text-align: center;
 }
 .story-kicker {
-  display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 11px;
-  font-weight: 800; color: var(--accent-text);
+  display: block; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px;
+  font-weight: 800; color: var(--accent-text); margin-bottom: 18px;
 }
-.story-head-text h2 { font-size: 26px; margin: 3px 0; }
-.story-ref { font-size: 12.5px; color: #9ca3af; font-weight: 700; }
+.story-kicker.center { align-self: center; }
+.story-ref {
+  font-size: 14px; color: #9ca3af; font-weight: 700; margin-bottom: 26px; display: block;
+}
+
+/* --- page 1: cover/medallion --- */
+.story-cloud, .story-star {
+  position: absolute; opacity: .5; font-size: 34px; color: var(--accent-soft);
+}
+.story-cloud.c1 { top: 16mm; left: 10mm; font-size: 30px; }
+.story-cloud.c2 { top: 22mm; right: 12mm; font-size: 24px; }
+.story-star.s1 { top: 40mm; right: 24mm; color: var(--accent); font-size: 22px; }
+.story-star.s2 { bottom: 30mm; left: 18mm; color: var(--accent); font-size: 18px; }
+.story-star.s3 { bottom: 60mm; right: 16mm; color: var(--accent); font-size: 16px; }
+.story-medallion {
+  position: relative; width: 190px; height: 190px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  margin: 6px 0 22px; box-shadow: 0 10px 0 rgba(0,0,0,.08);
+}
+.story-medallion-ring {
+  position: absolute; inset: -14px; border-radius: 50%;
+  border: 3px dashed var(--accent);
+}
+.story-medallion-icon { font-size: 92px; line-height: 1; }
+.story-title-big { font-size: 40px; max-width: 460px; margin: 0 0 6px; }
 .story-body {
-  font-size: 15px; color: #374151; background: #fff;
-  border-radius: 16px; padding: 20px 22px; border: 1.5px solid #f1ede4;
-  margin-bottom: 14px; line-height: 1.6;
+  font-size: 17px; color: #374151; background: #fff; text-align: left;
+  border-radius: 20px; padding: 26px 30px; border: 1.5px solid #f1ede4;
+  margin-top: 18px; line-height: 1.75; max-width: 620px;
 }
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.callout {
-  border-radius: 14px; padding: 14px 16px; font-size: 13px;
+
+/* --- page 2 & 3: big callouts --- */
+.story-substripe {
+  font-size: 26px; letter-spacing: 12px; opacity: .14; margin-bottom: 26px;
+  white-space: nowrap; overflow: hidden; max-width: 100%;
+}
+.story-title-mid { font-size: 26px; margin-bottom: 26px; max-width: 480px; }
+.callout-big {
+  width: 100%; max-width: 560px; text-align: left; position: relative;
+  border-radius: 20px; padding: 26px 28px 26px 84px; margin-bottom: 20px;
   border: 1.5px solid var(--accent-soft); background: var(--accent-soft);
-  line-height: 1.5;
+  line-height: 1.65; font-size: 16px;
 }
-.callout-tag {
-  display: block; font-weight: 800; font-size: 11.5px; margin-bottom: 5px;
-  color: var(--accent-text);
+.callout-big-ic {
+  position: absolute; left: 22px; top: 26px; font-size: 34px;
 }
-.callout p { margin: 0; color: #374151; }
-.callout.fact {
-  background: #fff8e6; border-color: #fde3a7; margin-bottom: 0;
-  font-size: 13px;
+.callout-big .callout-tag {
+  display: block; font-weight: 800; font-size: 13px; margin-bottom: 6px;
+  color: var(--accent-text); text-transform: none; letter-spacing: 0;
 }
-.callout.fact .callout-tag { color: #b45309; }
-.story-stripe {
-  margin-top: auto; padding-top: 14px;
-  text-align: center; font-size: 24px; letter-spacing: 12px;
-  opacity: .16; white-space: nowrap; overflow: hidden;
+.callout-big p { margin: 0; color: #374151; }
+.callout-big.fact { background: #fff8e6; border-color: #fde3a7; }
+.callout-big.fact .callout-tag { color: #b45309; }
+.story-wave {
+  margin-top: auto; width: 100%; height: 64px; opacity: .55;
+  background: var(--accent-soft);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
 .page-stripe {
   position: absolute; bottom: 26mm; left: 0; right: 0;
@@ -328,7 +356,7 @@ ul, ol { margin: 0; }
   e um certificado para comemorar a conquista!</p>
   <p class="letter-sign">Com carinho,<br><b>Equipe Mapa Bíblico Kids</b></p>
   <div class="page-stripe">💌 📖 💜 📖 💌 📖 💜 📖 💌 📖 💜 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 1</div>
 </section>
 <section class="page howto-page">
   <span class="section-kicker" style="--accent:#fb7185">🧭 como usar este livro</span>
@@ -360,7 +388,7 @@ ul, ol { margin: 0; }
     </div>
   </div>
   <div class="page-stripe">🧭 ✨ 🎈 🧭 ✨ 🎈 🧭 ✨ 🎈 🧭 ✨ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 2</div>
 </section>
 <section class="page toc-page">
   <span class="section-kicker" style="--accent:#f5b942">🗺️ sumário</span>
@@ -382,7 +410,7 @@ ul, ol { margin: 0; }
     </div>
   </div>
   <div class="page-stripe">🗺️ ⭐ 📚 🗺️ ⭐ 📚 🗺️ ⭐ 📚 🗺️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 3</div>
 </section>
 <section class="page panorama-page">
   <span class="section-kicker" style="--accent:#0d9488">🗺️ panorama geral</span>
@@ -406,7 +434,16 @@ ul, ol { margin: 0; }
       notícia para o mundo inteiro.</p>
     </div>
   </div>
-  <h2 class="panorama-timeline-title">✨ Linha do Tempo Resumida</h2>
+  <p class="panorama-highlight">💜 Do primeiro ao último livro, existe um fio condutor: <b>Jesus é o
+  centro de tudo</b>, o herói dessa grande história de amor.</p>
+  <div class="page-stripe">📖 🕊️ ✨ 📖 🕊️ ✨ 📖 🕊️ ✨ 📖 </div>
+  <div class="page-foot">Mapa Bíblico Kids · 4</div>
+</section>
+<section class="page panorama-page">
+  <span class="section-kicker" style="--accent:#a78bfa">⏳ linha do tempo</span>
+  <h1>Uma Jornada Através dos Tempos</h1>
+  <p>Do começo de tudo até o nascimento da Igreja — veja como as grandes fases da
+  história bíblica se conectam, uma preparando o caminho para a próxima:</p>
   <div class="timeline">
     <div class="timeline-item"><span class="timeline-dot" style="background:#0d9488"></span>
       <b>Criação</b><span>Deus cria o mundo e as primeiras pessoas</span></div>
@@ -415,16 +452,17 @@ ul, ol { margin: 0; }
     <div class="timeline-item"><span class="timeline-dot" style="background:#fb923c"></span>
       <b>Êxodo</b><span>Moisés liberta o povo da escravidão no Egito</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#f5b942"></span>
-      <b>Reis e Profetas</b><span>Davi, Salomão e os profetas anunciam o Salvador</span></div>
+      <b>Juízes e Reis</b><span>Josué, Davi, Salomão guiam o povo de Israel</span></div>
+    <div class="timeline-item"><span class="timeline-dot" style="background:#fbbf24"></span>
+      <b>Profetas</b><span>Anunciam a vinda do Salvador prometido</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#fb7185"></span>
       <b>Jesus</b><span>O Filho de Deus nasce, ensina, morre e ressuscita</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#a78bfa"></span>
       <b>A Igreja</b><span>Os discípulos espalham a boa notícia pelo mundo</span></div>
   </div>
-  <p class="panorama-highlight">💜 Do primeiro ao último livro, existe um fio condutor: <b>Jesus é o
-  centro de tudo</b>, o herói dessa grande história de amor.</p>
+  <div class="panorama-highlight alt">🌈 Cada fase é um capítulo da mesma grande história de amor de Deus por você!</div>
   <div class="page-stripe">🗺️ ⏳ ✨ 🗺️ ⏳ ✨ 🗺️ ⏳ ✨ 🗺️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 5</div>
 </section>
 <section class="page divider-page" style="--accent:#0d9488">
   <div class="divider-shape s1"></div>
@@ -434,473 +472,653 @@ ul, ol { margin: 0; }
   <h1>Antigo Testamento</h1>
   <p>Da Criação do mundo até a longa espera pelo Salvador prometido — 12 histórias inesquecíveis.</p>
 </section>
-<section class="page story-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🌎</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 1 de 12</span>
-      <h2>A Criação do Mundo</h2>
-      <span class="story-ref">📍 Gênesis 1 e 2</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 1 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🌎</span>
+  </div>
+  <h2 class="story-title-big">A Criação do Mundo</h2>
+  <span class="story-ref center">📍 Gênesis 1 e 2</span>
   <p class="story-body">No começo, não existia nada — só Deus. E Deus, com Sua palavra poderosa e cheia de amor, começou a criar! No primeiro dia fez a luz. Depois, o céu, os mares, a terra e as plantas. Criou o sol, a lua e as estrelas. Encheu os mares de peixes e o céu de pássaros. Fez os animais da terra, cada um do seu jeitinho. E, por último, o melhor de tudo: Deus criou o ser humano — homem e mulher — à Sua imagem, pra cuidar do mundo e viver perto d'Ele. No sétimo dia, Deus descansou e olhou pra tudo o que tinha feito. Estava tudo muito bom!</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Deus criou cada coisinha do mundo com cuidado e capricho — e criou você também, do jeitinho que é, porque tem um propósito especial pra sua vida.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“No princípio, Deus criou os céus e a terra.” — baseado em Gênesis 1:1</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 6</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-substripe">🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Criação do Mundo</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Deus criou cada coisinha do mundo com cuidado e capricho — e criou você também, do jeitinho que é, porque tem um propósito especial pra sua vida.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Qual parte da criação de Deus você acha mais linda: o céu estrelado, o mar, as montanhas ou os animais? Por quê?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Obrigado, Deus, por criar um mundo tão lindo e cheio de cores. Obrigado por me criar também, do jeitinho que sou. Ajuda-me a cuidar bem de tudo que Você fez. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“No princípio, Deus criou os céus e a terra.” — baseado em Gênesis 1:1</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 7</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Qual parte da criação de Deus você acha mais linda: o céu estrelado, o mar, as montanhas ou os animais? Por quê?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Obrigado, Deus, por criar um mundo tão lindo e cheio de cores. Obrigado por me criar também, do jeitinho que sou. Ajuda-me a cuidar bem de tudo que Você fez. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>A palavra “Gênesis” significa “origem” ou “começo” — por isso o primeiro livro da Bíblia tem esse nome!</p>
   </div>
-  <div class="story-stripe">🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 🌎 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 8</div>
 </section>
-<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🍎</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 2 de 12</span>
-      <h2>Adão e Eva no Jardim</h2>
-      <span class="story-ref">📍 Gênesis 2 e 3</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 2 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🍎</span>
+  </div>
+  <h2 class="story-title-big">Adão e Eva no Jardim</h2>
+  <span class="story-ref center">📍 Gênesis 2 e 3</span>
   <p class="story-body">Deus colocou Adão e Eva num jardim maravilhoso chamado Éden, cheio de árvores frutíferas, rios e animais. Lá, eles podiam comer de todas as árvores, menos de uma: a árvore do conhecimento do bem e do mal. Deus pediu que não comessem dela, pra protegê-los. Mas uma serpente enganou Eva, dizendo que a fruta era boa e que Deus estava escondendo algo. Eva comeu e deu também a Adão. Naquele momento, eles sentiram vergonha e medo pela primeira vez, e tiveram que deixar o jardim. Mesmo assim, Deus não abandonou os dois: Ele continuou cuidando deles e prometeu que, um dia, enviaria alguém para consertar o que tinha se quebrado.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Nossas escolhas têm consequências, mas mesmo quando erramos, Deus não para de nos amar — Ele sempre nos dá uma nova chance.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Deus fez roupas de peles para Adão e sua mulher, e os vestiu.” — baseado em Gênesis 3:21</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 9</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-substripe">🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Adão e Eva no Jardim</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Nossas escolhas têm consequências, mas mesmo quando erramos, Deus não para de nos amar — Ele sempre nos dá uma nova chance.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Já aconteceu de você fazer algo errado e ter medo de contar pra alguém? O que você acha que devemos fazer quando erramos?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, obrigado porque mesmo quando eu erro, Você continua me amando. Ajuda-me a ter coragem de pedir perdão e a fazer escolhas melhores. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Deus fez roupas de peles para Adão e sua mulher, e os vestiu.” — baseado em Gênesis 3:21</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 10</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Já aconteceu de você fazer algo errado e ter medo de contar pra alguém? O que você acha que devemos fazer quando erramos?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, obrigado porque mesmo quando eu erro, Você continua me amando. Ajuda-me a ter coragem de pedir perdão e a fazer escolhas melhores. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Os nomes “Adão” e “Eva” vêm do hebraico e significam algo como “homem/terra” e “que dá vida”.</p>
   </div>
-  <div class="story-stripe">🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 🍎 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 11</div>
 </section>
-<section class="page story-page" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🚢</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 3 de 12</span>
-      <h2>Noé e a Grande Arca</h2>
-      <span class="story-ref">📍 Gênesis 6 a 9</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 3 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🚢</span>
+  </div>
+  <h2 class="story-title-big">Noé e a Grande Arca</h2>
+  <span class="story-ref center">📍 Gênesis 6 a 9</span>
   <p class="story-body">Depois de muito tempo, o mundo ficou cheio de maldade, e isso deixou Deus triste. Mas havia um homem chamado Noé que amava e obedecia a Deus. Deus pediu que Noé construísse um barco enorme, uma arca, porque ia mandar uma grande chuva para lavar o mundo. Noé obedeceu, mesmo sem entender tudo e mesmo com as pessoas rindo dele. Ele construiu a arca e levou sua família e um casal de cada animal para dentro. Choveu por 40 dias e 40 noites! Quando a água baixou, Noé soltou uma pomba, que voltou trazendo um ramo de oliveira — sinal de que a terra estava seca de novo. Deus fez um arco-íris no céu como promessa de que nunca mais destruiria a terra com um dilúvio.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Obedecer a Deus às vezes parece estranho ou difícil, principalmente quando ninguém mais está fazendo o mesmo — mas Deus sempre recompensa quem confia n'Ele.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“E Deus disse: este é o sinal da aliança... porei o meu arco-íris nas nuvens.” — baseado em Gênesis 9:12-13</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 12</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-substripe">🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Noé e a Grande Arca</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Obedecer a Deus às vezes parece estranho ou difícil, principalmente quando ninguém mais está fazendo o mesmo — mas Deus sempre recompensa quem confia n'Ele.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Já teve que fazer a coisa certa mesmo quando os outros amigos estavam fazendo diferente? Como você se sentiu?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Senhor, me ajuda a ser corajoso como Noé e a obedecer a Você mesmo quando for difícil. Obrigado pela promessa do arco-íris. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“E Deus disse: este é o sinal da aliança... porei o meu arco-íris nas nuvens.” — baseado em Gênesis 9:12-13</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 13</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Já teve que fazer a coisa certa mesmo quando os outros amigos estavam fazendo diferente? Como você se sentiu?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Senhor, me ajuda a ser corajoso como Noé e a obedecer a Você mesmo quando for difícil. Obrigado pela promessa do arco-íris. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>A arca de Noé era enorme: media cerca de 133 metros de comprimento — quase o tamanho de um campo e meio de futebol!</p>
   </div>
-  <div class="story-stripe">🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 🚢 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 14</div>
 </section>
-<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">⭐</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 4 de 12</span>
-      <h2>Abraão, o Amigo de Deus</h2>
-      <span class="story-ref">📍 Gênesis 12 a 22</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 4 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">⭐</span>
+  </div>
+  <h2 class="story-title-big">Abraão, o Amigo de Deus</h2>
+  <span class="story-ref center">📍 Gênesis 12 a 22</span>
   <p class="story-body">Deus chamou um homem chamado Abraão e disse: “Saia da sua terra e vá para o lugar que eu vou te mostrar. Vou te abençoar e fazer de você uma grande nação!” Abraão não sabia exatamente para onde estava indo, mas confiou em Deus e partiu com sua esposa Sara. Passaram-se muitos anos, e Abraão e Sara ainda não tinham filhos — mas Deus tinha prometido que teriam um. Quando já eram bem idosos, nasceu Isaque, o filho da promessa! Deus cumpriu exatamente o que tinha dito, porque as promessas de Deus nunca falham, mesmo que demorem.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Fé é confiar em Deus mesmo quando não conseguimos ver o caminho todo — Deus sempre cumpre o que promete, no tempo certo.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Abraão creu no Senhor, e isso lhe foi creditado como justiça.” — baseado em Gênesis 15:6</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 15</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-substripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Abraão, o Amigo de Deus</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Fé é confiar em Deus mesmo quando não conseguimos ver o caminho todo — Deus sempre cumpre o que promete, no tempo certo.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você já teve que esperar bastante por algo que queria muito? Como foi essa espera?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, ensina-me a confiar em Você como Abraão confiou, mesmo quando eu não entender tudo o que está acontecendo. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Abraão creu no Senhor, e isso lhe foi creditado como justiça.” — baseado em Gênesis 15:6</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 16</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você já teve que esperar bastante por algo que queria muito? Como foi essa espera?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, ensina-me a confiar em Você como Abraão confiou, mesmo quando eu não entender tudo o que está acontecendo. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Abraão é chamado de “pai da fé” e é uma figura importante não só para os cristãos, mas também para judeus e muçulmanos.</p>
   </div>
-  <div class="story-stripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 17</div>
 </section>
-<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🌈</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 5 de 12</span>
-      <h2>José e o Sonho que Virou Realidade</h2>
-      <span class="story-ref">📍 Gênesis 37 a 45</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 5 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🌈</span>
+  </div>
+  <h2 class="story-title-big">José e o Sonho que Virou Realidade</h2>
+  <span class="story-ref center">📍 Gênesis 37 a 45</span>
   <p class="story-body">José era filho de Jacó e tinha um sonho especial: um dia, sua família se curvaria diante dele. Seus irmãos ficaram com ciúmes e o venderam como escravo para o Egito! Lá, mesmo passando por injustiças e até indo preso sem culpa, José continuou confiando em Deus. Com o tempo, Deus deu a José a capacidade de entender sonhos, e ele foi levado até o próprio rei do Egito, o Faraó. José interpretou um sonho que avisava sobre 7 anos de fartura seguidos de 7 anos de fome, e o Faraó o colocou como governador para organizar tudo! Anos depois, seus irmãos foram ao Egito buscar comida durante a fome e encontraram José — que, ao invés de se vingar, os perdoou e disse: “Vocês pensaram em me fazer mal, mas Deus transformou tudo em bem.”</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Mesmo quando as pessoas são injustas com a gente, Deus pode transformar as coisas mais difíceis em algo bom — e perdoar liberta nosso coração.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Vocês pensaram em me fazer mal, mas Deus tornou isso em bem.” — baseado em Gênesis 50:20</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 18</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-substripe">🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">José e o Sonho que Virou Realidade</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Mesmo quando as pessoas são injustas com a gente, Deus pode transformar as coisas mais difíceis em algo bom — e perdoar liberta nosso coração.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Alguma vez alguém foi injusto com você? O que você acha que ajuda a perdoar essa pessoa?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Senhor, assim como José, me ajuda a confiar em Você mesmo nas dificuldades, e me ensina a perdoar quem me machuca. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Vocês pensaram em me fazer mal, mas Deus tornou isso em bem.” — baseado em Gênesis 50:20</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 19</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Alguma vez alguém foi injusto com você? O que você acha que ajuda a perdoar essa pessoa?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Senhor, assim como José, me ajuda a confiar em Você mesmo nas dificuldades, e me ensina a perdoar quem me machuca. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>A túnica especial que José ganhou do pai era um sinal de status — provavelmente tinha mangas compridas e cores variadas.</p>
   </div>
-  <div class="story-stripe">🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 🌈 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 20</div>
 </section>
-<section class="page story-page" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🔥</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 6 de 12</span>
-      <h2>Moisés e a Sarça Ardente</h2>
-      <span class="story-ref">📍 Êxodo 3</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 6 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🔥</span>
+  </div>
+  <h2 class="story-title-big">Moisés e a Sarça Ardente</h2>
+  <span class="story-ref center">📍 Êxodo 3</span>
   <p class="story-body">Muito tempo depois, o povo de Deus (os israelitas) virou escravo no Egito. Um bebê chamado Moisés foi salvo das águas do rio Nilo e cresceu no palácio do Faraó. Anos depois, já adulto, Moisés estava cuidando de ovelhas no deserto quando viu algo incrível: uma sarça (um arbusto) pegando fogo, mas sem se queimar! Dali, Deus falou com ele: “Moisés, vá até o Faraó e diga: deixe o meu povo ir!” Moisés ficou com medo e disse que não sabia falar direito, mas Deus prometeu estar com ele. Moisés obedeceu, e Deus usou ele para libertar todo o povo de Israel da escravidão.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Deus não escolhe só os mais fortes ou mais talentosos — Ele escolhe pessoas comuns, como você, para fazer coisas extraordinárias.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Vai, pois; e eu serei com a tua boca.” — baseado em Êxodo 4:12</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 21</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-substripe">🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Moisés e a Sarça Ardente</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Deus não escolhe só os mais fortes ou mais talentosos — Ele escolhe pessoas comuns, como você, para fazer coisas extraordinárias.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Se Deus te chamasse hoje para fazer algo importante, o que você acha que sentiria?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, assim como fez com Moisés, me dá coragem para fazer o que Você pedir, mesmo quando eu tiver medo. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Vai, pois; e eu serei com a tua boca.” — baseado em Êxodo 4:12</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 22</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Se Deus te chamasse hoje para fazer algo importante, o que você acha que sentiria?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, assim como fez com Moisés, me dá coragem para fazer o que Você pedir, mesmo quando eu tiver medo. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>O nome “Moisés” significa algo como “tirado das águas”, porque ele foi resgatado do rio Nilo quando era bebê.</p>
   </div>
-  <div class="story-stripe">🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 23</div>
 </section>
-<section class="page story-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🌊</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 7 de 12</span>
-      <h2>A Travessia do Mar Vermelho</h2>
-      <span class="story-ref">📍 Êxodo 14</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 7 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🌊</span>
+  </div>
+  <h2 class="story-title-big">A Travessia do Mar Vermelho</h2>
+  <span class="story-ref center">📍 Êxodo 14</span>
   <p class="story-body">Depois de libertar o povo de Israel, Moisés os guiava pelo deserto rumo à terra prometida. Mas o Faraó se arrependeu de deixá-los ir e mandou seu exército atrás deles! O povo ficou preso: na frente, o Mar Vermelho; atrás, os cavalos e carros do exército egípcio se aproximando. Todos ficaram com muito medo, mas Moisés disse: “Não tenham medo, fiquem parados e vejam a salvação do Senhor!” Deus mandou um vento forte que abriu um caminho seco no meio do mar, com água em pé dos dois lados! O povo atravessou em segurança, e quando o exército egípcio tentou seguir, as águas voltaram ao normal.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Quando parece que não há saída, Deus pode abrir um caminho onde a gente nunca imaginou que existiria um.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“O Senhor lutará por vocês; fiquem apenas quietos.” — baseado em Êxodo 14:14</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 24</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-substripe">🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Travessia do Mar Vermelho</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Quando parece que não há saída, Deus pode abrir um caminho onde a gente nunca imaginou que existiria um.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você já se sentiu “encurralado”, sem saída para um problema? O que essa história ensina sobre confiar em Deus nesses momentos?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Senhor, quando eu não enxergar saída, ajuda-me a lembrar que Você pode abrir caminhos incríveis. Eu confio em Você. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“O Senhor lutará por vocês; fiquem apenas quietos.” — baseado em Êxodo 14:14</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 25</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você já se sentiu “encurralado”, sem saída para um problema? O que essa história ensina sobre confiar em Deus nesses momentos?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Senhor, quando eu não enxergar saída, ajuda-me a lembrar que Você pode abrir caminhos incríveis. Eu confio em Você. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Até hoje, o povo judeu relembra essa travessia na festa da Páscoa (Pessach), uma das celebrações mais importantes do calendário judaico.</p>
   </div>
-  <div class="story-stripe">🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 🌊 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 26</div>
 </section>
-<section class="page story-page" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">📜</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 8 de 12</span>
-      <h2>Os Dez Mandamentos</h2>
-      <span class="story-ref">📍 Êxodo 20</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 8 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">📜</span>
+  </div>
+  <h2 class="story-title-big">Os Dez Mandamentos</h2>
+  <span class="story-ref center">📍 Êxodo 20</span>
   <p class="story-body">Depois de atravessar o mar, o povo chegou ao monte Sinai. Ali, Deus chamou Moisés para subir a montanha e lhe deu dez regras importantes, escritas em tábuas de pedra, para ajudar o povo a viver bem e em paz: amar somente a Deus, não adorar ídolos, respeitar o nome de Deus, descansar um dia por semana, honrar pai e mãe, não matar, não trair, não roubar, não mentir e não cobiçar o que é dos outros. Essas regras não eram para prender o povo, mas para protegê-lo e ensiná-lo a amar a Deus e ao próximo.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>As regras de Deus não existem para nos limitar, mas porque Ele nos ama e quer o melhor para nossa vida e para quem está ao nosso redor.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Ama o Senhor, teu Deus... e ama o teu próximo como a ti mesmo.” — baseado em Mateus 22:37-39</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 27</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-substripe">📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Os Dez Mandamentos</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>As regras de Deus não existem para nos limitar, mas porque Ele nos ama e quer o melhor para nossa vida e para quem está ao nosso redor.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Qual desses mandamentos você acha mais fácil de seguir? E qual é mais difícil?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, obrigado por Suas regras que cuidam de mim. Me ajuda a segui-las com amor, e não só por obrigação. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Ama o Senhor, teu Deus... e ama o teu próximo como a ti mesmo.” — baseado em Mateus 22:37-39</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 28</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Qual desses mandamentos você acha mais fácil de seguir? E qual é mais difícil?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, obrigado por Suas regras que cuidam de mim. Me ajuda a segui-las com amor, e não só por obrigação. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>As tábuas com os Dez Mandamentos eram guardadas dentro de uma caixa muito especial, chamada Arca da Aliança.</p>
   </div>
-  <div class="story-stripe">📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 📜 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 29</div>
 </section>
-<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🎺</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 9 de 12</span>
-      <h2>Josué e os Muros de Jericó</h2>
-      <span class="story-ref">📍 Josué 6</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 9 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🎺</span>
+  </div>
+  <h2 class="story-title-big">Josué e os Muros de Jericó</h2>
+  <span class="story-ref center">📍 Josué 6</span>
   <p class="story-body">Depois que Moisés morreu, Josué se tornou o novo líder do povo de Israel, e eles finalmente chegaram perto da terra prometida! Mas na frente havia uma cidade cercada por muralhas altíssimas: Jericó. Deus deu um plano bem diferente: o povo devia marchar ao redor da cidade uma vez por dia, durante seis dias, em silêncio. No sétimo dia, deviam marchar sete vezes, e depois gritar bem alto enquanto os sacerdotes tocavam trombetas. Parecia um plano estranho para vencer uma guerra! Mas o povo obedeceu exatamente como Deus mandou — e, no momento do grito, as muralhas de Jericó desabaram!</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Às vezes o plano de Deus parece estranho ou sem sentido para nós, mas quando confiamos e obedecemos, vemos coisas incríveis acontecerem.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Pela fé, caíram os muros de Jericó, depois de rodeados sete dias.” — baseado em Hebreus 11:30</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 30</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-substripe">🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Josué e os Muros de Jericó</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Às vezes o plano de Deus parece estranho ou sem sentido para nós, mas quando confiamos e obedecemos, vemos coisas incríveis acontecerem.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você já teve que confiar em um plano que não fazia muito sentido pra você? Como foi?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Senhor, me ajuda a confiar nos Seus planos, mesmo quando eu não entendo tudo direito. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Pela fé, caíram os muros de Jericó, depois de rodeados sete dias.” — baseado em Hebreus 11:30</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 31</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você já teve que confiar em um plano que não fazia muito sentido pra você? Como foi?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Senhor, me ajuda a confiar nos Seus planos, mesmo quando eu não entendo tudo direito. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Jericó é considerada uma das cidades habitadas mais antigas do mundo — arqueólogos ainda estudam suas muralhas hoje em dia.</p>
   </div>
-  <div class="story-stripe">🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 🎺 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 32</div>
 </section>
-<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🪨</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 10 de 12</span>
-      <h2>Davi e Golias</h2>
-      <span class="story-ref">📍 1 Samuel 17</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 10 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🪨</span>
+  </div>
+  <h2 class="story-title-big">Davi e Golias</h2>
+  <span class="story-ref center">📍 1 Samuel 17</span>
   <p class="story-body">O exército de Israel estava com muito medo de um gigante filisteu chamado Golias, que desafiava qualquer um a lutar com ele. Ninguém tinha coragem de enfrentá-lo — ele era enorme e assustador! Mas um jovem pastor de ovelhas chamado Davi, que tinha ido visitar seus irmãos no acampamento, disse que ia enfrentar o gigante, confiando em Deus. Todos acharam loucura: Davi era só um garoto, sem armadura, e o gigante tinha espada e lança enormes! Mas Davi pegou sua funda e cinco pedrinhas do riacho e disse: “Você vem contra mim com espada, mas eu venho em nome do Senhor!” Davi acertou uma pedrinha bem na testa de Golias, e o gigante caiu!</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Deus é maior do que qualquer “gigante” na nossa vida — um medo, uma dificuldade grande — e Ele pode usar até os que parecem pequenos e fracos para fazer coisas grandes.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“O Senhor, que me livrou das garras do leão e do urso, ele me livrará da mão deste filisteu.” — baseado em 1 Samuel 17:37</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 33</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-substripe">🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Davi e Golias</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Deus é maior do que qualquer “gigante” na nossa vida — um medo, uma dificuldade grande — e Ele pode usar até os que parecem pequenos e fracos para fazer coisas grandes.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Qual é o seu “gigante” hoje — algo que te dá medo ou parece grande demais? Como Davi enfrentou o dele?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, me dá a coragem de Davi para enfrentar meus medos, sabendo que Você está do meu lado. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“O Senhor, que me livrou das garras do leão e do urso, ele me livrará da mão deste filisteu.” — baseado em 1 Samuel 17:37</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 34</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Qual é o seu “gigante” hoje — algo que te dá medo ou parece grande demais? Como Davi enfrentou o dele?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, me dá a coragem de Davi para enfrentar meus medos, sabendo que Você está do meu lado. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Segundo o relato bíblico, Golias tinha quase 3 metros de altura! Mesmo assim, uma pedrinha guiada por fé foi suficiente.</p>
   </div>
-  <div class="story-stripe">🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 🪨 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 35</div>
 </section>
-<section class="page story-page" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🦁</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 11 de 12</span>
-      <h2>Daniel na Cova dos Leões</h2>
-      <span class="story-ref">📍 Daniel 6</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 11 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🦁</span>
+  </div>
+  <h2 class="story-title-big">Daniel na Cova dos Leões</h2>
+  <span class="story-ref center">📍 Daniel 6</span>
   <p class="story-body">Daniel era um homem que amava muito a Deus e orava três vezes por dia, mesmo morando em um reino estrangeiro. Alguns homens que tinham inveja de Daniel convenceram o rei a criar uma lei proibindo orar a qualquer deus além dele por trinta dias, e quem desobedecesse seria jogado numa cova cheia de leões! Daniel soube da lei, mas continuou orando a Deus normalmente, com a janela aberta, sem se esconder. Ele foi pego e jogado na cova dos leões. Mas Deus enviou um anjo que fechou a boca dos leões, e Daniel passou a noite inteira sem se machucar! Na manhã seguinte, o rei ficou maravilhado e passou a honrar o Deus de Daniel.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Manter a fé, mesmo quando é arriscado ou dá medo, mostra pra todo mundo o quanto confiamos em Deus — e Ele cuida de quem é fiel a Ele.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“O meu Deus enviou o seu anjo, e fechou a boca dos leões.” — baseado em Daniel 6:22</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 36</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-substripe">🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Daniel na Cova dos Leões</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Manter a fé, mesmo quando é arriscado ou dá medo, mostra pra todo mundo o quanto confiamos em Deus — e Ele cuida de quem é fiel a Ele.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você continuaria orando mesmo se alguém tentasse te impedir? Por que a fé de Daniel era tão forte?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Senhor, me ajuda a ser fiel a Você como Daniel foi, mesmo quando for difícil ou eu tiver medo. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“O meu Deus enviou o seu anjo, e fechou a boca dos leões.” — baseado em Daniel 6:22</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 37</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você continuaria orando mesmo se alguém tentasse te impedir? Por que a fé de Daniel era tão forte?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Senhor, me ajuda a ser fiel a Você como Daniel foi, mesmo quando for difícil ou eu tiver medo. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Daniel viveu na Babilônia, uma das cidades mais avançadas do mundo antigo, e mesmo assim nunca deixou de adorar a Deus.</p>
   </div>
-  <div class="story-stripe">🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 🦁 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 38</div>
 </section>
-<section class="page story-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🐋</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Antigo Testamento · História 12 de 12</span>
-      <h2>Jonas e o Grande Peixe</h2>
-      <span class="story-ref">📍 Jonas 1 a 3</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Antigo Testamento · História 12 de 12</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🐋</span>
+  </div>
+  <h2 class="story-title-big">Jonas e o Grande Peixe</h2>
+  <span class="story-ref center">📍 Jonas 1 a 3</span>
   <p class="story-body">Deus pediu que o profeta Jonas fosse até a cidade de Nínive avisar que as pessoas precisavam mudar de vida. Mas Jonas não queria ir — ele fugiu na direção contrária, pegando um navio! Deus mandou uma tempestade tão forte que os marinheiros ficaram desesperados. Jonas contou que estava fugindo de Deus e pediu para ser jogado ao mar, para que a tempestade parasse. Assim que caiu na água, um grande peixe o engoliu, e Jonas ficou três dias e três noites dentro dele! Lá dentro, Jonas orou e pediu perdão a Deus. O peixe o cuspiu na praia, e dessa vez Jonas foi até Nínive, como Deus tinha pedido desde o começo.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Quando fugimos do que Deus pede, as coisas ficam mais difíceis — mas mesmo assim, Deus não desiste de nós e nos dá uma nova chance.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“E veio a palavra do Senhor a Jonas, pela segunda vez.” — baseado em Jonas 3:1</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 39</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-substripe">🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Jonas e o Grande Peixe</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Quando fugimos do que Deus pede, as coisas ficam mais difíceis — mas mesmo assim, Deus não desiste de nós e nos dá uma nova chance.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Já tentou “fugir” de fazer algo que sabia que era certo? O que aconteceu no final?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Deus, obrigado porque mesmo quando eu fujo do que é certo, Você me dá outra chance. Me ajuda a obedecer da primeira vez. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“E veio a palavra do Senhor a Jonas, pela segunda vez.” — baseado em Jonas 3:1</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 40</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Já tentou “fugir” de fazer algo que sabia que era certo? O que aconteceu no final?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Deus, obrigado porque mesmo quando eu fujo do que é certo, Você me dá outra chance. Me ajuda a obedecer da primeira vez. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Nínive, a cidade para onde Jonas foi enviado, era a capital do Império Assírio — uma das maiores cidades do mundo antigo.</p>
   </div>
-  <div class="story-stripe">🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 🐋 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 41</div>
 </section>
 <section class="page divider-page" style="--accent:#a78bfa">
   <div class="divider-shape s1"></div>
@@ -910,395 +1128,545 @@ ul, ol { margin: 0; }
   <h1>Novo Testamento</h1>
   <p>A vida de Jesus e o início da Igreja — 10 histórias que mudaram o mundo para sempre.</p>
 </section>
-<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">⭐</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 1 de 10</span>
-      <h2>O Nascimento de Jesus</h2>
-      <span class="story-ref">📍 Lucas 2</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 1 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">⭐</span>
+  </div>
+  <h2 class="story-title-big">O Nascimento de Jesus</h2>
+  <span class="story-ref center">📍 Lucas 2</span>
   <p class="story-body">Depois de muitos e muitos anos esperando a promessa de Deus, chegou a hora! Um anjo apareceu para uma jovem chamada Maria e disse que ela teria um filho especial, chamado Jesus, o Filho de Deus. Maria e José viajaram até Belém, mas não havia lugar na hospedaria, então Jesus nasceu num estábulo simples, e foi colocado numa manjedoura (a caixinha onde os animais comiam). No céu, uma estrela brilhante apareceu, e anjos anunciaram a boa notícia a alguns pastores que cuidavam de ovelhas: “Hoje nasceu o Salvador!” Sábios de terras distantes seguiram a estrela e trouxeram presentes especiais para o bebê Jesus.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Deus escolheu vir ao mundo do jeito mais simples e humilde possível, mostrando que Ele se importa com todo mundo, não só com os mais ricos ou importantes.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Hoje, na cidade de Davi, nasceu o Salvador, que é Cristo, o Senhor.” — baseado em Lucas 2:11</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 42</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-substripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">O Nascimento de Jesus</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Deus escolheu vir ao mundo do jeito mais simples e humilde possível, mostrando que Ele se importa com todo mundo, não só com os mais ricos ou importantes.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Por que você acha que Deus escolheu um estábulo simples, e não um palácio, para o nascimento de Jesus?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Obrigado, Jesus, por vir ao mundo por amor a mim. Que eu tenha um coração simples e agradecido como os pastores. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Hoje, na cidade de Davi, nasceu o Salvador, que é Cristo, o Senhor.” — baseado em Lucas 2:11</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 43</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Por que você acha que Deus escolheu um estábulo simples, e não um palácio, para o nascimento de Jesus?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Obrigado, Jesus, por vir ao mundo por amor a mim. Que eu tenha um coração simples e agradecido como os pastores. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Os pastores foram os primeiros a saber do nascimento de Jesus — pessoas simples, e não reis ou pessoas importantes!</p>
   </div>
-  <div class="story-stripe">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 44</div>
 </section>
-<section class="page story-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🕊️</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 2 de 10</span>
-      <h2>O Batismo de Jesus</h2>
-      <span class="story-ref">📍 Mateus 3</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 2 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🕊️</span>
+  </div>
+  <h2 class="story-title-big">O Batismo de Jesus</h2>
+  <span class="story-ref center">📍 Mateus 3</span>
   <p class="story-body">Quando Jesus já era adulto, foi até o rio Jordão, onde João Batista batizava as pessoas que queriam mudar de vida e se aproximar de Deus. João ficou surpreso quando Jesus pediu para ser batizado, porque Jesus nunca tinha pecado — Ele não precisava disso! Mas Jesus quis mostrar o caminho certo para todos nós. Quando Jesus saiu da água, o céu se abriu, o Espírito Santo desceu como uma pomba sobre Ele, e uma voz do céu disse: “Este é o meu Filho amado, em quem me agrado!”</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Jesus, mesmo sendo perfeito, quis nos mostrar o caminho, do início ao fim — isso nos ensina a seguir o exemplo d'Ele em tudo o que fazemos.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Este é o meu Filho amado, em quem me agrado.” — baseado em Mateus 3:17</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 45</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-substripe">🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">O Batismo de Jesus</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Jesus, mesmo sendo perfeito, quis nos mostrar o caminho, do início ao fim — isso nos ensina a seguir o exemplo d'Ele em tudo o que fazemos.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>O que você acha que significa “seguir o exemplo de Jesus” no seu dia a dia?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, quero seguir Seu exemplo em tudo o que eu fizer. Obrigado por me mostrar o caminho certo. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Este é o meu Filho amado, em quem me agrado.” — baseado em Mateus 3:17</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 46</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>O que você acha que significa “seguir o exemplo de Jesus” no seu dia a dia?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, quero seguir Seu exemplo em tudo o que eu fizer. Obrigado por me mostrar o caminho certo. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>“Batizar” significa “mergulhar” ou “imergir” — por isso o batismo costumava ser feito em rios, como o Jordão.</p>
   </div>
-  <div class="story-stripe">🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ 🕊️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 47</div>
 </section>
-<section class="page story-page" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🎣</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 3 de 10</span>
-      <h2>Jesus Escolhe os Discípulos</h2>
-      <span class="story-ref">📍 Mateus 4</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 3 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🎣</span>
+  </div>
+  <h2 class="story-title-big">Jesus Escolhe os Discípulos</h2>
+  <span class="story-ref center">📍 Mateus 4</span>
   <p class="story-body">Andando pela beira do mar da Galileia, Jesus viu dois irmãos pescadores, Pedro e André, jogando suas redes na água. Jesus os chamou: “Venham comigo, e eu farei de vocês pescadores de pessoas!” Na mesma hora, eles largaram as redes e o seguiram. Um pouco mais adiante, Jesus chamou outros dois irmãos, Tiago e João, que também deixaram tudo para segui-lo. Ao longo do tempo, Jesus escolheu doze discípulos — pessoas comuns, como pescadores e cobradores de impostos — para aprenderem com Ele e depois contarem a boa notícia para o mundo inteiro.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Jesus não escolhe as pessoas mais famosas ou perfeitas — Ele chama gente comum, como você, para fazer parte da Sua grande história.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Venham após mim, e eu os farei pescadores de homens.” — baseado em Mateus 4:19</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 48</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <div class="story-substripe">🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Jesus Escolhe os Discípulos</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Jesus não escolhe as pessoas mais famosas ou perfeitas — Ele chama gente comum, como você, para fazer parte da Sua grande história.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Se Jesus te chamasse pessoalmente hoje para segui-lo, o que você faria?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, obrigado por me chamar para fazer parte da Sua família. Quero Te seguir todos os dias da minha vida. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Venham após mim, e eu os farei pescadores de homens.” — baseado em Mateus 4:19</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 49</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#0d9488; --accent-soft:#e6f7f5; --accent-text:#0d9488">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Se Jesus te chamasse pessoalmente hoje para segui-lo, o que você faria?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, obrigado por me chamar para fazer parte da Sua família. Quero Te seguir todos os dias da minha vida. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Dos doze discípulos de Jesus, pelo menos quatro — Pedro, André, Tiago e João — eram pescadores de profissão.</p>
   </div>
-  <div class="story-stripe">🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 🎣 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 50</div>
 </section>
-<section class="page story-page" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🍞</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 4 de 10</span>
-      <h2>A Multiplicação dos Pães e Peixes</h2>
-      <span class="story-ref">📍 Mateus 14</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 4 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🍞</span>
+  </div>
+  <h2 class="story-title-big">A Multiplicação dos Pães e Peixes</h2>
+  <span class="story-ref center">📍 Mateus 14</span>
   <p class="story-body">Uma tarde, mais de cinco mil pessoas seguiram Jesus até um lugar deserto para ouvi-lo ensinar e ver os milagres que Ele fazia. Quando ficou tarde, os discípulos disseram que era melhor mandar as pessoas embora para comprarem comida, porque não havia nada ali. Jesus respondeu: “Vocês mesmos deem de comer a eles!” Um menino tinha apenas cinco pães e dois peixinhos, e os entregou a Jesus. Jesus abençoou aquela pouquinha comida, e — para a surpresa de todos — deu para todo mundo comer, e ainda sobrou! Doze cestos cheios de sobras, para mais de cinco mil pessoas!</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Quando entregamos o pouco que temos nas mãos de Jesus, mesmo que pareça insuficiente, Ele pode multiplicar e fazer muito mais do que imaginamos.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Trouxeram-lhe os cinco pães e os dois peixes... e todos comeram e se fartaram.” — baseado em Mateus 14:19-20</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 51</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-substripe">🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Multiplicação dos Pães e Peixes</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Quando entregamos o pouco que temos nas mãos de Jesus, mesmo que pareça insuficiente, Ele pode multiplicar e fazer muito mais do que imaginamos.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você tem algo pequeno — um talento, um brinquedo, um gesto de carinho — que poderia compartilhar com alguém hoje?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, ensina-me a compartilhar o que eu tenho, confiando que Você pode fazer muito com o pouco que eu ofereço. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Trouxeram-lhe os cinco pães e os dois peixes... e todos comeram e se fartaram.” — baseado em Mateus 14:19-20</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 52</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você tem algo pequeno — um talento, um brinquedo, um gesto de carinho — que poderia compartilhar com alguém hoje?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, ensina-me a compartilhar o que eu tenho, confiando que Você pode fazer muito com o pouco que eu ofereço. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Esse é um dos poucos milagres de Jesus contado nos quatro Evangelhos: Mateus, Marcos, Lucas e João!</p>
   </div>
-  <div class="story-stripe">🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 🍞 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 53</div>
 </section>
-<section class="page story-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">⛵</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 5 de 10</span>
-      <h2>Jesus Acalma a Tempestade</h2>
-      <span class="story-ref">📍 Marcos 4</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 5 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">⛵</span>
+  </div>
+  <h2 class="story-title-big">Jesus Acalma a Tempestade</h2>
+  <span class="story-ref center">📍 Marcos 4</span>
   <p class="story-body">Depois de um longo dia ensinando, Jesus e os discípulos entraram num barco para atravessar o mar da Galileia. Jesus estava tão cansado que adormeceu logo na popa do barco. De repente, uma tempestade forte se levantou, com ondas enormes que ameaçavam afundar o barco! Os discípulos ficaram apavorados e acordaram Jesus, gritando: “Mestre, não te importas que estamos morrendo?” Jesus se levantou, olhou para o vento e o mar, e disse apenas: “Acalme-se!” E, na mesma hora, tudo ficou completamente calmo. Os discípulos ficaram admirados: “Até o vento e o mar lhe obedecem!”</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Mesmo nas “tempestades” da nossa vida — medos, problemas, dificuldades — Jesus está no barco com a gente, e Ele tem o poder de trazer paz.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Acalma-te, emudece! E o vento cessou, e fez-se grande bonança.” — baseado em Marcos 4:39</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 54</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <div class="story-substripe">⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">Jesus Acalma a Tempestade</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Mesmo nas “tempestades” da nossa vida — medos, problemas, dificuldades — Jesus está no barco com a gente, e Ele tem o poder de trazer paz.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>O que você faz quando sente medo ou está passando por um momento difícil?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, quando eu passar por tempestades, me lembra que Você está comigo e pode trazer paz ao meu coração. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Acalma-te, emudece! E o vento cessou, e fez-se grande bonança.” — baseado em Marcos 4:39</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 55</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#38bdf8; --accent-soft:#e8f8ff; --accent-text:#0284c7">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>O que você faz quando sente medo ou está passando por um momento difícil?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, quando eu passar por tempestades, me lembra que Você está comigo e pode trazer paz ao meu coração. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>O mar da Galileia é, na verdade, um grande lago de água doce, conhecido por tempestades repentinas e muito fortes.</p>
   </div>
-  <div class="story-stripe">⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ ⛵ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 56</div>
 </section>
-<section class="page story-page" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🏠</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 6 de 10</span>
-      <h2>A Parábola do Filho Pródigo</h2>
-      <span class="story-ref">📍 Lucas 15</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 6 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🏠</span>
+  </div>
+  <h2 class="story-title-big">A Parábola do Filho Pródigo</h2>
+  <span class="story-ref center">📍 Lucas 15</span>
   <p class="story-body">Jesus contou a história de um pai com dois filhos. O filho mais novo pediu sua parte da herança e foi embora para um país distante, onde gastou tudo vivendo de forma descontrolada. Quando o dinheiro acabou, veio uma grande fome, e ele ficou tão pobre que passou a cuidar de porcos e até teve vontade de comer a comida deles! Foi aí que ele pensou: “Vou voltar para casa do meu pai e pedir perdão.” Enquanto ele ainda estava longe, o pai o viu chegando, correu ao encontro dele, o abraçou e organizou uma grande festa, dizendo: “Meu filho estava morto e voltou a viver; estava perdido e foi encontrado!”</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Não importa o quanto a gente se afaste ou erre, o coração de Deus está sempre pronto para nos receber de volta com amor, sem cobranças.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Enquanto ainda estava longe, seu pai o viu e, cheio de compaixão, correu, abraçou-o.” — baseado em Lucas 15:20</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 57</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <div class="story-substripe">🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Parábola do Filho Pródigo</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Não importa o quanto a gente se afaste ou erre, o coração de Deus está sempre pronto para nos receber de volta com amor, sem cobranças.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Como você se sente sabendo que Deus sempre te recebe de volta, não importa o que aconteça?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Pai, obrigado porque Seus braços estão sempre abertos para mim. Me ajuda a voltar para perto de Você sempre que eu me afastar. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Enquanto ainda estava longe, seu pai o viu e, cheio de compaixão, correu, abraçou-o.” — baseado em Lucas 15:20</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 58</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb7185; --accent-soft:#feeef0; --accent-text:#e11d48">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Como você se sente sabendo que Deus sempre te recebe de volta, não importa o que aconteça?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Pai, obrigado porque Seus braços estão sempre abertos para mim. Me ajuda a voltar para perto de Você sempre que eu me afastar. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Essa é uma parábola — uma história inventada por Jesus para ensinar uma lição. Ele contava muitas histórias assim!</p>
   </div>
-  <div class="story-stripe">🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 🏠 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 59</div>
 </section>
-<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">❤️</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 7 de 10</span>
-      <h2>A Parábola do Bom Samaritano</h2>
-      <span class="story-ref">📍 Lucas 10</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 7 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">❤️</span>
+  </div>
+  <h2 class="story-title-big">A Parábola do Bom Samaritano</h2>
+  <span class="story-ref center">📍 Lucas 10</span>
   <p class="story-body">Um mestre da lei perguntou a Jesus: “Quem é o meu próximo?” Jesus respondeu com uma história: um homem estava viajando quando foi atacado por ladrões, que bateram nele, roubaram tudo e o deixaram quase morto na estrada. Um sacerdote passou por ali e desviou para o outro lado. Depois, um levita (ajudante do templo) fez a mesma coisa. Mas um samaritano — alguém que, naquela época, era mal visto pelos judeus — parou, cuidou dos ferimentos do homem, o levou numa pousada e pagou tudo o que ele precisava para se recuperar. Jesus perguntou: “Qual dos três foi o próximo daquele homem?” A resposta era clara: aquele que teve compaixão.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Amar o próximo é cuidar de quem precisa, mesmo que essa pessoa seja diferente de nós ou que ninguém mais esteja ajudando.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Vá, e faça a mesma coisa.” — baseado em Lucas 10:37</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 60</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-substripe">❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Parábola do Bom Samaritano</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Amar o próximo é cuidar de quem precisa, mesmo que essa pessoa seja diferente de nós ou que ninguém mais esteja ajudando.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você conhece alguém que precisa de ajuda ou de um gesto de carinho hoje? O que você pode fazer?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, me ensina a ter um coração cheio de compaixão, pronto para ajudar quem precisa, do jeito que o bom samaritano fez. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Vá, e faça a mesma coisa.” — baseado em Lucas 10:37</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 61</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você conhece alguém que precisa de ajuda ou de um gesto de carinho hoje? O que você pode fazer?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, me ensina a ter um coração cheio de compaixão, pronto para ajudar quem precisa, do jeito que o bom samaritano fez. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Na época de Jesus, judeus e samaritanos geralmente não se davam bem — por isso a atitude do samaritano surpreendeu tanto quem ouviu.</p>
   </div>
-  <div class="story-stripe">❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 62</div>
 </section>
-<section class="page story-page" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🍇</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 8 de 10</span>
-      <h2>A Última Ceia</h2>
-      <span class="story-ref">📍 Mateus 26</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 8 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🍇</span>
+  </div>
+  <h2 class="story-title-big">A Última Ceia</h2>
+  <span class="story-ref center">📍 Mateus 26</span>
   <p class="story-body">Antes da festa da Páscoa, Jesus se reuniu com Seus doze discípulos para uma última refeição especial. Durante o jantar, Jesus fez algo surpreendente: se levantou, pegou uma bacia com água e começou a lavar os pés dos discípulos — uma tarefa que normalmente era feita pelos servos! Ele queria ensinar que amar de verdade é servir uns aos outros, sem orgulho. Depois, Jesus pegou o pão, abençoou e disse: “Isto é o meu corpo, entregue por vocês.” Depois pegou o cálice de vinho e disse: “Isto é o meu sangue, derramado por vocês.” Ele estava se preparando para dar a vida por todos nós, por amor.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Jesus nos ensinou, com atitudes e não só com palavras, que servir com amor é o caminho mais bonito de viver.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Assim como eu vos amei, que também vos ameis uns aos outros.” — baseado em João 13:34</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 63</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <div class="story-substripe">🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Última Ceia</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Jesus nos ensinou, com atitudes e não só com palavras, que servir com amor é o caminho mais bonito de viver.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Você consegue pensar em uma forma de servir alguém da sua casa esta semana, como Jesus fez com os discípulos?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, me ensina a servir com amor, sem esperar nada em troca, assim como Você fez por mim. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Assim como eu vos amei, que também vos ameis uns aos outros.” — baseado em João 13:34</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 64</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#a78bfa; --accent-soft:#f2edfe; --accent-text:#7c3aed">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Você consegue pensar em uma forma de servir alguém da sua casa esta semana, como Jesus fez com os discípulos?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, me ensina a servir com amor, sem esperar nada em troca, assim como Você fez por mim. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>Até hoje, muitas igrejas relembram a Última Ceia por meio de uma celebração chamada Santa Ceia ou Eucaristia.</p>
   </div>
-  <div class="story-stripe">🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 🍇 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 65</div>
 </section>
-<section class="page story-page" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">✝️</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 9 de 10</span>
-      <h2>A Crucificação e a Ressurreição</h2>
-      <span class="story-ref">📍 Mateus 27 e 28</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 9 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">✝️</span>
+  </div>
+  <h2 class="story-title-big">A Crucificação e a Ressurreição</h2>
+  <span class="story-ref center">📍 Mateus 27 e 28</span>
   <p class="story-body">Jesus foi preso injustamente, julgado e condenado a morrer numa cruz — mesmo nunca tendo feito nada de errado. Ele fez isso por amor, para pagar pelos erros de todas as pessoas do mundo, para sempre. Foi um dia muito triste: Jesus morreu e foi colocado num túmulo, com uma pedra enorme na entrada. Mas essa não foi a última parte da história! No terceiro dia, domingo de manhã bem cedo, algumas mulheres foram até o túmulo e encontraram a pedra removida — e o túmulo vazio! Um anjo disse: “Ele não está aqui, ressuscitou, como tinha dito!” Jesus estava vivo outra vez, vencendo até a morte, e apareceu para muitas pessoas depois disso.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Jesus deu a Sua vida por amor a cada um de nós, e Sua ressurreição nos mostra que, com Deus, sempre existe esperança, mesmo depois dos momentos mais tristes.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“Ele não está aqui; ressuscitou, como tinha dito.” — baseado em Mateus 28:6</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 66</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <div class="story-substripe">✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">A Crucificação e a Ressurreição</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Jesus deu a Sua vida por amor a cada um de nós, e Sua ressurreição nos mostra que, com Deus, sempre existe esperança, mesmo depois dos momentos mais tristes.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>Como você se sente sabendo que Jesus fez tudo isso por amor a você?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Jesus, obrigado por dar a Sua vida por mim e por vencer a morte. Quero viver cada dia agradecido por esse amor tão grande. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“Ele não está aqui; ressuscitou, como tinha dito.” — baseado em Mateus 28:6</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 67</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#f5b942; --accent-soft:#fff8e6; --accent-text:#b45309">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>Como você se sente sabendo que Jesus fez tudo isso por amor a você?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Jesus, obrigado por dar a Sua vida por mim e por vencer a morte. Quero viver cada dia agradecido por esse amor tão grande. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>A Páscoa cristã, celebrada até hoje no mundo todo, é justamente a comemoração da ressurreição de Jesus.</p>
   </div>
-  <div class="story-stripe">✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ ✝️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 68</div>
 </section>
-<section class="page story-page" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">🔥</div>
-    <div class="story-head-text">
-      <span class="story-kicker">Novo Testamento · História 10 de 10</span>
-      <h2>O Pentecostes e o Início da Igreja</h2>
-      <span class="story-ref">📍 Atos 2</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">Novo Testamento · História 10 de 10</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">🔥</span>
+  </div>
+  <h2 class="story-title-big">O Pentecostes e o Início da Igreja</h2>
+  <span class="story-ref center">📍 Atos 2</span>
   <p class="story-body">Depois que Jesus ressuscitou, Ele ficou mais um tempo com os discípulos e depois subiu ao céu, prometendo enviar o Espírito Santo para ajudá-los. Dez dias depois, durante uma festa judaica chamada Pentecostes, os discípulos estavam todos reunidos quando, de repente, ouviram um som como um vento forte enchendo a casa toda, e algo parecido com línguas de fogo apareceu sobre a cabeça de cada um deles! Eles ficaram cheios do Espírito Santo e começaram a falar sobre Jesus com uma coragem que não tinham antes — tanta coragem que, naquele mesmo dia, milhares de pessoas decidiram seguir a Jesus também. Assim começou a Igreja, uma grande família espalhada pelo mundo todo.</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>Deus dá coragem e força para contarmos sobre o Seu amor a todas as pessoas ao nosso redor, mesmo quando temos medo ou vergonha.</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>“E todos foram cheios do Espírito Santo.” — baseado em Atos 2:4</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 69</div>
+</section>
+<section class="page story-page story-page-2" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <div class="story-substripe">🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">O Pentecostes e o Início da Igreja</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>Deus dá coragem e força para contarmos sobre o Seu amor a todas as pessoas ao nosso redor, mesmo quando temos medo ou vergonha.</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>O que você conta para seus amigos sobre o quanto Deus te ama?</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>Espírito Santo, me enche de coragem para contar sobre o amor de Jesus para todas as pessoas que eu encontrar. Amém.</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>“E todos foram cheios do Espírito Santo.” — baseado em Atos 2:4</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 70</div>
+</section>
+<section class="page story-page story-page-3" style="--accent:#fb923c; --accent-soft:#fff3e8; --accent-text:#c2410c">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>O que você conta para seus amigos sobre o quanto Deus te ama?</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>Espírito Santo, me enche de coragem para contar sobre o amor de Jesus para todas as pessoas que eu encontrar. Amém.</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>A palavra “Pentecostes” vem do grego e significa “quinquagésimo dia” — 50 dias depois da Páscoa.</p>
   </div>
-  <div class="story-stripe">🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · 71</div>
 </section>
 <section class="page divider-page" style="--accent:#fb7185">
   <div class="divider-shape s1"></div>
@@ -1316,7 +1684,7 @@ ul, ol { margin: 0; }
     próxima página!</p>
   </header>
   <ol class="quiz-list"><li class="quiz-q"><p class="quiz-q-text">1. Quem construiu uma arca enorme para escapar do dilúvio?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Abraão</li><li><span class="opt-letter">B</span>Noé</li><li><span class="opt-letter">C</span>Moisés</li><li><span class="opt-letter">D</span>Davi</li></ul></li><li class="quiz-q"><p class="quiz-q-text">2. Qual jovem pastor enfrentou o gigante Golias com uma funda e uma pedrinha?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>José</li><li><span class="opt-letter">B</span>Daniel</li><li><span class="opt-letter">C</span>Davi</li><li><span class="opt-letter">D</span>Jonas</li></ul></li><li class="quiz-q"><p class="quiz-q-text">3. Em que cidade Jesus nasceu?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Jerusalém</li><li><span class="opt-letter">B</span>Nazaré</li><li><span class="opt-letter">C</span>Belém</li><li><span class="opt-letter">D</span>Jericó</li></ul></li><li class="quiz-q"><p class="quiz-q-text">4. Quantos mandamentos Deus deu a Moisés no monte Sinai?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Cinco</li><li><span class="opt-letter">B</span>Sete</li><li><span class="opt-letter">C</span>Dez</li><li><span class="opt-letter">D</span>Doze</li></ul></li><li class="quiz-q"><p class="quiz-q-text">5. Quem foi jogado na cova dos leões por continuar orando a Deus?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Jonas</li><li><span class="opt-letter">B</span>Daniel</li><li><span class="opt-letter">C</span>José</li><li><span class="opt-letter">D</span>Josué</li></ul></li></ol>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 72</div>
 </section>
 <section class="page quiz-page">
   <header class="section-head" style="--accent:#a78bfa">
@@ -1325,7 +1693,7 @@ ul, ol { margin: 0; }
   </header>
   <ol class="quiz-list" start="6"><li class="quiz-q"><p class="quiz-q-text">6. O que aconteceu com as muralhas de Jericó depois que o povo marchou e gritou?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Ficaram mais fortes</li><li><span class="opt-letter">B</span>Não mudou nada</li><li><span class="opt-letter">C</span>Desabaram</li><li><span class="opt-letter">D</span>Viraram ouro</li></ul></li><li class="quiz-q"><p class="quiz-q-text">7. Quantos pães e peixes o menino entregou a Jesus antes da multiplicação?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>2 pães e 5 peixes</li><li><span class="opt-letter">B</span>5 pães e 2 peixes</li><li><span class="opt-letter">C</span>10 pães e 10 peixes</li><li><span class="opt-letter">D</span>Só 1 peixe</li></ul></li><li class="quiz-q"><p class="quiz-q-text">8. Na parábola do bom samaritano, quem ajudou o homem ferido na estrada?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>O sacerdote</li><li><span class="opt-letter">B</span>O levita</li><li><span class="opt-letter">C</span>O samaritano</li><li><span class="opt-letter">D</span>Um soldado</li></ul></li><li class="quiz-q"><p class="quiz-q-text">9. O que aconteceu no terceiro dia depois que Jesus morreu na cruz?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Ele apareceu como anjo</li><li><span class="opt-letter">B</span>O túmulo continuou fechado</li><li><span class="opt-letter">C</span>Ele ressuscitou</li><li><span class="opt-letter">D</span>Nada mudou</li></ul></li><li class="quiz-q"><p class="quiz-q-text">10. No Pentecostes, o que os discípulos receberam para ter coragem de falar de Jesus?</p><ul class="quiz-opts"><li><span class="opt-letter">A</span>Um livro novo</li><li><span class="opt-letter">B</span>O Espírito Santo</li><li><span class="opt-letter">C</span>Uma espada</li><li><span class="opt-letter">D</span>Um mapa</li></ul></li></ol>
   <div class="answer-key">🔑 Gabarito: 1-B · 2-C · 3-C · 4-C · 5-B · 6-C · 7-B · 8-C · 9-C · 10-B</div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 73</div>
 </section>
 <section class="page draw-page" style="--accent:#0d9488; --accent-soft:#e6f7f5">
   <span class="section-kicker">🎨 Hora de criar</span>
@@ -1337,7 +1705,31 @@ ul, ol { margin: 0; }
     <span class="draw-frame-corner bl"></span>
     <span class="draw-frame-corner br"></span>
   </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 74</div>
+</section>
+<section class="page draw-page" style="--accent:#38bdf8; --accent-soft:#e8f8ff">
+  <span class="section-kicker">🎨 Hora de criar</span>
+  <h1>Desenhe a Travessia do Mar Vermelho</h1>
+  <p class="draw-prompt">Desenhe o povo de Israel atravessando o mar em segurança, com as águas abertas dos dois lados, bem alto até o céu!</p>
+  <div class="draw-frame">
+    <span class="draw-frame-corner tl"></span>
+    <span class="draw-frame-corner tr"></span>
+    <span class="draw-frame-corner bl"></span>
+    <span class="draw-frame-corner br"></span>
+  </div>
+  <div class="page-foot">Mapa Bíblico Kids · 75</div>
+</section>
+<section class="page draw-page" style="--accent:#fb7185; --accent-soft:#feeef0">
+  <span class="section-kicker">🎨 Hora de criar</span>
+  <h1>Desenhe Davi e Golias</h1>
+  <p class="draw-prompt">Desenhe o pequeno Davi, com sua funda na mão, enfrentando o gigante Golias. Quem será que parece maior no seu desenho?</p>
+  <div class="draw-frame">
+    <span class="draw-frame-corner tl"></span>
+    <span class="draw-frame-corner tr"></span>
+    <span class="draw-frame-corner bl"></span>
+    <span class="draw-frame-corner br"></span>
+  </div>
+  <div class="page-foot">Mapa Bíblico Kids · 76</div>
 </section>
 <section class="page draw-page" style="--accent:#f5b942; --accent-soft:#fff8e6">
   <span class="section-kicker">🎨 Hora de criar</span>
@@ -1349,7 +1741,19 @@ ul, ol { margin: 0; }
     <span class="draw-frame-corner bl"></span>
     <span class="draw-frame-corner br"></span>
   </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 77</div>
+</section>
+<section class="page draw-page" style="--accent:#a78bfa; --accent-soft:#f2edfe">
+  <span class="section-kicker">🎨 Hora de criar</span>
+  <h1>Desenhe a Multiplicação dos Pães</h1>
+  <p class="draw-prompt">Desenhe a cena em que Jesus multiplica os pães e peixes para milhares de pessoas. Capriche nos cestos cheios de comida!</p>
+  <div class="draw-frame">
+    <span class="draw-frame-corner tl"></span>
+    <span class="draw-frame-corner tr"></span>
+    <span class="draw-frame-corner bl"></span>
+    <span class="draw-frame-corner br"></span>
+  </div>
+  <div class="page-foot">Mapa Bíblico Kids · 78</div>
 </section>
 <section class="page draw-page" style="--accent:#fb7185; --accent-soft:#feeef0">
   <span class="section-kicker">🎨 Hora de criar</span>
@@ -1361,7 +1765,7 @@ ul, ol { margin: 0; }
     <span class="draw-frame-corner bl"></span>
     <span class="draw-frame-corner br"></span>
   </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · 79</div>
 </section>
 <section class="page certificate-page">
   <div class="certificate-border">

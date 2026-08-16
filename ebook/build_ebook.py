@@ -2,6 +2,9 @@
 """Generates ebook-mapa-biblico-kids.html — a standalone, print-ready children's
 Bible ebook. Run, then render to PDF with Playwright (see render.js)."""
 
+import itertools
+import re
+
 COLORS = {
     "teal":   {"bg": "#0d9488", "bgsoft": "#e6f7f5", "text": "#0d9488"},
     "coral":  {"bg": "#fb7185", "bgsoft": "#feeef0", "text": "#e11d48"},
@@ -443,9 +446,18 @@ DRAW_PROMPTS = [
     dict(color="teal", title="Desenhe a Arca de Noé",
          prompt="Como você imagina a arca de Noé por dentro? Desenhe os animais entrando, "
                 "dois a dois, e não esqueça da pomba com o ramo de oliveira!"),
+    dict(color="sky", title="Desenhe a Travessia do Mar Vermelho",
+         prompt="Desenhe o povo de Israel atravessando o mar em segurança, com as águas "
+                "abertas dos dois lados, bem alto até o céu!"),
+    dict(color="coral", title="Desenhe Davi e Golias",
+         prompt="Desenhe o pequeno Davi, com sua funda na mão, enfrentando o gigante "
+                "Golias. Quem será que parece maior no seu desenho?"),
     dict(color="gold", title="Desenhe o Nascimento de Jesus",
          prompt="Desenhe o estábulo onde Jesus nasceu, com Maria, José, os pastores e a "
                 "estrela brilhando lá no céu."),
+    dict(color="purple", title="Desenhe a Multiplicação dos Pães",
+         prompt="Desenhe a cena em que Jesus multiplica os pães e peixes para milhares de "
+                "pessoas. Capriche nos cestos cheios de comida!"),
     dict(color="coral", title="Desenhe Você e Jesus",
          prompt="Imagine que Jesus está pertinho de você agora. O que vocês estariam "
                 "fazendo juntos? Desenhe essa cena!"),
@@ -458,47 +470,75 @@ DRAW_PROMPTS = [
 def esc(s):
     return s
 
-def story_page(idx, total, section_label, s):
+def story_page_1(idx, total, section_label, s):
+    """Page 1 of 3: title + big illustration medallion + the story itself."""
     c = COLORS[s["color"]]
     return f"""
-<section class="page story-page" style="--accent:{c['bg']}; --accent-soft:{c['bgsoft']}; --accent-text:{c['text']}">
-  <div class="story-deco tl">✦</div>
-  <div class="story-deco br">✦</div>
-  <header class="story-head">
-    <div class="story-badge">{s['icon']}</div>
-    <div class="story-head-text">
-      <span class="story-kicker">{section_label} · História {idx} de {total}</span>
-      <h2>{s['title']}</h2>
-      <span class="story-ref">📍 {s['ref']}</span>
-    </div>
-  </header>
+<section class="page story-page story-page-1" style="--accent:{c['bg']}; --accent-soft:{c['bgsoft']}; --accent-text:{c['text']}">
+  <div class="story-cloud c1">☁️</div>
+  <div class="story-cloud c2">☁️</div>
+  <div class="story-star s1">✦</div>
+  <div class="story-star s2">✧</div>
+  <div class="story-star s3">✦</div>
+  <span class="story-kicker center">{section_label} · História {idx} de {total}</span>
+  <div class="story-medallion">
+    <span class="story-medallion-ring"></span>
+    <span class="story-medallion-icon">{s['icon']}</span>
+  </div>
+  <h2 class="story-title-big">{s['title']}</h2>
+  <span class="story-ref center">📍 {s['ref']}</span>
   <p class="story-body">{s['story']}</p>
-  <div class="story-grid">
-    <div class="callout lesson">
-      <span class="callout-tag">💡 Lição de hoje</span>
-      <p>{s['lesson']}</p>
-    </div>
-    <div class="callout verse">
-      <span class="callout-tag">📖 Versículo pra guardar</span>
-      <p>{s['verse']}</p>
-    </div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
+</section>"""
+
+
+def story_page_2(s):
+    """Page 2 of 3: lesson + verse, big and clear."""
+    c = COLORS[s["color"]]
+    return f"""
+<section class="page story-page story-page-2" style="--accent:{c['bg']}; --accent-soft:{c['bgsoft']}; --accent-text:{c['text']}">
+  <div class="story-substripe">{(s['icon'] + ' ') * 16}</div>
+  <span class="story-kicker center">✨ o que aprendemos com</span>
+  <h2 class="story-title-mid center">{s['title']}</h2>
+  <div class="callout-big lesson">
+    <span class="callout-big-ic">💡</span>
+    <span class="callout-tag">Lição de hoje</span>
+    <p>{s['lesson']}</p>
   </div>
-  <div class="story-grid">
-    <div class="callout question">
-      <span class="callout-tag">🤔 Vamos pensar</span>
-      <p>{s['question']}</p>
-    </div>
-    <div class="callout prayer">
-      <span class="callout-tag">🙏 Oração</span>
-      <p>{s['prayer']}</p>
-    </div>
+  <div class="callout-big verse">
+    <span class="callout-big-ic">📖</span>
+    <span class="callout-tag">Versículo pra guardar</span>
+    <p>{s['verse']}</p>
   </div>
-  <div class="callout fact">
-    <span class="callout-tag">🌟 Você sabia?</span>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
+</section>"""
+
+
+def story_page_3(s):
+    """Page 3 of 3: reflection question, prayer and fun fact."""
+    c = COLORS[s["color"]]
+    return f"""
+<section class="page story-page story-page-3" style="--accent:{c['bg']}; --accent-soft:{c['bgsoft']}; --accent-text:{c['text']}">
+  <span class="story-kicker center">🌿 hora de refletir</span>
+  <div class="callout-big question">
+    <span class="callout-big-ic">🤔</span>
+    <span class="callout-tag">Vamos pensar</span>
+    <p>{s['question']}</p>
+  </div>
+  <div class="callout-big prayer">
+    <span class="callout-big-ic">🙏</span>
+    <span class="callout-tag">Oração</span>
+    <p>{s['prayer']}</p>
+  </div>
+  <div class="callout-big fact">
+    <span class="callout-big-ic">🌟</span>
+    <span class="callout-tag">Você sabia?</span>
     <p>{s['fact']}</p>
   </div>
-  <div class="story-stripe">{(s['icon'] + ' ') * 14}</div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="story-wave"></div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
@@ -541,7 +581,7 @@ def quiz_pages():
     próxima página!</p>
   </header>
   <ol class="quiz-list">{_quiz_rows(first, 1)}</ol>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
     answer_key = " · ".join(
         f"{i+1}-{['A','B','C','D'][c]}" for i, (_, _, c) in enumerate(QUIZ)
@@ -554,7 +594,7 @@ def quiz_pages():
   </header>
   <ol class="quiz-list" start="{half + 1}">{_quiz_rows(second, half + 1)}</ol>
   <div class="answer-key">🔑 Gabarito: {answer_key}</div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
     return page1 + page2
 
@@ -572,7 +612,7 @@ def draw_page(d):
     <span class="draw-frame-corner bl"></span>
     <span class="draw-frame-corner br"></span>
   </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
@@ -617,7 +657,7 @@ LETTER_PAGE = """
   e um certificado para comemorar a conquista!</p>
   <p class="letter-sign">Com carinho,<br><b>Equipe Mapa Bíblico Kids</b></p>
   <div class="page-stripe">💌 📖 💜 📖 💌 📖 💜 📖 💌 📖 💜 </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
@@ -652,7 +692,7 @@ HOWTO_PAGE = """
     </div>
   </div>
   <div class="page-stripe">🧭 ✨ 🎈 🧭 ✨ 🎈 🧭 ✨ 🎈 🧭 ✨ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
@@ -680,11 +720,11 @@ def toc_page():
     </div>
   </div>
   <div class="page-stripe">🗺️ ⭐ 📚 🗺️ ⭐ 📚 🗺️ ⭐ 📚 🗺️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
-PANORAMA_PAGE = """
+PANORAMA_PAGE_1 = """
 <section class="page panorama-page">
   <span class="section-kicker" style="--accent:#0d9488">🗺️ panorama geral</span>
   <h1>A Bíblia é Uma Historia Só!</h1>
@@ -707,7 +747,19 @@ PANORAMA_PAGE = """
       notícia para o mundo inteiro.</p>
     </div>
   </div>
-  <h2 class="panorama-timeline-title">✨ Linha do Tempo Resumida</h2>
+  <p class="panorama-highlight">💜 Do primeiro ao último livro, existe um fio condutor: <b>Jesus é o
+  centro de tudo</b>, o herói dessa grande história de amor.</p>
+  <div class="page-stripe">📖 🕊️ ✨ 📖 🕊️ ✨ 📖 🕊️ ✨ 📖 </div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
+</section>"""
+
+
+PANORAMA_PAGE_2 = """
+<section class="page panorama-page">
+  <span class="section-kicker" style="--accent:#a78bfa">⏳ linha do tempo</span>
+  <h1>Uma Jornada Através dos Tempos</h1>
+  <p>Do começo de tudo até o nascimento da Igreja — veja como as grandes fases da
+  história bíblica se conectam, uma preparando o caminho para a próxima:</p>
   <div class="timeline">
     <div class="timeline-item"><span class="timeline-dot" style="background:#0d9488"></span>
       <b>Criação</b><span>Deus cria o mundo e as primeiras pessoas</span></div>
@@ -716,16 +768,17 @@ PANORAMA_PAGE = """
     <div class="timeline-item"><span class="timeline-dot" style="background:#fb923c"></span>
       <b>Êxodo</b><span>Moisés liberta o povo da escravidão no Egito</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#f5b942"></span>
-      <b>Reis e Profetas</b><span>Davi, Salomão e os profetas anunciam o Salvador</span></div>
+      <b>Juízes e Reis</b><span>Josué, Davi, Salomão guiam o povo de Israel</span></div>
+    <div class="timeline-item"><span class="timeline-dot" style="background:#fbbf24"></span>
+      <b>Profetas</b><span>Anunciam a vinda do Salvador prometido</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#fb7185"></span>
       <b>Jesus</b><span>O Filho de Deus nasce, ensina, morre e ressuscita</span></div>
     <div class="timeline-item"><span class="timeline-dot" style="background:#a78bfa"></span>
       <b>A Igreja</b><span>Os discípulos espalham a boa notícia pelo mundo</span></div>
   </div>
-  <p class="panorama-highlight">💜 Do primeiro ao último livro, existe um fio condutor: <b>Jesus é o
-  centro de tudo</b>, o herói dessa grande história de amor.</p>
+  <div class="panorama-highlight alt">🌈 Cada fase é um capítulo da mesma grande história de amor de Deus por você!</div>
   <div class="page-stripe">🗺️ ⏳ ✨ 🗺️ ⏳ ✨ 🗺️ ⏳ ✨ 🗺️ </div>
-  <div class="page-foot">Mapa Bíblico Kids</div>
+  <div class="page-foot">Mapa Bíblico Kids · @@PN@@</div>
 </section>"""
 
 
@@ -813,10 +866,10 @@ ul, ol { margin: 0; }
   gap: 14px;
 }
 .cover-shape { position: absolute; border-radius: 50%; opacity: .18; }
-.c1 { width: 260px; height: 260px; background: #fb923c; top: -80px; left: -80px; }
-.c2 { width: 200px; height: 200px; background: #fb7185; bottom: -60px; right: -60px; }
-.c3 { width: 140px; height: 140px; background: #f5b942; bottom: 60px; left: -50px; }
-.c4 { width: 100px; height: 100px; background: #a78bfa; top: 90px; right: -30px; }
+.cover-shape.c1 { width: 260px; height: 260px; background: #fb923c; top: -80px; left: -80px; }
+.cover-shape.c2 { width: 200px; height: 200px; background: #fb7185; bottom: -60px; right: -60px; }
+.cover-shape.c3 { width: 140px; height: 140px; background: #f5b942; bottom: 60px; left: -50px; }
+.cover-shape.c4 { width: 100px; height: 100px; background: #a78bfa; top: 90px; right: -30px; }
 .cover-stars { letter-spacing: 8px; font-size: 14px; opacity: .8; }
 .cover-badge {
   font-size: 54px; background: rgba(255,255,255,.15); border: 3px solid rgba(255,255,255,.4);
@@ -914,49 +967,77 @@ ul, ol { margin: 0; }
   background: #f3f0ff; border: 1.5px solid #ddd6fe; border-radius: 16px;
   padding: 18px 22px; font-size: 15.5px; margin-top: 18px; line-height: 1.6;
 }
+.panorama-highlight.alt {
+  background: #fff8e6; border-color: #fde3a7; font-weight: 700; color: #92400e;
+  text-align: center;
+}
 
-/* ---------- Story pages ---------- */
-.story-page { background: #fffaf3; display: flex; flex-direction: column; }
-.story-deco { position: absolute; font-size: 40px; color: var(--accent-soft); opacity: .9; }
-.story-deco.tl { top: 10mm; left: -4mm; }
-.story-deco.br { bottom: 16mm; right: -4mm; }
-.story-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-.story-badge {
-  flex: 0 0 auto; width: 76px; height: 76px; border-radius: 50%;
-  background: var(--accent); display: flex; align-items: center; justify-content: center;
-  font-size: 38px; box-shadow: 0 5px 0 rgba(0,0,0,.08);
+/* ---------- Story pages (3 per story: capa / lição / reflexão) ---------- */
+.story-page {
+  background: #fffaf3; display: flex; flex-direction: column; align-items: center;
+  text-align: center;
 }
 .story-kicker {
-  display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 11px;
-  font-weight: 800; color: var(--accent-text);
+  display: block; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px;
+  font-weight: 800; color: var(--accent-text); margin-bottom: 18px;
 }
-.story-head-text h2 { font-size: 26px; margin: 3px 0; }
-.story-ref { font-size: 12.5px; color: #9ca3af; font-weight: 700; }
+.story-kicker.center { align-self: center; }
+.story-ref {
+  font-size: 14px; color: #9ca3af; font-weight: 700; margin-bottom: 26px; display: block;
+}
+
+/* --- page 1: cover/medallion --- */
+.story-cloud, .story-star {
+  position: absolute; opacity: .5; font-size: 34px; color: var(--accent-soft);
+}
+.story-cloud.c1 { top: 16mm; left: 10mm; font-size: 30px; }
+.story-cloud.c2 { top: 22mm; right: 12mm; font-size: 24px; }
+.story-star.s1 { top: 40mm; right: 24mm; color: var(--accent); font-size: 22px; }
+.story-star.s2 { bottom: 30mm; left: 18mm; color: var(--accent); font-size: 18px; }
+.story-star.s3 { bottom: 60mm; right: 16mm; color: var(--accent); font-size: 16px; }
+.story-medallion {
+  position: relative; width: 190px; height: 190px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  margin: 6px 0 22px; box-shadow: 0 10px 0 rgba(0,0,0,.08);
+}
+.story-medallion-ring {
+  position: absolute; inset: -14px; border-radius: 50%;
+  border: 3px dashed var(--accent);
+}
+.story-medallion-icon { font-size: 92px; line-height: 1; }
+.story-title-big { font-size: 40px; max-width: 460px; margin: 0 0 6px; }
 .story-body {
-  font-size: 15px; color: #374151; background: #fff;
-  border-radius: 16px; padding: 20px 22px; border: 1.5px solid #f1ede4;
-  margin-bottom: 14px; line-height: 1.6;
+  font-size: 17px; color: #374151; background: #fff; text-align: left;
+  border-radius: 20px; padding: 26px 30px; border: 1.5px solid #f1ede4;
+  margin-top: 18px; line-height: 1.75; max-width: 620px;
 }
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.callout {
-  border-radius: 14px; padding: 14px 16px; font-size: 13px;
+
+/* --- page 2 & 3: big callouts --- */
+.story-substripe {
+  font-size: 26px; letter-spacing: 12px; opacity: .14; margin-bottom: 26px;
+  white-space: nowrap; overflow: hidden; max-width: 100%;
+}
+.story-title-mid { font-size: 26px; margin-bottom: 26px; max-width: 480px; }
+.callout-big {
+  width: 100%; max-width: 560px; text-align: left; position: relative;
+  border-radius: 20px; padding: 26px 28px 26px 84px; margin-bottom: 20px;
   border: 1.5px solid var(--accent-soft); background: var(--accent-soft);
-  line-height: 1.5;
+  line-height: 1.65; font-size: 16px;
 }
-.callout-tag {
-  display: block; font-weight: 800; font-size: 11.5px; margin-bottom: 5px;
-  color: var(--accent-text);
+.callout-big-ic {
+  position: absolute; left: 22px; top: 26px; font-size: 34px;
 }
-.callout p { margin: 0; color: #374151; }
-.callout.fact {
-  background: #fff8e6; border-color: #fde3a7; margin-bottom: 0;
-  font-size: 13px;
+.callout-big .callout-tag {
+  display: block; font-weight: 800; font-size: 13px; margin-bottom: 6px;
+  color: var(--accent-text); text-transform: none; letter-spacing: 0;
 }
-.callout.fact .callout-tag { color: #b45309; }
-.story-stripe {
-  margin-top: auto; padding-top: 14px;
-  text-align: center; font-size: 24px; letter-spacing: 12px;
-  opacity: .16; white-space: nowrap; overflow: hidden;
+.callout-big p { margin: 0; color: #374151; }
+.callout-big.fact { background: #fff8e6; border-color: #fde3a7; }
+.callout-big.fact .callout-tag { color: #b45309; }
+.story-wave {
+  margin-top: auto; width: 100%; height: 64px; opacity: .55;
+  background: var(--accent-soft);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
 .page-stripe {
   position: absolute; bottom: 26mm; left: 0; right: 0;
@@ -1051,19 +1132,30 @@ ul, ol { margin: 0; }
 
 
 def build():
-    parts = [COVER_PAGE, LETTER_PAGE, HOWTO_PAGE, toc_page(), PANORAMA_PAGE]
+    parts = [COVER_PAGE, LETTER_PAGE, HOWTO_PAGE, toc_page(), PANORAMA_PAGE_1, PANORAMA_PAGE_2]
     parts.append(divider_page("Antigo Testamento", "Da Criação do mundo até a longa espera pelo Salvador prometido — 12 histórias inesquecíveis.", "🏺", "teal"))
     for i, s in enumerate(OT_STORIES, start=1):
-        parts.append(story_page(i, len(OT_STORIES), "Antigo Testamento", s))
+        parts.append(story_page_1(i, len(OT_STORIES), "Antigo Testamento", s))
+        parts.append(story_page_2(s))
+        parts.append(story_page_3(s))
     parts.append(divider_page("Novo Testamento", "A vida de Jesus e o início da Igreja — 10 histórias que mudaram o mundo para sempre.", "✝️", "purple"))
     for i, s in enumerate(NT_STORIES, start=1):
-        parts.append(story_page(i, len(NT_STORIES), "Novo Testamento", s))
+        parts.append(story_page_1(i, len(NT_STORIES), "Novo Testamento", s))
+        parts.append(story_page_2(s))
+        parts.append(story_page_3(s))
     parts.append(divider_page("Hora de Brincar e Aprender", "Quiz, desenhos e um certificado especial para comemorar tudo o que você aprendeu!", "🎉", "coral"))
     parts.append(quiz_pages())
     for d in DRAW_PROMPTS:
         parts.append(draw_page(d))
     parts.append(certificate_page())
     parts.append(CLOSING_PAGE)
+
+    body = ''.join(parts)
+
+    # Fill in real, sequential page numbers for every "@@PN@@" placeholder,
+    # in document order (one per printed page).
+    counter = itertools.count(1)
+    body = re.sub(r'@@PN@@', lambda _m: str(next(counter)), body)
 
     html = f"""<!DOCTYPE html>
 <html lang="pt-br">
@@ -1073,7 +1165,7 @@ def build():
 <style>{CSS}</style>
 </head>
 <body>
-{''.join(parts)}
+{body}
 </body>
 </html>"""
     return html
