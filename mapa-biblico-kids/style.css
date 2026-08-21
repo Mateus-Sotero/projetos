@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root{
+  --ink:#2b2b2b;
+  --paper:#fffdf8;
+  --grid:#e9e4f5;
+  --purple:#7E57C2;
+  --orange:#F0A93A;
+  --pink:#EF476F;
+  --blue:#118AB2;
+  --teal:#06D6A0;
+  --gold:#FFC93C;
+  --green:#7CB342;
+  --indigo:#7B61FF;
+  --shadow: 0 10px 26px rgba(43,43,43,.18);
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:#cfd6e6;
+  font-family:'Nunito',sans-serif;
+  color:var(--ink);
+}
+
+/* ---------- barra flutuante ---------- */
+.toolbar{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; align-items:center; gap:10px;
+  background:#fff; border-bottom:3px solid var(--ink);
+  padding:8px 16px; flex-wrap:wrap;
+}
+.toolbar .brand{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.1rem; color:var(--purple); margin-right:auto; }
+.toolbar select, .toolbar button{
+  font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.85rem;
+  border:2px solid var(--ink); border-radius:10px; padding:6px 12px;
+  background:var(--gold); cursor:pointer;
+}
+.toolbar button.secondary{ background:#fff; }
+.toolbar .progress{ font-weight:700; font-size:.85rem; }
+.toolbar .progress-bar{ width:120px; height:10px; border:2px solid var(--ink); border-radius:6px; background:#eee; overflow:hidden; display:inline-block; vertical-align:middle; margin-left:6px;}
+.toolbar .progress-bar > span{ display:block; height:100%; background:var(--teal); }
+
+#book{ padding-top:64px; }
+
+/* ---------- página A4 ---------- */
+.page{
+  width:210mm; min-height:297mm;
+  margin:22px auto; padding:14mm 13mm;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/22px 22px,
+    var(--paper);
+  box-shadow:var(--shadow);
+  position:relative;
+  page-break-after:always;
+  overflow:hidden;
+}
+.page::after{
+  content:""; position:absolute; inset:6mm; border:3px dashed rgba(43,43,43,.18); border-radius:14px; pointer-events:none;
+}
+.page-number{ position:absolute; bottom:6mm; right:10mm; font-family:'Baloo 2',sans-serif; font-weight:700; opacity:.55; font-size:.8rem; }
+.section-tag{ position:absolute; top:6mm; left:10mm; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; opacity:.6; }
+
+/* ---------- título estilo adesivo ---------- */
+.sticker-title{ display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin:6px 0 18px; }
+.sticker-title span{
+  font-family:'Baloo 2',sans-serif; font-weight:800; font-size:2.1rem; color:var(--ink);
+  padding:4px 10px; border-radius:9px; border:3px solid var(--ink);
+  box-shadow:2px 3px 0 rgba(43,43,43,.25);
+  background:var(--c, var(--gold));
+}
+.sticker-title.small span{ font-size:1.3rem; padding:3px 8px; }
+.sticker-title span:nth-child(6n+1){ --c:#FFC93C; transform:rotate(-3deg); }
+.sticker-title span:nth-child(6n+2){ --c:#7BE0C4; transform:rotate(2deg); }
+.sticker-title span:nth-child(6n+3){ --c:#FF9FC7; transform:rotate(-2deg); }
+.sticker-title span:nth-child(6n+4){ --c:#9AD1FF; transform:rotate(3deg); }
+.sticker-title span:nth-child(6n+5){ --c:#C9A6FF; transform:rotate(-1deg); }
+.sticker-title span:nth-child(6n+6){ --c:#FFB27A; transform:rotate(1deg); }
+
+.book-header{ text-align:center; }
+.book-number-badge{
+  display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.85rem;
+  background:#fff; border:2px solid var(--ink); border-radius:20px; padding:2px 12px; margin-bottom:8px;
+}
+
+/* ---------- caixas de conteúdo ---------- */
+.info-box{
+  border:3px solid var(--ink); border-radius:16px; padding:12px 16px; margin:12px 0;
+  background:#fff; position:relative;
+}
+.info-box .info-label{
+  font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.85rem;
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--gold); border:2px solid var(--ink); border-radius:10px; padding:2px 10px;
+  position:absolute; top:-14px; left:14px;
+}
+.info-box p{ margin:8px 0 0; font-size:.98rem; line-height:1.45; }
+
+.two-col{ display:flex; gap:14px; flex-wrap:wrap; align-items:stretch; }
+.two-col > div{ flex:1 1 260px; }
+
+/* ---------- ilustração ---------- */
+.scene-svg{ width:100%; height:auto; border:3px solid var(--ink); border-radius:16px; box-shadow:2px 3px 0 rgba(43,43,43,.15); }
+.scene-svg.coloring{ background:#fff; }
+
+/* ---------- caixa de atividade ---------- */
+.activity-box{
+  margin-top:14px; border:3px solid var(--ink); border-radius:16px; padding:14px 16px;
+  background:repeating-linear-gradient(135deg, #fff, #fff 18px, #fbf7ff 18px, #fbf7ff 36px);
+}
+.activity-box .activity-badge{
+  font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.78rem; text-transform:uppercase;
+  background:var(--pink); color:#fff; border:2px solid var(--ink); border-radius:10px; padding:2px 10px;
+  display:inline-block; margin-bottom:8px;
+}
+.activity-prompt{ font-family:'Baloo 2',sans-serif; font-weight:700; margin:0 0 8px; font-size:1.02rem; }
+.activity-prompt.center{ text-align:center; }
+.activity-question{ font-weight:700; margin:0 0 8px; }
+
+/* labirinto */
+.maze-wrap{ display:flex; justify-content:center; }
+.maze-svg{ width:100%; max-width:420px; height:auto; fill:none; }
+
+/* caça-palavras */
+.wordsearch{ border-collapse:collapse; margin:6px auto; }
+.wordsearch td{
+  width:26px; height:26px; text-align:center; vertical-align:middle;
+  font-family:'Baloo 2',sans-serif; font-weight:700; border:1px solid #ccc; font-size:.9rem;
+}
+.word-list{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:8px; }
+.word-chip{
+  font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.85rem;
+  background:#fff; border:2px solid var(--ink); border-radius:8px; padding:3px 10px;
+}
+
+/* múltipla escolha */
+.choice-list{ display:flex; flex-direction:column; gap:8px; }
+.choice-item{
+  border:2px solid var(--ink); border-radius:12px; padding:8px 12px; display:flex; align-items:center; gap:10px;
+  background:#fff;
+}
+.choice-letter{
+  font-family:'Baloo 2',sans-serif; font-weight:800; width:26px; height:26px; border-radius:50%;
+  border:2px solid var(--ink); display:inline-flex; align-items:center; justify-content:center; flex:none;
+}
+
+/* verdadeiro/falso */
+.tf-list{ display:flex; flex-direction:column; gap:10px; }
+.tf-item{ display:flex; align-items:center; gap:12px; }
+.tf-boxes{ display:flex; gap:4px; flex:none; }
+.tf-box{
+  font-family:'Baloo 2',sans-serif; font-weight:800; width:28px; height:28px; border:2px solid var(--ink);
+  border-radius:6px; display:inline-flex; align-items:center; justify-content:center; background:#fff;
+}
+
+/* associação */
+.match-wrap{ display:flex; justify-content:space-between; gap:30px; }
+.match-col{ display:flex; flex-direction:column; gap:12px; flex:1; }
+.match-item{ display:flex; align-items:center; gap:8px; font-weight:700; }
+.match-item.right{ justify-content:flex-end; text-align:right; flex-direction:row-reverse; }
+.match-dot{ width:14px; height:14px; border-radius:50%; border:2px solid var(--ink); background:#fff; flex:none; }
+
+/* contar/encontrar objetos */
+.count-field{ position:relative; height:220px; border:2px dashed var(--ink); border-radius:12px; background:#fff; }
+.count-icon{ position:absolute; width:44px; height:44px; transform:translate(-50%,-50%); }
+.count-icon svg{ width:100%; height:100%; }
+.answer-line{ margin-top:10px; font-weight:700; }
+.blank{ display:inline-block; width:70px; border-bottom:2px solid var(--ink); }
+
+/* completar frase */
+.fill-sentence{ font-size:1.05rem; font-weight:700; line-height:1.7; }
+.word-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+
+/* sequência */
+.seq-list{ display:flex; flex-direction:column; gap:10px; }
+.seq-item{ display:flex; align-items:center; gap:10px; font-weight:700; }
+.seq-box{ width:30px; height:30px; border:2px solid var(--ink); border-radius:8px; background:#fff; flex:none; }
+
+/* desenhar */
+.draw-box{ margin-top:8px; height:260px; border:3px dashed var(--ink); border-radius:14px; background:#fff; }
+
+/* colorir */
+.coloring-wrap{ display:flex; justify-content:center; }
+
+/* ---------- capa ---------- */
+.cover-page{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; height:100%; }
+.cover-page .cover-illustration{ width:70%; margin:18px 0; }
+.cover-sub{ font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--purple); font-size:1.1rem; }
+.cover-badge{
+  margin-top:20px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;
+  background:var(--gold); border:3px solid var(--ink); border-radius:20px; padding:8px 20px;
+}
+
+/* ---------- legenda de ícones ---------- */
+.legend-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.legend-item{ display:flex; align-items:center; gap:10px; border:2px solid var(--ink); border-radius:12px; padding:8px 10px; background:#fff; }
+.legend-emoji{ font-size:1.4rem; }
+
+/* ---------- mapa / trilha ---------- */
+.trail-wrap{ display:flex; align-items:center; justify-content:space-between; gap:6px; margin-top:20px; flex-wrap:wrap; }
+.trail-stop{ display:flex; flex-direction:column; align-items:center; gap:6px; flex:1 1 60px; }
+.trail-icon{ width:60px; height:60px; }
+.trail-dash{ flex:2; border-top:4px dashed var(--ink); height:0; }
+.trail-label{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.72rem; text-align:center; }
+
+.section-map-item{ border:3px solid var(--ink); border-radius:16px; padding:12px 16px; margin-bottom:12px; background:#fff; }
+.section-map-item h3{ font-family:'Baloo 2',sans-serif; margin:0 0 4px; }
+.section-map-item .books-list{ font-weight:700; font-size:.85rem; color:#555; margin:0 0 6px; }
+
+/* ---------- desafios / conquistas ---------- */
+.challenge-card{
+  border:4px solid var(--ink); border-radius:22px; padding:30px; text-align:center; margin-top:40px;
+  background:linear-gradient(135deg,#FFF7D6,#FFE3EC);
+}
+.challenge-card .big{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.8rem; color:var(--pink); }
+.challenge-card .sub{ font-weight:700; margin-top:8px; }
+
+/* ---------- passaporte ---------- */
+.passport-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; margin-top:14px; }
+.passport-item{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:.92rem; padding:4px 0; border-bottom:1px dotted #ccc; }
+.passport-check{
+  width:22px; height:22px; border:2px solid var(--ink); border-radius:6px; flex:none; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; background:#fff;
+}
+.passport-check.checked{ background:var(--teal); }
+.passport-check.checked::after{ content:"✓"; color:#fff; font-weight:800; }
+.passport-num{ opacity:.5; font-size:.78rem; width:22px; text-align:right; }
+
+/* ---------- certificado ---------- */
+.certificate{
+  border:6px double var(--ink); border-radius:20px; height:100%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:30px;
+  background:linear-gradient(160deg,#FFF9E1,#EDE7F6);
+}
+.certificate .cert-title{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:2rem; color:var(--purple); }
+.cert-line{ margin:26px 0; border-bottom:2px solid var(--ink); width:70%; }
+.cert-name-label{ font-weight:700; }
+
+/* ---------- navegação lateral ---------- */
+.toc{ position:fixed; top:64px; right:0; bottom:0; width:230px; overflow-y:auto; background:#fff; border-left:3px solid var(--ink); padding:12px; z-index:40; }
+.toc h4{ font-family:'Baloo 2',sans-serif; margin:10px 0 6px; font-size:.8rem; text-transform:uppercase; opacity:.6; }
+.toc a{ display:block; font-size:.82rem; padding:3px 6px; border-radius:6px; color:var(--ink); text-decoration:none; }
+.toc a:hover{ background:var(--grid); }
+#book{ margin-right:230px; }
+
+@media (max-width: 900px){
+  .toc{ display:none; }
+  #book{ margin-right:0; }
+  .page{ width:100%; min-height:auto; }
+}
+
+/* ---------- impressão ---------- */
+@media print{
+  body{ background:#fff; }
+  .toolbar, .toc{ display:none !important; }
+  #book{ padding-top:0; margin-right:0; }
+  .page{ margin:0; box-shadow:none; width:auto; min-height:auto; }
+  .passport-check{ background:#fff !important; }
+  .passport-check.checked::after{ content:""; }
+}

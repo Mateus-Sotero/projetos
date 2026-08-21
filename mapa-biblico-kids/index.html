@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa Bíblico Kids — Jornada pelos 66 livros da Bíblia</title>
+  <meta name="description" content="Caderno de atividades ilustrado para crianças conhecerem os 66 livros da Bíblia, do Gênesis ao Apocalipse." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <span class="brand">📖 Mapa Bíblico Kids</span>
+    <select id="jump-select"></select>
+    <span class="progress">Progresso: <span id="progress-label">0/66 livros</span>
+      <span class="progress-bar"><span id="progress-fill" style="width:0%"></span></span>
+    </span>
+    <button id="print-btn">🖨️ Imprimir / Salvar PDF</button>
+  </header>
+
+  <nav class="toc" id="toc"></nav>
+
+  <main id="book"></main>
+
+  <script src="js/illustrations.js"></script>
+  <script src="js/activities.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
